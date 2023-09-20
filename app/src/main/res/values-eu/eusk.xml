@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FirestoreDemo</string>
+    <string name="nombre">Izena:</string>
+    <string name="contrase_a">Pasahitza:</string>
+    <string name="dni">DNI:</string>
+    <string name="finalizar">Bukatu</string>
+    <string name="registrarse">Erregistratu</string>
+    <string name="iniciar_sesion">Saioa hasi</string>
+    <string name="login">Onartu</string>
+    <string name="dniLogin">DNI:</string>
+    <string name="contrase_aLogin">Pasahitza:</string>
+</resources>

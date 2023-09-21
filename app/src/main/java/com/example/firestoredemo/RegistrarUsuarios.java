@@ -25,7 +25,7 @@ public class RegistrarUsuarios extends AppCompatActivity {
     Button registrarse;
     EditText nombre;
     EditText passw;
-    EditText dni;
+    EditText email;
 
 
     @Override
@@ -39,7 +39,7 @@ public class RegistrarUsuarios extends AppCompatActivity {
 
        nombre = findViewById(R.id.nombre);
        passw = findViewById(R.id.passw);
-       dni = findViewById(R.id.dni);
+        email = findViewById(R.id.email);
        registrarse = findViewById(R.id.registrarse);
 
        registrarse.setOnClickListener(new View.OnClickListener() {
@@ -47,12 +47,17 @@ public class RegistrarUsuarios extends AppCompatActivity {
            public void onClick(View view) {
                String nombreUser = nombre.getText().toString();
                String passwUser = passw.getText().toString();
-               String dniUser = dni.getText().toString();
+               String emailUser = email.getText().toString();
 
-               if(nombreUser.isEmpty() || passwUser.isEmpty() || dniUser.isEmpty()){
-                   Toast.makeText(getApplicationContext(), "Por Favor, rellena los campos.", Toast.LENGTH_SHORT).show();
+               if(nombreUser.isEmpty() || passwUser.isEmpty() || emailUser.isEmpty()){
+                   Toast.makeText(getApplicationContext(), "Por Favor, rellena todos los campos.", Toast.LENGTH_SHORT).show();
                }else{
-                   enviarUsuario(nombreUser, passwUser, dniUser);
+                    if(emailUser.contains("@") && emailUser.contains(".com")) {
+                        enviarUsuario(nombreUser, passwUser, emailUser);
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "El correo debe de estar correctamente escrito", Toast.LENGTH_SHORT).show();
+                    }
                }
 
            }

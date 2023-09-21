@@ -11,4 +11,5 @@
     <string name="dniLogin">DNI:</string>
     <string name="contrase_aLogin">Contraseña:</string>
     <string name="id_usuario" translatable="false">Usuario</string>
+    <string name="e_mail">E-mail</string>
 </resources>

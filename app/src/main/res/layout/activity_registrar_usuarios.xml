@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="47dp"
             android:text="@string/nombre"
-            android:textColor="#F66A3E"
+            android:textColor="@color/orange"
             android:textSize="24sp" />
 
         <EditText
@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="47dp"
             android:text="@string/contrase_a"
-            android:textColor="#FFF66A3E"
+            android:textColor="@color/orange"
             android:textSize="24sp" />
 
         <EditText
@@ -65,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="47dp"
             android:text="@string/e_mail"
-            android:textColor="#FFF66A3E"
+            android:textColor="@color/orange"
             android:textSize="24sp" />
 
         <EditText
@@ -80,15 +80,14 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="15dp" />
+            android:layout_height="35sp" />
 
         <Button
             android:id="@+id/registrarse"
             android:layout_width="match_parent"
-            android:layout_height="59dp"
-            android:text="@string/finalizar"
-            android:textColorHighlight="#FFF66A3E"
-            android:textColorLink="#FFF66A3E" />
+            android:layout_height="59sp"
+            android:backgroundTint="@color/orange"
+            android:text="@string/finalizar" />
 
     </LinearLayout>
 

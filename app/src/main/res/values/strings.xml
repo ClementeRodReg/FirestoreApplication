@@ -9,7 +9,7 @@
     <string name="iniciar_sesion">Iniciar Sesion</string>
     <string name="login">Login</string>
     <string name="dniLogin">DNI:</string>
-    <string name="contrase_aLogin">Contraseña:</string>
-    <string name="id_usuario" translatable="false">Usuario</string>
+    <string name="contrase_aLogin">Contraseña</string>
+    <string name="id_usuario" translatable="false">E-mail</string>
     <string name="e_mail">E-mail</string>
 </resources>

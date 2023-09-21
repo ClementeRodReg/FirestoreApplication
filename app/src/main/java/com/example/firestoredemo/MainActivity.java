@@ -21,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
     EditText passwLogin;
     EditText gmailLogin;
 
+    String gmail;
+    String contra;
+
     private FirebaseFirestore myBBDD;
 
     @Override
@@ -45,10 +48,10 @@ public class MainActivity extends AppCompatActivity {
                 passwLogin = findViewById(R.id.passwLogin);
                 gmailLogin = findViewById(R.id.loginGmail);
 
-                if (gmailLogin.getText()!=null) {
+                gmail = gmailLogin.getText().toString();
+                contra = passwLogin.getText().toString();
 
-                    String gmail = gmailLogin.getText().toString();
-                    String contra = passwLogin.getText().toString();
+                if (!(gmail.isEmpty())) {
 
                     myBBDD = FirebaseFirestore.getInstance();
                     Task<DocumentSnapshot> datos = myBBDD.collection("Usuarios").document(gmail).get();
@@ -57,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
                                 // now do something with result
                                 if (datos.getResult().getData() != null) {
                                     if (datos.getResult().getData().get("Contraseña").equals(passwLogin.getText().toString())) {
+                                        Toast.makeText(getApplicationContext(), "Inicio correcto", Toast.LENGTH_SHORT).show();
 
-                                        Toast.makeText(getApplicationContext(), "Inicio correctp", Toast.LENGTH_SHORT).show();
                                     } else {
                                         Toast.makeText(getApplicationContext(), "Contraseña incorrecta.", Toast.LENGTH_SHORT).show();
                                     }
@@ -73,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Rellene con los datos necesarios para iniciar sesión.", Toast.LENGTH_SHORT).show();
                 }
+
+
             }
         });
 

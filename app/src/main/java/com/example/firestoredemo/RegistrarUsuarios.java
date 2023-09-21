@@ -14,7 +14,9 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -52,12 +54,20 @@ public class RegistrarUsuarios extends AppCompatActivity {
                if(nombreUser.isEmpty() || passwUser.isEmpty() || emailUser.isEmpty()){
                    Toast.makeText(getApplicationContext(), "Por Favor, rellena todos los campos.", Toast.LENGTH_SHORT).show();
                }else{
-                    if(emailUser.contains("@") && emailUser.contains(".com")) {
-                        enviarUsuario(nombreUser, passwUser, emailUser);
-                    }
-                    else{
-                        Toast.makeText(getApplicationContext(), "El correo debe de estar correctamente escrito", Toast.LENGTH_SHORT).show();
-                    }
+                   myBBDD = FirebaseFirestore.getInstance();
+                   Task<DocumentSnapshot> datos = myBBDD.collection("Usuarios").document(emailUser).get();
+                   datos.addOnSuccessListener(result -> {
+                               if (datos.getResult().getData() == null) {
+                                   if (emailUser.contains("@") && emailUser.contains(".com")) {
+                                       enviarUsuario(nombreUser, passwUser, emailUser);
+                                   } else {
+                                       Toast.makeText(getApplicationContext(), "El correo debe de estar correctamente escrito", Toast.LENGTH_SHORT).show();
+                                   }
+                               } else {
+                                   Toast.makeText(getApplicationContext(), "El correo introducido ya esta en uso", Toast.LENGTH_SHORT).show();
+                                   email.setText("");
+                               }
+                           });
                }
 
            }

@@ -6,18 +6,31 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
     Button registrarboton;
-
     Button inicioSesion;
+
+    EditText passwLogin;
+    EditText gmailLogin;
+
+    private FirebaseFirestore myBBDD;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        registrarboton = findViewById (R.id.button);
+        inicioSesion = findViewById(R.id.inicioSesion);
+        registrarboton = findViewById(R.id.button);
+
         registrarboton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -25,11 +38,41 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        inicioSesion = findViewById (R.id.inicioSesion);
-        inicioSesion.setOnClickListener( new View.OnClickListener() {
+        inicioSesion.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View j) {
-                startActivity(new Intent(MainActivity.this, Login_usuarios.class));
+            public void onClick(View view) {
+
+                passwLogin = findViewById(R.id.passwLogin);
+                gmailLogin = findViewById(R.id.loginGmail);
+
+                if (gmailLogin.getText()!=null) {
+
+                    String gmail = gmailLogin.getText().toString();
+                    String contra = passwLogin.getText().toString();
+
+                    myBBDD = FirebaseFirestore.getInstance();
+                    Task<DocumentSnapshot> datos = myBBDD.collection("Usuarios").document(gmail).get();
+
+                    datos.addOnSuccessListener(result -> {
+                                // now do something with result
+                                if (datos.getResult().getData() != null) {
+                                    if (datos.getResult().getData().get("Contraseña").equals(passwLogin.getText().toString())) {
+
+                                        Toast.makeText(getApplicationContext(), "Inicio correctp", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Contraseña incorrecta.", Toast.LENGTH_SHORT).show();
+                                    }
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Registrese para poder iniciar sesión.", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .addOnFailureListener(e -> {
+                                // now do something with the exception
+                                Toast.makeText(getApplicationContext(), "Espere un segundo, ya casi esta.", Toast.LENGTH_SHORT).show();
+                            });
+                } else {
+                    Toast.makeText(getApplicationContext(), "Rellene con los datos necesarios para iniciar sesión.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

@@ -12,4 +12,5 @@
     <string name="contrase_aLogin">Contraseña</string>
     <string name="id_usuario" translatable="false">E-mail</string>
     <string name="e_mail">E-mail</string>
+    <string name="modo_invitado">Modo Invitado</string>
 </resources>

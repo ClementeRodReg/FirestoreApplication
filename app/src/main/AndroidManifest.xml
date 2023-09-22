@@ -13,6 +13,9 @@
         android:theme="@style/Theme.FirestoreDemo"
         tools:targetApi="31">
         <activity
+            android:name=".CaruselMasMotionLayout"
+            android:exported="false" />
+        <activity
             android:name=".RegistrarUsuarios"
             android:exported="false" />
         <activity

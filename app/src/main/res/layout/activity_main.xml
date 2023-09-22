@@ -29,7 +29,7 @@
             tools:layout_editor_absoluteY="40dp">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btn_registro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/black"
@@ -37,7 +37,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button2"
+                app:layout_constraintTop_toBottomOf="@+id/btn_inicioInvitado"
                 app:layout_constraintVertical_bias="0.136" />
 
             <Button
@@ -92,7 +92,7 @@
                 tools:ignore="MissingConstraints" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btn_inicioInvitado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/orange"

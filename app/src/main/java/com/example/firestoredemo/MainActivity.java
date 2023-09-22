@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     Button registrarboton;
     Button inicioSesion;
     Button modoInvitado;
+
     EditText passwLogin;
     EditText gmailLogin;
 
@@ -32,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         inicioSesion = findViewById(R.id.inicioSesion);
-        registrarboton = findViewById(R.id.button);
+        registrarboton = findViewById(R.id.btn_registro);
+        modoInvitado = findViewById(R.id.btn_inicioInvitado);
 
         registrarboton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
                                 if (datos.getResult().getData() != null) {
                                     if (datos.getResult().getData().get("Contraseña").equals(passwLogin.getText().toString())) {
                                         Toast.makeText(getApplicationContext(), "Inicio correcto", Toast.LENGTH_SHORT).show();
-
                                     } else {
                                         Toast.makeText(getApplicationContext(), "Contraseña incorrecta.", Toast.LENGTH_SHORT).show();
                                     }
@@ -81,6 +82,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        modoInvitado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, Teatro.class));
+            }
+        });
     }
 
 }

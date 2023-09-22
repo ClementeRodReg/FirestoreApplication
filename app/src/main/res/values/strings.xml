@@ -1,16 +1,17 @@
 <resources>
-    <string name="app_name">FirestoreDemo</string>
+    <string name="app_name">VIDE</string>
     <string name="feliz_jueves_perros" translatable="false">Feliz jueves perros!!!</string>
     <string name="nombre">Nombre:</string>
     <string name="contrase_a">Contraseña:</string>
     <string name="dni">DNI:</string>
     <string name="finalizar">Finalizar</string>
     <string name="registrarse">Registrarse</string>
-    <string name="iniciar_sesion">Iniciar Sesion</string>
+    <string name="iniciar_sesion">Iniciar Sesión</string>
     <string name="login">Login</string>
     <string name="dniLogin">DNI:</string>
     <string name="contrase_aLogin">Contraseña</string>
     <string name="id_usuario" translatable="false">E-mail</string>
     <string name="e_mail">E-mail</string>
     <string name="modo_invitado">Modo Invitado</string>
+    <string name="id_teatroTitulo">TEATROS</string>
 </resources>

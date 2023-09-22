@@ -6,4 +6,4 @@ Sergio Galera
 Clemente Rodriguez
 Nadir Elhasnaui
 
-Nuestra aplicación se basa en mostrar noticias y eventos relacionados con el Teatro, Deporte, Musica y Cine.
+Nuestra aplicación se basa en mostrar noticias y eventos relacionados con el Teatro, Deporte, Musica y Cine en la que se pueden hacen reservas.

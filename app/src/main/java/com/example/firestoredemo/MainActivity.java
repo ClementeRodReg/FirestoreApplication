@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button registrarboton;
     Button inicioSesion;
-
+    Button modoInvitado;
     EditText passwLogin;
     EditText gmailLogin;
 

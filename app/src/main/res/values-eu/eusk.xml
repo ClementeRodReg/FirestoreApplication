@@ -10,4 +10,6 @@
     <string name="login">Onartu</string>
     <string name="dniLogin">DNI:</string>
     <string name="contrase_aLogin">Pasahitza:</string>
+    <string name="e_mail">E-posta</string>
+    <string name="modo_invitado">Gonbidatu modua</string>
 </resources>

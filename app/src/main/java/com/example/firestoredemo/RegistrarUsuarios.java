@@ -12,10 +12,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -24,6 +28,7 @@ import java.util.Map;
 
 public class RegistrarUsuarios extends AppCompatActivity {
     private FirebaseFirestore myBBDD;
+    private FirebaseAuth mAuth;
     Button registrarse;
     EditText nombre;
     EditText passw;
@@ -36,7 +41,7 @@ public class RegistrarUsuarios extends AppCompatActivity {
         setContentView(R.layout.activity_registrar_usuarios);
         FirebaseApp.initializeApp(this);
         this.setTitle("Registrar Usuario");
-
+        mAuth = FirebaseAuth.getInstance();
 
 
        nombre = findViewById(R.id.nombre);
@@ -54,18 +59,22 @@ public class RegistrarUsuarios extends AppCompatActivity {
                if(nombreUser.isEmpty() || passwUser.isEmpty() || emailUser.isEmpty()){
                    Toast.makeText(getApplicationContext(), "Por Favor, rellena todos los campos.", Toast.LENGTH_SHORT).show();
                }else{
-                   myBBDD = FirebaseFirestore.getInstance();
-                   Task<DocumentSnapshot> datos = myBBDD.collection("Usuarios").document(emailUser).get();
-                   datos.addOnSuccessListener(result -> {
-                               if (datos.getResult().getData() == null) {
-                                   if (emailUser.contains("@") && emailUser.contains(".com")) {
-                                       enviarUsuario(nombreUser, passwUser, emailUser);
+                   mAuth.createUserWithEmailAndPassword(emailUser, passwUser)
+                           .addOnCompleteListener(RegistrarUsuarios.this, new OnCompleteListener<AuthResult>() {
+                               @Override
+                               public void onComplete(@NonNull Task<AuthResult> task) {
+                                   if (task.isSuccessful()) {
+                                       // Sign in success, update UI with the signed-in user's information
+                                       Toast.makeText(getApplicationContext(), "Registro existoso.", Toast.LENGTH_SHORT).show();
+                                       FirebaseUser user = mAuth.getCurrentUser();
+
                                    } else {
-                                       Toast.makeText(getApplicationContext(), "El correo debe de estar correctamente escrito", Toast.LENGTH_SHORT).show();
+                                       // If sign in fails, display a message to the user.
+                                       Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                       Toast.makeText(RegistrarUsuarios.this, "Este Usario ya esta en uso.",
+                                               Toast.LENGTH_SHORT).show();
+
                                    }
-                               } else {
-                                   Toast.makeText(getApplicationContext(), "El correo introducido ya esta en uso", Toast.LENGTH_SHORT).show();
-                                   email.setText("");
                                }
                            });
                }

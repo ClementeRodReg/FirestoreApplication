@@ -1,8 +1,10 @@
-package com.example.firestoredemo;
+package com.example.firestoredemo.vista;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.firestoredemo.R;
 
 public class Teatro extends AppCompatActivity {
 

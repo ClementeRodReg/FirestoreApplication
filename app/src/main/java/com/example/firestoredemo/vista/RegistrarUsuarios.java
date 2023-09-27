@@ -1,4 +1,4 @@
-package com.example.firestoredemo;
+package com.example.firestoredemo.vista;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.firestoredemo.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -20,7 +21,6 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -44,50 +44,48 @@ public class RegistrarUsuarios extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
-       nombre = findViewById(R.id.nombre);
-       passw = findViewById(R.id.passw);
+        nombre = findViewById(R.id.nombre);
+        passw = findViewById(R.id.passw);
         email = findViewById(R.id.email);
-       registrarse = findViewById(R.id.registrarse);
+        registrarse = findViewById(R.id.registrarse);
 
-       registrarse.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               String nombreUser = nombre.getText().toString();
-               String passwUser = passw.getText().toString();
-               String emailUser = email.getText().toString();
+        registrarse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String nombreUser = nombre.getText().toString();
+                String passwUser = passw.getText().toString();
+                String emailUser = email.getText().toString();
 
-               if(nombreUser.isEmpty() || passwUser.isEmpty() || emailUser.isEmpty()){
-                   Toast.makeText(getApplicationContext(), "Por Favor, rellena todos los campos.", Toast.LENGTH_SHORT).show();
-               }else{
-                   mAuth.createUserWithEmailAndPassword(emailUser, passwUser)
-                           .addOnCompleteListener(RegistrarUsuarios.this, new OnCompleteListener<AuthResult>() {
-                               @Override
-                               public void onComplete(@NonNull Task<AuthResult> task) {
-                                   if (task.isSuccessful()) {
-                                       // Sign in success, update UI with the signed-in user's information
-                                       Toast.makeText(getApplicationContext(), "Registro existoso.", Toast.LENGTH_SHORT).show();
-                                       FirebaseUser user = mAuth.getCurrentUser();
+                if (nombreUser.isEmpty() || passwUser.isEmpty() || emailUser.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Por Favor, rellena todos los campos.", Toast.LENGTH_SHORT).show();
+                } else {
+                    mAuth.createUserWithEmailAndPassword(emailUser, passwUser)
+                            .addOnCompleteListener(RegistrarUsuarios.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Toast.makeText(getApplicationContext(), "Registro existoso.", Toast.LENGTH_SHORT).show();
+                                        FirebaseUser user = mAuth.getCurrentUser();
 
-                                   } else {
-                                       // If sign in fails, display a message to the user.
-                                       Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                       Toast.makeText(RegistrarUsuarios.this, "Este Usario ya esta en uso.",
-                                               Toast.LENGTH_SHORT).show();
-
-                                   }
-                               }
-                           });
-               }
-
-           }
-       });
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                        Toast.makeText(RegistrarUsuarios.this, "Este Usario ya esta en uso.",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                }
+            }
+        });
     }
 
     private void enviarUsuario(String nombreUser, String passwUser, String dniUser) {
 
         Map<String, Object> datos = new HashMap<>();
-        datos.put("Nombre",nombreUser);
-        datos.put("Contraseña",passwUser);
+        datos.put("Nombre", nombreUser);
+        datos.put("Contraseña", passwUser);
         myBBDD = FirebaseFirestore.getInstance();
         myBBDD.collection("Usuarios").document(dniUser).set(datos)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

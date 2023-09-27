@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/cacahuete"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/layout2"
+            android:layout_width="match_parent"
+            android:layout_height="132dp"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/iconImageView"
+                android:layout_width="101dp"
+                android:layout_height="111dp"
+                android:src="@drawable/img1" />
+
+            <Space
+                android:layout_width="146dp"
+                android:layout_height="31dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/nameTextView"
+                android:layout_width="250dp"
+                android:layout_height="110dp"
+                android:text="Nombre del evento"
+                android:textSize="30sp" />
+
+            <Space
+                android:layout_width="395dp"
+                android:layout_height="39dp"
+                android:layout_weight="1" />
+
+            <ExpandableListView
+                android:id="@+id/expandableListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

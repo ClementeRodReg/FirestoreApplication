@@ -66,7 +66,8 @@ public class RegistrarUsuarios extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
                                         Toast.makeText(getApplicationContext(), "Registro existoso.", Toast.LENGTH_SHORT).show();
-                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        finish();
+                                        //FirebaseUser user = mAuth.getCurrentUser();
 
                                     } else {
                                         // If sign in fails, display a message to the user.
@@ -81,7 +82,9 @@ public class RegistrarUsuarios extends AppCompatActivity {
         });
     }
 
+    /*
     private void enviarUsuario(String nombreUser, String passwUser, String dniUser) {
+    // Todo esto esta comentado porque es interesante lo de obtener datos de firebase
 
         Map<String, Object> datos = new HashMap<>();
         datos.put("Nombre", nombreUser);
@@ -103,7 +106,7 @@ public class RegistrarUsuarios extends AppCompatActivity {
                 });
 
     }
-
+*/
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();

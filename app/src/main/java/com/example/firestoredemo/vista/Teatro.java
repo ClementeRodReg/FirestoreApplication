@@ -1,11 +1,13 @@
 package com.example.firestoredemo.vista;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -44,7 +46,6 @@ public class Teatro extends AppCompatActivity {
 
         // Agregar bloques con íconos y nombres al LinearLayout
         addBlocksForArrayList(elementos);
-
     }
 
     private void addBlocksForArrayList(ArrayList<modeloTeatro> elementos) {
@@ -55,14 +56,24 @@ public class Teatro extends AppCompatActivity {
             // Obtener referencias a los elementos de la vista
             ImageView iconoImageView = vistaElementoEvento.findViewById(R.id.iconImageView);
             TextView nombreTextView = vistaElementoEvento.findViewById(R.id.nameTextView);
+            LinearLayout linearLayoutEvento = vistaElementoEvento.findViewById(R.id.linearLayoutEvento);
 
             // Configurar el ícono y el nombre
             iconoImageView.setImageResource(elemento.getIconResId());
             nombreTextView.setText(elemento.getName());
 
+            // Agregar el clic listener al linearLayoutEvento
+            linearLayoutEvento.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Acciones que deseas realizar cuando se hace clic
+                    // Por ejemplo, mostrar un Toast
+                    Toast.makeText(Teatro.this, "Se hizo clic en " + elemento.getName(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
             // Agregar la vista del evento al LinearLayout principal
             linearLayout.addView(vistaElementoEvento);
         }
     }
-
 }

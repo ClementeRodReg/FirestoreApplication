@@ -17,7 +17,7 @@
         android:padding="16dp">
 
         <ImageView
-            android:id="@+id/iconImageView"
+            android:id="@+id/fotoSeleccionada"
             android:layout_width="78dp"
             android:layout_height="85dp"
             android:src="@drawable/img1" />

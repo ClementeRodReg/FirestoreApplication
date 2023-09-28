@@ -13,6 +13,9 @@
         android:theme="@style/Theme.FirestoreDemo"
         tools:targetApi="31">
         <activity
+            android:name=".vista.EventoSeleccionado"
+            android:exported="false" />
+        <activity
             android:name=".vista.Vista_categorias"
             android:exported="false" />
         <activity

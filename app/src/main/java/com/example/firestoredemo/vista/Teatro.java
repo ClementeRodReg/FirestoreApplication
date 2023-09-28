@@ -34,15 +34,15 @@ public class Teatro extends AppCompatActivity {
         // Crear un ArrayList con elementos de ejemplo
         ArrayList<modeloTeatro> elementos = new ArrayList<>();
         elementos.add(new modeloTeatro(R.drawable.img1, "Las joyas de París"));
-        elementos.add(new modeloTeatro(R.drawable.img1, "Teatro Liceo"));
-        elementos.add(new modeloTeatro(R.drawable.img1, "Teatro Colón"));
-        elementos.add(new modeloTeatro(R.drawable.img1, "Italia y su tradición"));
-        elementos.add(new modeloTeatro(R.drawable.img1, "Ópera de Sídney"));
-        elementos.add(new modeloTeatro(R.drawable.img1, "Royal Opera House"));
-        elementos.add(new modeloTeatro(R.drawable.img1, "Metropolitan Ópera House"));
-        elementos.add(new modeloTeatro(R.drawable.img1, "Ópera House Oslo"));
-        elementos.add(new modeloTeatro(R.drawable.img1, "Ópera estatal de Viena"));
-        elementos.add(new modeloTeatro(R.drawable.img1, "El Bolshoi"));
+        elementos.add(new modeloTeatro(R.drawable.img2, "Teatro Liceo"));
+        elementos.add(new modeloTeatro(R.drawable.img3, "Teatro Colón"));
+        elementos.add(new modeloTeatro(R.drawable.img4, "Italia y su tradición"));
+        elementos.add(new modeloTeatro(R.drawable.img5, "Ópera de Sídney"));
+        elementos.add(new modeloTeatro(R.drawable.img6, "Royal Opera House"));
+        elementos.add(new modeloTeatro(R.drawable.img7, "Metropolitan Ópera House"));
+        elementos.add(new modeloTeatro(R.drawable.img8, "Ópera House Oslo"));
+        elementos.add(new modeloTeatro(R.drawable.img9, "Ópera estatal de Viena"));
+        elementos.add(new modeloTeatro(R.drawable.img10, "El Bolshoi"));
 
         // Agregar bloques con íconos y nombres al LinearLayout
         addBlocksForArrayList(elementos);
@@ -54,7 +54,7 @@ public class Teatro extends AppCompatActivity {
             View vistaElementoEvento = getLayoutInflater().inflate(R.layout.eventosgeneral, null);
 
             // Obtener referencias a los elementos de la vista
-            ImageView iconoImageView = vistaElementoEvento.findViewById(R.id.iconImageView);
+            ImageView iconoImageView = vistaElementoEvento.findViewById(R.id.fotoSeleccionada);
             TextView nombreTextView = vistaElementoEvento.findViewById(R.id.nameTextView);
             LinearLayout linearLayoutEvento = vistaElementoEvento.findViewById(R.id.linearLayoutEvento);
 
@@ -69,6 +69,11 @@ public class Teatro extends AppCompatActivity {
                     // Acciones que deseas realizar cuando se hace clic
                     // Por ejemplo, mostrar un Toast
                     Toast.makeText(Teatro.this, "Se hizo clic en " + elemento.getName(), Toast.LENGTH_SHORT).show();
+
+                    Intent mandar = new Intent(Teatro.this, EventoSeleccionado.class);
+                    mandar.putExtra("clave_datoNombre", elemento.getName().toString());
+                    mandar.putExtra("clave_datoImagen", elemento.getIconResId());
+                    startActivity(mandar);
                 }
             });
 

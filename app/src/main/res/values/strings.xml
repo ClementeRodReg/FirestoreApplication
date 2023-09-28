@@ -18,4 +18,8 @@
     <string name="textFecha"> Fecha:</string>
     <string name="textHora"> Hora:</string>
     <string name="btnContinuar">Continuar</string>
+    <string name="editTextAno">yyyy</string>
+    <string name="textViewBarra">/</string>
+    <string name="editTextMes">MM</string>
+    <string name="editTextDia">dd</string>
 </resources>

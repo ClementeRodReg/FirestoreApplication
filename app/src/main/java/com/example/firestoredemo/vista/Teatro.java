@@ -68,7 +68,6 @@ public class Teatro extends AppCompatActivity {
                 public void onClick(View v) {
                     // Acciones que deseas realizar cuando se hace clic
                     // Por ejemplo, mostrar un Toast
-                    Toast.makeText(Teatro.this, "Se hizo clic en " + elemento.getName(), Toast.LENGTH_SHORT).show();
 
                     Intent mandar = new Intent(Teatro.this, EventoSeleccionado.class);
                     mandar.putExtra("clave_datoNombre", elemento.getName().toString());

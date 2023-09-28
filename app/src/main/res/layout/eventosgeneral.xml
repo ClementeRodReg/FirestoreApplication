@@ -9,6 +9,7 @@
     app:cardUseCompatPadding="true">
 
     <LinearLayout
+        android:id="@+id/linearLayoutEvento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#1e1f21"
@@ -47,4 +48,5 @@
             android:visibility="gone" />
 
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>

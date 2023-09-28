@@ -28,8 +28,5 @@ public class EventoSeleccionado extends AppCompatActivity {
         lblEventoSeleccionado.setText(nombreEvento.toString());
 
 
-
-
-
     }
 }

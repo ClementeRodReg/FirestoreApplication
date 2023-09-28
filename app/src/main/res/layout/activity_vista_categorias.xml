@@ -44,13 +44,15 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/orange"
         android:text="Categorias"
+        android:translationX="30dp"
+        android:translationY="10dp"
         app:icon="@android:drawable/ic_menu_agenda"
         app:iconTint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.318" />
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

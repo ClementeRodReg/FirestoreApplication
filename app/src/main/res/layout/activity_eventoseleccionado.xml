@@ -2,27 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ContraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
     tools:context=".vista.EventoSeleccionado">
-
-    <EditText
-        android:id="@+id/editTextAno"
-        android:layout_width="62dp"
-        android:layout_height="42dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/editTextAno"
-        android:inputType="number"
-        android:textColor="@color/white"
-        android:textColorHint="@color/grey"
-        app:layout_constraintBottom_toTopOf="@+id/btnContinuar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
-        app:layout_constraintStart_toEndOf="@+id/editTextMes"
-        app:layout_constraintTop_toBottomOf="@+id/textFecha"
-        app:layout_constraintVertical_bias="0.02" />
 
     <TextView
         android:id="@+id/lblEventoSeleccionado"
@@ -42,154 +26,53 @@
 
     <Space
         android:id="@+id/space"
-        android:layout_width="match_parent"
-        android:layout_height="54dp"
+        android:layout_width="416dp"
+        android:layout_height="38dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblEventoSeleccionado"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.381" />
 
     <ImageView
         android:id="@+id/fotoSeleccionada"
         android:layout_width="298dp"
         android:layout_height="161dp"
         android:layout_marginTop="4dp"
+        android:importantForAccessibility="no"
         android:src="@drawable/img1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/space"
-        app:layout_constraintVertical_bias="0.0"
-        android:importantForAccessibility="no" />
+        app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/textFecha"
-        android:layout_width="66dp"
-        android:layout_height="27dp"
-        android:text="@string/textFecha"
-        android:textColor="@color/orange"
-        android:textSize="20sp"
+    <Space
+        android:id="@+id/space"
+        android:layout_width="416dp"
+        android:layout_height="38dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.159"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fotoSeleccionada"
-        app:layout_constraintVertical_bias="0.25"
-        tools:ignore="TextSizeCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/lblEventoSeleccionado"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/textHora"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/textHora"
-        android:textColor="@color/orange"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.615"
-        app:layout_constraintStart_toEndOf="@+id/textFecha"
-        app:layout_constraintTop_toBottomOf="@+id/fotoSeleccionada"
-        app:layout_constraintVertical_bias="0.25" />
+    <ScrollView
+        android:id="@+id/cacahuete"
+        android:layout_width="414dp"
+        android:layout_height="329dp"
+        tools:layout_editor_absoluteX="-3dp"
+        tools:layout_editor_absoluteY="402dp">
 
-    <EditText
-        android:id="@+id/editTextTime"
-        android:layout_width="88dp"
-        android:layout_height="41dp"
-        android:layout_marginEnd="52dp"
-        android:ems="10"
-        android:hint="19:45"
-        android:importantForAutofill="no"
-        android:inputType="time"
-        android:textColor="@color/white"
-        android:textColorHint="@color/grey"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textHora"
-        app:layout_constraintVertical_bias="0.009" />
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
 
-    <EditText
-        android:id="@+id/editTextDia"
-        android:layout_width="34dp"
-        android:layout_height="41dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/editTextDia"
-        android:inputType="number"
-        android:textColor="@color/white"
-        android:textColorHint="@color/grey"
-        app:layout_constraintBottom_toTopOf="@+id/btnContinuar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.148"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textFecha"
-        app:layout_constraintVertical_bias="0.032" />
-
-    <EditText
-        android:id="@+id/editTextMes"
-        android:layout_width="41dp"
-        android:layout_height="41dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/editTextMes"
-        android:inputType="number"
-        android:textColor="@color/white"
-        android:textColorHint="@color/grey"
-        app:layout_constraintBottom_toTopOf="@+id/btnContinuar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.267"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textFecha"
-        app:layout_constraintVertical_bias="0.04" />
-
-    <TextView
-        android:id="@+id/textViewBarra1"
-        android:layout_width="31dp"
-        android:layout_height="40dp"
-        android:text="@string/textViewBarra"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textColorHighlight="@color/white"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnContinuar"
-        app:layout_constraintEnd_toEndOf="@+id/editTextMes"
-        app:layout_constraintHorizontal_bias="0.694"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textFecha"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="TextSizeCheck" />
-
-    <TextView
-        android:id="@+id/textViewBarra"
-        android:layout_width="31dp"
-        android:layout_height="40dp"
-        android:text="@string/textViewBarra"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnContinuar"
-        app:layout_constraintEnd_toEndOf="@+id/editTextAno"
-        app:layout_constraintHorizontal_bias="0.348"
-        app:layout_constraintStart_toStartOf="@+id/editTextMes"
-        app:layout_constraintTop_toBottomOf="@+id/textFecha"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="TextSizeCheck" />
-
-    <Button
-        android:id="@+id/btnContinuar"
-        android:layout_width="122dp"
-        android:layout_height="65dp"
-        android:backgroundTint="@color/orange"
-        android:text="@string/btnContinuar"
-        android:textColor="@color/white"
-        app:iconSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textFecha"
-        app:layout_constraintVertical_bias="0.584" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

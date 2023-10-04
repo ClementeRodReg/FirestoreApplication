@@ -15,5 +15,11 @@
     <string name="modo_invitado">Modo Invitado</string>
     <string name="id_teatroTitulo">TEATROS</string>
     <string name="nombreSeleccionado">Nombre Seleccionado</string>
-    <string name="MySharedPref">SharedPreferences</string>
+    <string name="textFecha"> Fecha:</string>
+    <string name="textHora"> Hora:</string>
+    <string name="btnContinuar">Continuar</string>
+    <string name="editTextAno">yyyy</string>
+    <string name="textViewBarra">/</string>
+    <string name="editTextMes">MM</string>
+    <string name="editTextDia">dd</string>
 </resources>

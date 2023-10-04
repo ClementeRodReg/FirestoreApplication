@@ -22,4 +22,5 @@
     <string name="textViewBarra">/</string>
     <string name="editTextMes">MM</string>
     <string name="editTextDia">dd</string>
+    <string name="txteventos">Eventos</string>
 </resources>

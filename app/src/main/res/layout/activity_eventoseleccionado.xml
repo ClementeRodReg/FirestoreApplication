@@ -26,14 +26,15 @@
 
     <Space
         android:id="@+id/space"
-        android:layout_width="416dp"
-        android:layout_height="38dp"
+        android:layout_width="410dp"
+        android:layout_height="22dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblEventoSeleccionado"
-        app:layout_constraintVertical_bias="0.381" />
+        app:layout_constraintVertical_bias="0.359"
+        tools:ignore="DuplicateIds" />
 
     <ImageView
         android:id="@+id/fotoSeleccionada"
@@ -51,21 +52,51 @@
 
     <Space
         android:id="@+id/space"
-        android:layout_width="416dp"
-        android:layout_height="38dp"
+        android:layout_width="410dp"
+        android:layout_height="22dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/space"
+        app:layout_constraintVertical_bias="0.418"
+        tools:ignore="DuplicateIds,NotSibling" />
+
+    <TextView
+        android:id="@+id/txtEvento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txteventos"
+        android:textColor="@color/orange"
+        android:textColorHighlight="@color/orange"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="@+id/cacahuete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/space"
+        app:layout_constraintVertical_bias="0.369" />
+
+    <Space
+        android:id="@+id/space"
+        android:layout_width="410dp"
+        android:layout_height="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblEventoSeleccionado"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="DuplicateIds" />
 
     <ScrollView
         android:id="@+id/cacahuete"
-        android:layout_width="414dp"
-        android:layout_height="329dp"
-        tools:layout_editor_absoluteX="-3dp"
-        tools:layout_editor_absoluteY="402dp">
+        android:layout_width="375dp"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:id="@+id/linearLayout"

@@ -7,6 +7,7 @@ public class Sala {
     private double precio;
 
     public Sala(String nombre, String fecha, String hora, double precio){
+        this.nombre=nombre;
         this.fecha=fecha;
         this.hora=hora;
         this.precio=precio;

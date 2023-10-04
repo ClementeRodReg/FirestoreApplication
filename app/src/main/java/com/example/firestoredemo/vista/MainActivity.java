@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -35,19 +36,20 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
 
-    protected void onStart(Bundle savedInstanceState){
-        passwLogin = findViewById(R.id.passwLogin);
-        gmailLogin = findViewById(R.id.loginGmail);
-        SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
-        gmailLogin.setText(sh.getString("mail", ""));
-        passwLogin.setText(sh.getString("passw", ""));
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
+
+        //Aqui empieza Shared Preferences
+        passwLogin = findViewById(R.id.passwLogin);
+        gmailLogin = findViewById(R.id.loginGmail);
+        SharedPreferences sh = MainActivity.this.getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        gmailLogin.setText(sh.getString("mail", ""));
+        passwLogin.setText(sh.getString("passw", ""));
+        //Aqui termina Shared Preferences
+
 
         inicioSesion = findViewById(R.id.inicioSesion);
         registrarboton = findViewById(R.id.btn_registro);
@@ -69,8 +71,6 @@ public class MainActivity extends AppCompatActivity {
         inicioSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                passwLogin = findViewById(R.id.passwLogin);
-                gmailLogin = findViewById(R.id.loginGmail);
 
                 gmail = gmailLogin.getText().toString();
                 contra = passwLogin.getText().toString();
@@ -82,11 +82,15 @@ public class MainActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
+
+                                        //---Aqui gurada el usuario y contraseña que hace login correctamente en shared preferences---
                                         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
                                         SharedPreferences.Editor myEdit = sharedPreferences.edit();
                                         myEdit.putString("mail", gmail);
                                         myEdit.putString("passw", contra);
                                         myEdit.apply();
+                                        //------
+
                                         Log.d(TAG, "signInWithEmail:success");
                                         FirebaseUser user = mAuth.getCurrentUser();
                                         Intent IrAVentanaCategorias = new Intent(MainActivity.this, Vista_categorias.class);

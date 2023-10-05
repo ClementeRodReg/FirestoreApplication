@@ -23,4 +23,5 @@
     <string name="editTextMes">MM</string>
     <string name="editTextDia">dd</string>
     <string name="txteventos">Eventos</string>
+    <string name="lbl_fecha_y_hora">Fecha y Hora</string>
 </resources>

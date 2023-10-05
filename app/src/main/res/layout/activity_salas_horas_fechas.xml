@@ -22,4 +22,35 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.065"
         tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/lblSala"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lbl_fecha_y_hora"
+        android:textColor="@color/orange"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.147"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblEventoSeleccionado"
+        app:layout_constraintVertical_bias="0.052" />
+
+    <Spinner
+        android:id="@+id/comboBox"
+        android:layout_width="155dp"
+        android:layout_height="41dp"
+        android:backgroundTint="@color/black"
+        android:spinnerMode="dropdown"
+        android:dropDownWidth="match_parent"
+        android:popupBackground="@color/black"
+        android:popupElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.148"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.366" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

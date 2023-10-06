@@ -11,15 +11,68 @@
         android:id="@+id/lblEventoSeleccionado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="159dp"
         android:gravity="center"
         android:text="@string/nombreSeleccionado"
         android:textColor="@color/white"
         android:textSize="48sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/comboBoxHora"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.065"
         tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/lblSala"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lbl_fecha_y_hora"
+        android:textColor="@color/orange"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.147"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblEventoSeleccionado"
+        app:layout_constraintVertical_bias="0.052" />
+
+    <Spinner
+        android:id="@+id/comboBoxFecha"
+        android:layout_width="184dp"
+        android:layout_height="34dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.132"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblSala"
+        app:layout_constraintVertical_bias="0.084" />
+
+    <Spinner
+        android:id="@+id/comboBoxHora"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="377dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/comboBoxFecha"
+        app:layout_constraintStart_toStartOf="@+id/comboBoxFecha"
+        app:layout_constraintTop_toBottomOf="@+id/lblEventoSeleccionado" />
+
+    <ScrollView
+        android:id="@+id/cacahuete"
+        android:layout_width="410dp"
+        android:layout_height="352dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

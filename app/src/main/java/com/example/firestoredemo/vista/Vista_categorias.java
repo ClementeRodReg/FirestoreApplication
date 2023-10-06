@@ -17,8 +17,10 @@ public class Vista_categorias extends AppCompatActivity {
     ScrollView menuLateral;
     Button botonMenuLateral;
     TextView id_texttheatro;
-    LinearLayout idLena;
 
+    TextView mostrargmail;
+    LinearLayout idLena;
+    Button cerrarsesion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +33,11 @@ public class Vista_categorias extends AppCompatActivity {
 
         ViewPropertyAnimator animator = botonMenuLateral.animate();
         id_texttheatro = findViewById(R.id.id_texttheatro);
+      mostrargmail = findViewById(R.id.idmostrargmail);
+        mostrargmail.setText(getIntent().getStringExtra("email"));
+
+
+        cerrarsesion = findViewById(R.id.idcerarsesion);
 
         id_texttheatro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,5 +62,18 @@ public class Vista_categorias extends AppCompatActivity {
                 }
             }
         });
+
+
+        cerrarsesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Vista_categorias.this, MainActivity.class));
+                }
+
+        });
+
+
+
+
     }
 }

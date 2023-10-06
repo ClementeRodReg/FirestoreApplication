@@ -93,7 +93,15 @@ public class MainActivity extends AppCompatActivity {
 
                                         Log.d(TAG, "signInWithEmail:success");
                                         FirebaseUser user = mAuth.getCurrentUser();
+
+                                        //
+
+                                        Log.d("tag", gmail);
                                         Intent IrAVentanaCategorias = new Intent(MainActivity.this, Vista_categorias.class);
+                                        IrAVentanaCategorias.putExtra("email", gmail);
+                                        startActivity(IrAVentanaCategorias);
+
+                                        //
                                         IrAVentanaCategorias.putExtra("currentUser", user);
                                         startActivity(IrAVentanaCategorias);
                                     } else {

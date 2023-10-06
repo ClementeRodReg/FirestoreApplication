@@ -6,16 +6,12 @@ public class Local {
     public String getNombre() {
         return nombre;
     }
-
-    public List<Evento> getEventos() {
-        return eventos;
-    }
-
     private String nombre;
-    private List<Evento> eventos;
-    public Local(String nombre, List<Evento> eventos){
+    private List<Sala> salas ;
+    public List<Sala> getSalas() { return salas; }
+    public Local(String nombre, List<Sala> salas){
         this.nombre=nombre;
-        this.eventos=eventos;
+        this.salas=salas;
     }
 
 }

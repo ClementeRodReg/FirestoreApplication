@@ -9,14 +9,15 @@ public class Evento {
         return nombre;
     }
 
-    public List<Sala> getSala() {
-        return sala;
+    public List<Local> getLocal() {
+        return locales;
     }
 
-    private List<Sala> sala;
+    private List<Local> locales;
+
     private String nombre;
-    public Evento(String nombre, List<Sala> sala){
+    public Evento(String nombre, List<Local> locales){
         this.nombre=nombre;
-        this.sala=sala;
+        this.locales=locales;
     }
 }

@@ -63,7 +63,7 @@
         tools:ignore="DuplicateIds,NotSibling" />
 
     <TextView
-        android:id="@+id/txtEvento"
+        android:id="@+id/txtLugar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txteventos"

@@ -13,7 +13,7 @@
     <string name="id_usuario" translatable="false">E-mail</string>
     <string name="e_mail">E-mail</string>
     <string name="modo_invitado">Modo Invitado</string>
-    <string name="id_teatroTitulo">TEATROS</string>
+    <string name="id_teatroTitulo">TEATRO</string>
     <string name="nombreSeleccionado">Nombre Seleccionado</string>
     <string name="textFecha"> Fecha:</string>
     <string name="textHora"> Hora:</string>
@@ -22,6 +22,9 @@
     <string name="textViewBarra">/</string>
     <string name="editTextMes">MM</string>
     <string name="editTextDia">dd</string>
-    <string name="txteventos">Eventos</string>
+    <string name="txteventos">Lugar</string>
     <string name="lbl_fecha_y_hora">Fecha y Hora</string>
+    <string name="lblteatro">Teatro</string>
+    <string name="lblCines">Cines</string>
+    <string name="lblDeportes">Deportes</string>
 </resources>

@@ -124,7 +124,10 @@ public class MainActivity extends AppCompatActivity {
         modoInvitado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, Teatro.class));
+                mAuth.signInAnonymously();
+                Intent IrAVentanaCategorias = new Intent(MainActivity.this, Vista_categorias.class);
+                IrAVentanaCategorias.putExtra("email", "Modo Invitado");
+                startActivity(IrAVentanaCategorias);
             }
         });
     }

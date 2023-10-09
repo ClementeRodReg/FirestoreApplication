@@ -36,6 +36,8 @@ public class MetodosObtencion {
                        for (Map.Entry<String, Object> pair : eventosHM.entrySet()) {
                            Obras obra = new Obras(documentLocal.getId(), Double.valueOf(pair.getValue().toString()));
                            obrasList.add(obra);
+                           System.out.println(obra.getNombre());
+                           System.out.println(obra.getPrecio());
                        }
                    }
                }
@@ -47,7 +49,23 @@ public class MetodosObtencion {
     public ArrayList<String> obtenerEdificios(String obra){
         ArrayList<String> edificios = new ArrayList<>();
 
+        myBBDD = FirebaseFirestore.getInstance();
+        Task coleccion = myBBDD.collection("Salas").get();
 
+        coleccion.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    // Bucle de los edificios que tiene la coleccion que se manda
+                    for (QueryDocumentSnapshot documentLocal : task.getResult()) {
+                        //Sacar el HashMap de Firebase
+                        edificios.add(documentLocal.getId());
+                    }
+                }
+            }
+        });
+
+        Task coleccion2 = myBBDD.collection("SeCelebraT").get();
 
         return edificios;
     }

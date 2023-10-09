@@ -43,11 +43,11 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         //Aqui empieza Shared Preferences
-        passwLogin = findViewById(R.id.passwLogin);
+       // passwLogin = findViewById(R.id.passwLogin);
         gmailLogin = findViewById(R.id.loginGmail);
         SharedPreferences sh = MainActivity.this.getSharedPreferences("MySharedPref", MODE_PRIVATE);
         gmailLogin.setText(sh.getString("mail", ""));
-        passwLogin.setText(sh.getString("passw", ""));
+       // passwLogin.setText(sh.getString("passw", ""));
         //Aqui termina Shared Preferences
 
 
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                                         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
                                         SharedPreferences.Editor myEdit = sharedPreferences.edit();
                                         myEdit.putString("mail", gmail);
-                                        myEdit.putString("passw", contra);
+                                        //myEdit.putString("passw", contra);
                                         myEdit.apply();
                                         //------
 

@@ -2,6 +2,7 @@ package com.example.firestoredemo.vista;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,12 +20,12 @@ import com.example.firestoredemo.modelo.modeloTeatro;
 import java.util.ArrayList;
 
 public class Teatro extends AppCompatActivity {
-
+    int insertado=0;
     private LinearLayout linearLayout;
-
     MetodosObtencion metodosObtencion = new MetodosObtencion();
     ArrayList<Obras> listaObras;
-
+    final Handler handler = new Handler();
+    final int delay = 1000; // 1000 milliseconds == 1 second
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,23 +40,23 @@ public class Teatro extends AppCompatActivity {
         // Crear un ArrayList con elementos de ejemplo
 
         listaObras = metodosObtencion.obtenerObras("Teatro");
-        try {
-            Thread.sleep(7000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-    public void onStart() {
-        super.onStart();
-
         ArrayList<modeloTeatro> elementos = new ArrayList<>();
 
-        for (Obras obra: listaObras) {
-            elementos.add(new modeloTeatro(R.drawable.img11, obra.getNombre().toString()));
-            System.out.println(obra.getNombre().toString());
-        }
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                System.out.println("Comprobando..."); // Do your work here
+                if(!listaObras.isEmpty() && insertado < 1){
+                    for(Obras obra : listaObras){
+                        elementos.add(new modeloTeatro(R.drawable.img11, obra.getNombre()));
+                    }
+                    addBlocksForArrayList(elementos);
+                    insertado++;
+                }
+                // Agregar bloques con íconos y nombres al LinearLayout
+
+                handler.postDelayed(this, delay);
+            }
+        }, delay);
 
         /*
         elementos.add(new modeloTeatro(R.drawable.img11, "Romeo y Julieta"));
@@ -69,9 +70,14 @@ public class Teatro extends AppCompatActivity {
         */
 
 
-        // Agregar bloques con íconos y nombres al LinearLayout
-        addBlocksForArrayList(elementos);
+
+
+
     }
+
+
+
+
 
     private void addBlocksForArrayList(ArrayList<modeloTeatro> elementos) {
         for (modeloTeatro elemento : elementos) {

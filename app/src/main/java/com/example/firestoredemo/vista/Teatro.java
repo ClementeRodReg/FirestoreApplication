@@ -23,6 +23,7 @@ public class Teatro extends AppCompatActivity {
     private LinearLayout linearLayout;
 
     MetodosObtencion metodosObtencion = new MetodosObtencion();
+    ArrayList<Obras> listaObras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,18 @@ public class Teatro extends AppCompatActivity {
 
         // Crear un ArrayList con elementos de ejemplo
 
-        ArrayList<Obras> listaObras = metodosObtencion.obtenerObras("Teatro");
+        listaObras = metodosObtencion.obtenerObras("Teatro");
+        try {
+            Thread.sleep(7000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public void onStart() {
+        super.onStart();
+
         ArrayList<modeloTeatro> elementos = new ArrayList<>();
 
         for (Obras obra: listaObras) {

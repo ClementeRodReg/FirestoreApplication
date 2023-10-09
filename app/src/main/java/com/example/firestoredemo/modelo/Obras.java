@@ -10,6 +10,10 @@ public class Obras {
         this.precio=precio;
     }
 
+    public Obras() {
+
+    }
+
     public String getNombre() {
         return nombre;
     }

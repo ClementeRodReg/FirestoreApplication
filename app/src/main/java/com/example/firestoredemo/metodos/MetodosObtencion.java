@@ -18,9 +18,9 @@ public class MetodosObtencion {
 
     FirebaseFirestore myBBDD;
 
-    public List<Obras> obtenerObras(String nombreCategoria){
+    public ArrayList<Obras> obtenerObras(String nombreCategoria){
 
-        List<Obras> obrasList = new ArrayList<Obras>();
+        ArrayList<Obras> obrasList = new ArrayList<Obras>();
         myBBDD = FirebaseFirestore.getInstance();
         Task coleccion = myBBDD.collection(nombreCategoria).get();
 
@@ -42,6 +42,14 @@ public class MetodosObtencion {
            }
        });
         return obrasList;
+    }
+
+    public ArrayList<String> obtenerEdificios(String obra){
+        ArrayList<String> edificios = new ArrayList<>();
+
+
+
+        return edificios;
     }
 
 }

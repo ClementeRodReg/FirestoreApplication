@@ -45,39 +45,21 @@ public class Teatro extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             public void run() {
                 System.out.println("Comprobando..."); // Do your work here
-                if(!listaObras.isEmpty() && insertado < 1){
-                    for(Obras obra : listaObras){
-                        elementos.add(new modeloTeatro(R.drawable.img11, obra.getNombre()));
+                if(!listaObras.isEmpty() && insertado < 1) {
+                    for (Obras obra : listaObras) {
+                        String nombreObra = obra.getNombre().toLowerCase().replaceAll("\\s+", "");
+                        int idImagen = getResources().getIdentifier(nombreObra, "drawable", getPackageName());
+
+                        elementos.add(new modeloTeatro(idImagen, obra.getNombre()));
                     }
                     addBlocksForArrayList(elementos);
                     insertado++;
                 }
-                // Agregar bloques con íconos y nombres al LinearLayout
-
                 handler.postDelayed(this, delay);
             }
         }, delay);
 
-        /*
-        elementos.add(new modeloTeatro(R.drawable.img11, "Romeo y Julieta"));
-        elementos.add(new modeloTeatro(R.drawable.img22, "La Casa de Bernarda Alba"));
-        elementos.add(new modeloTeatro(R.drawable.img33, "La Celestina"));
-        elementos.add(new modeloTeatro(R.drawable.img44, "La Vida es Sueño"));
-        elementos.add(new modeloTeatro(R.drawable.img55, "Hamlet"));
-        elementos.add(new modeloTeatro(R.drawable.img66, "El Fantasma de la Ópera"));
-        elementos.add(new modeloTeatro(R.drawable.img77, "Sueño de una Noche de Verano"));
-        elementos.add(new modeloTeatro(R.drawable.img88, "Don Juan Tenorio"));
-        */
-
-
-
-
-
     }
-
-
-
-
 
     private void addBlocksForArrayList(ArrayList<modeloTeatro> elementos) {
         for (modeloTeatro elemento : elementos) {

@@ -25,6 +25,6 @@
     <string name="txteventos">Lugar</string>
     <string name="lbl_fecha_y_hora">Fecha y Hora</string>
     <string name="lblteatro">Teatro</string>
-    <string name="lblCines">Cines</string>
+    <string name="lblCines">Cine</string>
     <string name="lblDeportes">Deportes</string>
 </resources>

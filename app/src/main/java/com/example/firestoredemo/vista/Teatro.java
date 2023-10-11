@@ -26,6 +26,7 @@ public class Teatro extends AppCompatActivity {
     ArrayList<Obras> listaObras;
     final Handler handler = new Handler();
     final int delay = 1000; // 1000 milliseconds == 1 second
+    TextView lblEventoSeleccionado;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,11 +36,17 @@ public class Teatro extends AppCompatActivity {
 
         // Obtener el ScrollView y LinearLayout del diseño de la actividad
         ScrollView scrollView = findViewById(R.id.cacahuete);
+        lblEventoSeleccionado = findViewById(R.id.lblEventoSeleccionado);
         linearLayout = findViewById(R.id.linearLayout);
 
-        // Crear un ArrayList con elementos de ejemplo
+        //Obtener categoria seleccionada mediante putExta
+        String nombreCategoria = getIntent().getStringExtra("id_categoria");
 
-        listaObras = metodosObtencion.obtenerObras("Teatro");
+        //Colocación del nombre de la categoria seleccionada
+        lblEventoSeleccionado.setText(nombreCategoria);
+
+        // Crear un ArrayList con elementos de ejemplo
+        listaObras = metodosObtencion.obtenerObras(nombreCategoria);
         ArrayList<modeloTeatro> elementos = new ArrayList<>();
 
         handler.postDelayed(new Runnable() {

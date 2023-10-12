@@ -4,7 +4,6 @@ import static android.content.ContentValues.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import android.media.MediaPlayer;
 import com.example.firestoredemo.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,6 +25,8 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class MainActivity extends AppCompatActivity {
 
+    private MediaPlayer mediaPlayer;
+    private boolean sonidoYaReproducido = false;
     Button registrarboton;
     Button inicioSesion;
     Button modoInvitado;
@@ -37,9 +38,20 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        if (!sonidoYaReproducido) {
+            mediaPlayer.start();
+            sonidoYaReproducido = true;
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.startsound);
         mAuth = FirebaseAuth.getInstance();
 
         //Aqui empieza Shared Preferences
@@ -132,5 +144,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
 }

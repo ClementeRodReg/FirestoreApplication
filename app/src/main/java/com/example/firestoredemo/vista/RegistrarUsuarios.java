@@ -47,7 +47,9 @@ public class RegistrarUsuarios extends AppCompatActivity {
 
                 if (nombreUser.isEmpty() || passwUser.isEmpty() || emailUser.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Por Favor, rellena todos los campos.", Toast.LENGTH_SHORT).show();
-                } else {
+                } else if(passwUser.length() < 6){
+                    Toast.makeText(getApplicationContext(), "La contraseña debe de tener como mínimo 6 caracteres", Toast.LENGTH_SHORT).show();
+                }else {
                     mAuth.createUserWithEmailAndPassword(emailUser, passwUser)
                             .addOnCompleteListener(RegistrarUsuarios.this, new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -61,7 +63,7 @@ public class RegistrarUsuarios extends AppCompatActivity {
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                        Toast.makeText(RegistrarUsuarios.this, "Este Usario ya esta en uso.",
+                                        Toast.makeText(RegistrarUsuarios.this, "Este Usuario ya esta en uso.",
                                                 Toast.LENGTH_SHORT).show();
                                     }
                                 }

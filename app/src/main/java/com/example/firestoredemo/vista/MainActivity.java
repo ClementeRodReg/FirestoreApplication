@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         //Aqui empieza Shared Preferences
        // passwLogin = findViewById(R.id.passwLogin);
         gmailLogin = findViewById(R.id.loginGmail);
+        passwLogin = findViewById(R.id.passwLogin);
         SharedPreferences sh = MainActivity.this.getSharedPreferences("MySharedPref", MODE_PRIVATE);
         gmailLogin.setText(sh.getString("mail", ""));
        // passwLogin.setText(sh.getString("passw", ""));

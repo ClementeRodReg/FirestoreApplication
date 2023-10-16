@@ -1,20 +1,21 @@
 package com.example.firestoredemo.modelo;
 
-import java.util.List;
+import java.util.ArrayList;
+
 
 public class Salas {
 
     String nombreEdif;
-    List<String> nombreSalas;
+    ArrayList<String> nombreSalas;
 
-    public Salas(String nombreEdif, List<String> nombreSalas){
+    public Salas(String nombreEdif, ArrayList<String> nombreSalas){
         this.nombreEdif=nombreEdif;
         this.nombreSalas=nombreSalas;
     }
     public Salas(){
 
     }
-    public List<String> getNombreSalas() {
+    public ArrayList<String> getNombreSalas() {
         return nombreSalas;
     }
 

@@ -30,6 +30,7 @@ public class EventoSeleccionado extends AppCompatActivity {
     final Handler handler = new Handler();
     final int delay = 1000; // 1000 milliseconds == 1 second
     int insertado=0;
+    String nombreCategoria = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +52,14 @@ public class EventoSeleccionado extends AppCompatActivity {
         String nombreEvento = getIntent().getStringExtra("clave_datoNombre");
         lblEventoSeleccionado.setText(nombreEvento.toString());
 
+        nombreCategoria = getIntent().getStringExtra("id_categoria");
+
         // Obtener el ScrollView y LinearLayout del diseño de la actividad
         ScrollView scrollView = findViewById(R.id.cacahuete);
         linearLayout = findViewById(R.id.linearLayout);
 
         // Crear un ArrayList con elementos de ejemplo
-        listaEdificios = metodosObtencion.obtenerEdificios(nombreEvento);
+        listaEdificios = metodosObtencion.obtenerEdificios(nombreEvento, nombreCategoria);
         ArrayList<modeloTeatro> elementos = new ArrayList<>();
 
         handler.postDelayed(new Runnable() {

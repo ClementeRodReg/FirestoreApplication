@@ -20,6 +20,7 @@ public class Vista_categorias extends AppCompatActivity {
     TextView id_cine;
     TextView id_deportes;
     TextView mostrargmail;
+    TextView id_Concierto;
     LinearLayout idLena;
     Button cerrarsesion;
 
@@ -37,6 +38,7 @@ public class Vista_categorias extends AppCompatActivity {
         id_texttheatro = findViewById(R.id.id_texttheatro);
         id_cine = findViewById(R.id.id_cine);
         id_deportes = findViewById(R.id.id_deportes);
+        id_Concierto = findViewById(R.id.id_Concierto);
         mostrargmail = findViewById(R.id.idmostrargmail);
         cerrarsesion = findViewById(R.id.idcerarsesion);
 
@@ -65,6 +67,15 @@ public class Vista_categorias extends AppCompatActivity {
             public void onClick(View view) {
                 Intent IrAVentanaTeatro = new Intent(Vista_categorias.this, Teatro.class);
                 IrAVentanaTeatro.putExtra("id_categoria", id_deportes.getText().toString());
+                startActivity(IrAVentanaTeatro);
+            }
+        });
+
+        id_Concierto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent IrAVentanaTeatro = new Intent(Vista_categorias.this, Teatro.class);
+                IrAVentanaTeatro.putExtra("id_categoria", id_Concierto.getText().toString());
                 startActivity(IrAVentanaTeatro);
             }
         });

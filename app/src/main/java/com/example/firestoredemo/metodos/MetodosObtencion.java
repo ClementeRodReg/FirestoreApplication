@@ -1,6 +1,8 @@
 package com.example.firestoredemo.metodos;
 
 
+import android.widget.Switch;
+
 import com.example.firestoredemo.modelo.Obras;
 import com.example.firestoredemo.modelo.Salas;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -47,13 +49,48 @@ public class MetodosObtencion {
         return obrasList;
     }
 
-    public ArrayList<Salas> obtenerEdificios(String obra){
-
-        ArrayList<Salas> edificios = new ArrayList<>();
+    public ArrayList<Salas> obtenerEdificios(String obra, String nombreCategoria){
         myBBDD = FirebaseFirestore.getInstance();
-        Task coleccion = myBBDD.collection("Salas").get();
 
         ArrayList<Salas> edificiosEnLosQueSeCelebra = new ArrayList<>();
+        ArrayList<String> esd = new ArrayList<>();
+        String seCelebra = "";
+
+        if(nombreCategoria.equalsIgnoreCase("Teatro")){
+            seCelebra = "SeCelebraT";
+        }else if(nombreCategoria.equals("Cine")){
+            seCelebra = "SeCelebraC";
+        }else if(nombreCategoria.equals("Concierto")){
+            seCelebra = "SeCelebraCo";
+        }else{
+            seCelebra = "Deporte";
+        }
+
+        Task coleccion2 = myBBDD.collection(seCelebra).get();
+
+        coleccion2.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task2) {
+                if (task2.isSuccessful()) {
+                    // Bucle de los edificios que tiene la coleccion que se manda
+                    for (QueryDocumentSnapshot FechaSala : task2.getResult()) {
+                        //dividir el id que recibimos de firebase
+                        String fecha = FechaSala.getId().split("_")[0];
+                        String sala = FechaSala.getId().split("_")[1];
+                        if(!edificiosEnLosQueSeCelebra.contains(sala)){
+
+                            if(FechaSala.get("NombreEvento").equals(obra)){
+                                esd.add(sala);
+                                System.out.println(sala);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+
+        Task coleccion = myBBDD.collection("Salas").get();
 
         coleccion.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -69,45 +106,24 @@ public class MetodosObtencion {
                             nombreSalas.add(pair.getValue().toString());
                         }
 
-                        //insertamos todo en la calse personalizada
-                        Salas edifio = new Salas(documentLocal.getId(), nombreSalas);
+                        for (String sala : nombreSalas) {
+                            for (String elemento : esd) {
+                                if (sala.equalsIgnoreCase(elemento) && !edificiosEnLosQueSeCelebra.contains(sala)){
 
-                        //metemos el objeto personalizado en el Arraylist
-                        edificios.add(edifio);
-                    }
-                }
-            }
-        });
+                                    //insertamos todo en la calse personalizada
+                                    Salas edifio = new Salas(documentLocal.getId(), nombreSalas);
 
-        Task coleccion2 = myBBDD.collection("SeCelebraT").get();
-
-        coleccion2.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task2) {
-                if (task2.isSuccessful()) {
-                    // Bucle de los edificios que tiene la coleccion que se manda
-                    for (QueryDocumentSnapshot FechaSala : task2.getResult()) {
-                        //dividir el id que recibimos de firebase
-                        String fecha = FechaSala.getId().split("_")[0];
-                        String sala = FechaSala.getId().split("_")[1];
-                        if(!edificiosEnLosQueSeCelebra.contains(sala)){
-
-                            if(FechaSala.get("NombreObra").equals(obra)){
-
-                                System.out.println(sala);
+                                    //metemos el objeto personalizado en el Arraylist
+                                    edificiosEnLosQueSeCelebra.add(edifio);
+                                }
                             }
-
                         }
 
 
-
                     }
                 }
             }
         });
-
-
-
 
 
         return edificiosEnLosQueSeCelebra;

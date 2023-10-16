@@ -27,6 +27,7 @@ public class Teatro extends AppCompatActivity {
     final Handler handler = new Handler();
     final int delay = 1000; // 1000 milliseconds == 1 second
     TextView lblEventoSeleccionado;
+    String nombreCategoria = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +41,7 @@ public class Teatro extends AppCompatActivity {
         linearLayout = findViewById(R.id.linearLayout);
 
         //Obtener categoria seleccionada mediante putExta
-        String nombreCategoria = getIntent().getStringExtra("id_categoria");
+        nombreCategoria = getIntent().getStringExtra("id_categoria");
 
         //Colocación del nombre de la categoria seleccionada
         lblEventoSeleccionado.setText(nombreCategoria);
@@ -91,6 +92,7 @@ public class Teatro extends AppCompatActivity {
 
                     Intent mandar = new Intent(Teatro.this, EventoSeleccionado.class);
                     mandar.putExtra("clave_datoNombre", elemento.getName().toString());
+                    mandar.putExtra("id_categoria", nombreCategoria);
                     mandar.putExtra("clave_datoImagen", elemento.getIconResId());
                     startActivity(mandar);
                 }

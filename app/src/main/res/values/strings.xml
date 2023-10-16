@@ -26,7 +26,7 @@
     <string name="lbl_fecha_y_hora">Fecha y Hora</string>
     <string name="lblteatro">Teatro</string>
     <string name="lblCines">Cine</string>
-    <string name="lblDeportes">Deportes</string>
+    <string name="lblDeportes">Deporte</string>
     <string name="reg_strate">Regístrarse</string>
     <string name="lbl_concierto">Concierto</string>
 </resources>

@@ -11,7 +11,9 @@ public class Salas {
         this.nombreEdif=nombreEdif;
         this.nombreSalas=nombreSalas;
     }
+    public Salas(){
 
+    }
     public List<String> getNombreSalas() {
         return nombreSalas;
     }

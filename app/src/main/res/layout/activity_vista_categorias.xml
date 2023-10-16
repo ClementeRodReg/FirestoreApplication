@@ -98,6 +98,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="16dp" />
 
+            <TextView
+                android:id="@+id/id_Concierto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/orange"
+                android:text="@string/lbl_concierto"
+                android:textAlignment="center"
+                android:textColor="@color/white" />
+
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="16dp" />

@@ -28,4 +28,5 @@
     <string name="lblCines">Cine</string>
     <string name="lblDeportes">Deportes</string>
     <string name="reg_strate">Regístrarse</string>
+    <string name="lbl_concierto">Concierto</string>
 </resources>

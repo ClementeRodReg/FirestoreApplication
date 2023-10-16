@@ -20,7 +20,7 @@
             android:id="@+id/fotoSeleccionada"
             android:layout_width="107dp"
             android:layout_height="82dp"
-            android:src="@drawable/img1" />
+            android:src="@drawable/img0" />
 
         <Space
             android:layout_width="146dp"

@@ -106,6 +106,7 @@ public class EventoSeleccionado extends AppCompatActivity {
 
                     Intent mandar = new Intent(EventoSeleccionado.this, SalasHorasFechas.class);
                     mandar.putExtra("clave_datoNombre", elemento.getName().toString());
+                    mandar.putExtra("id_categoria", nombreCategoria);
                     startActivity(mandar);
                 }
             });

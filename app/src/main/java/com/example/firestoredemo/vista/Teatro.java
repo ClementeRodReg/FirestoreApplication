@@ -2,6 +2,7 @@ package com.example.firestoredemo.vista;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,14 +13,21 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.firestoredemo.R;
+import com.example.firestoredemo.metodos.MetodosObtencion;
+import com.example.firestoredemo.modelo.Obras;
 import com.example.firestoredemo.modelo.modeloTeatro;
 
 import java.util.ArrayList;
 
 public class Teatro extends AppCompatActivity {
-
+    int insertado=0;
     private LinearLayout linearLayout;
-
+    MetodosObtencion metodosObtencion = new MetodosObtencion();
+    ArrayList<Obras> listaObras;
+    final Handler handler = new Handler();
+    final int delay = 1000; // 1000 milliseconds == 1 second
+    TextView lblEventoSeleccionado;
+    String nombreCategoria = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,21 +37,36 @@ public class Teatro extends AppCompatActivity {
 
         // Obtener el ScrollView y LinearLayout del diseño de la actividad
         ScrollView scrollView = findViewById(R.id.cacahuete);
+        lblEventoSeleccionado = findViewById(R.id.lblEventoSeleccionado);
         linearLayout = findViewById(R.id.linearLayout);
 
-        // Crear un ArrayList con elementos de ejemplo
-        ArrayList<modeloTeatro> elementos = new ArrayList<>();
-        elementos.add(new modeloTeatro(R.drawable.img11, "Romeo y Julieta"));
-        elementos.add(new modeloTeatro(R.drawable.img22, "La Casa de Bernarda Alba"));
-        elementos.add(new modeloTeatro(R.drawable.img33, "La Celestina"));
-        elementos.add(new modeloTeatro(R.drawable.img44, "La Vida es Sueño"));
-        elementos.add(new modeloTeatro(R.drawable.img55, "Hamlet"));
-        elementos.add(new modeloTeatro(R.drawable.img66, "El Fantasma de la Ópera"));
-        elementos.add(new modeloTeatro(R.drawable.img77, "Sueño de una Noche de Verano"));
-        elementos.add(new modeloTeatro(R.drawable.img88, "Don Juan Tenorio"));
+        //Obtener categoria seleccionada mediante putExta
+        nombreCategoria = getIntent().getStringExtra("id_categoria");
 
-        // Agregar bloques con íconos y nombres al LinearLayout
-        addBlocksForArrayList(elementos);
+        //Colocación del nombre de la categoria seleccionada
+        lblEventoSeleccionado.setText(nombreCategoria);
+
+        // Crear un ArrayList con elementos de ejemplo
+        listaObras = metodosObtencion.obtenerObras(nombreCategoria);
+        ArrayList<modeloTeatro> elementos = new ArrayList<>();
+
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                System.out.println("Comprobando..."); // Do your work here
+                if(!listaObras.isEmpty() && insertado < 1) {
+                    for (Obras obra : listaObras) {
+                        String nombreObra = obra.getNombre().toLowerCase().replaceAll("\\s+", "");
+                        int idImagen = getResources().getIdentifier(nombreObra, "drawable", getPackageName());
+
+                        elementos.add(new modeloTeatro(idImagen, obra.getNombre()));
+                    }
+                    addBlocksForArrayList(elementos);
+                    insertado++;
+                }
+                handler.postDelayed(this, delay);
+            }
+        }, delay);
+
     }
 
     private void addBlocksForArrayList(ArrayList<modeloTeatro> elementos) {
@@ -69,6 +92,7 @@ public class Teatro extends AppCompatActivity {
 
                     Intent mandar = new Intent(Teatro.this, EventoSeleccionado.class);
                     mandar.putExtra("clave_datoNombre", elemento.getName().toString());
+                    mandar.putExtra("id_categoria", nombreCategoria);
                     mandar.putExtra("clave_datoImagen", elemento.getIconResId());
                     startActivity(mandar);
                 }

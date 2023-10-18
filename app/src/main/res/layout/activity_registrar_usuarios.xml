@@ -7,88 +7,118 @@
     android:background="#000000"
     tools:context=".vista.RegistrarUsuarios">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="150dp"
-        android:background="#000000"
-        android:orientation="vertical"
-        android:visibility="visible"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView1"
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:text="@string/nombre"
-            android:textColor="@color/orange"
-            android:textSize="24sp" />
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:orientation="vertical"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/nombre"
-            android:layout_width="match_parent"
-            android:layout_height="59dp"
-            android:ems="10"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:textColor="#FFEBEE"
-            android:textSize="24sp"
-            tools:ignore="LabelFor,SpeakableTextPresentCheck" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="38dp" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:text="@string/contrase_a"
-            android:textColor="@color/orange"
-            android:textSize="24sp" />
+            <TextView
+                android:id="@+id/textRegistrate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|center_vertical"
+                android:text="@string/reg_strate"
+                android:textColor="@color/orange"
+                android:textColorHighlight="@color/orange"
+                android:textColorLink="@color/orange"
+                android:textSize="42sp" />
 
-        <EditText
-            android:id="@+id/passw"
-            android:layout_width="match_parent"
-            android:layout_height="59dp"
-            android:ems="10"
-            android:importantForAutofill="no"
-            android:inputType="textPassword"
-            android:textColor="#FFEBEE"
-            tools:ignore="LabelFor,SpeakableTextPresentCheck" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="69dp" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:text="@string/e_mail"
-            android:textColor="@color/orange"
-            android:textSize="24sp" />
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:text="@string/nombre"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
 
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="59dp"
-            android:ems="10"
-            android:importantForAutofill="no"
-            android:inputType="textEmailAddress"
-            android:textColor="#FFEBEE"
-            tools:ignore="LabelFor,SpeakableTextPresentCheck" />
+            <EditText
+                android:id="@+id/nombre"
+                android:layout_width="match_parent"
+                android:layout_height="59dp"
+                android:ems="10"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:textColor="#FFEBEE"
+                android:textSize="24sp"
+                tools:ignore="LabelFor,SpeakableTextPresentCheck" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="35sp" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:text="@string/contrase_a"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
 
-        <Button
-            android:id="@+id/registrarse"
-            android:layout_width="match_parent"
-            android:layout_height="59sp"
-            android:backgroundTint="@color/orange"
-            android:text="@string/finalizar" />
+            <EditText
+                android:id="@+id/passw"
+                android:layout_width="match_parent"
+                android:layout_height="59dp"
+                android:ems="10"
+                android:importantForAutofill="no"
+                android:inputType="textPassword"
+                android:textColor="#FFEBEE"
+                tools:ignore="LabelFor,SpeakableTextPresentCheck" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:text="@string/e_mail"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="59dp"
+                android:ems="10"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress"
+                android:textColor="#FFEBEE"
+                tools:ignore="LabelFor,SpeakableTextPresentCheck" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="35sp" />
+
+            <Button
+                android:id="@+id/registrarse"
+                android:layout_width="match_parent"
+                android:layout_height="59sp"
+                android:backgroundTint="@color/orange"
+                android:text="@string/finalizar"
+                android:textColor="@color/white"
+                android:textColorHighlight="@color/white"
+                android:textColorHint="@color/white"
+                android:textColorLink="@color/white" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

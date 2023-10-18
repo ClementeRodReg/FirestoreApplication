@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -11,6 +12,9 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import com.example.firestoredemo.R;
 import com.example.firestoredemo.metodos.MetodosEventoSeleccionado;
+import com.example.firestoredemo.metodos.MetodosObtencion;
+import com.example.firestoredemo.modelo.Obras;
+import com.example.firestoredemo.modelo.Salas;
 import com.example.firestoredemo.modelo.modeloTeatro;
 
 import java.util.ArrayList;
@@ -21,6 +25,12 @@ public class EventoSeleccionado extends AppCompatActivity {
     TextView lblEventoSeleccionado;
     ImageView imageView;
     private LinearLayout linearLayout;
+    MetodosObtencion metodosObtencion = new MetodosObtencion();
+    ArrayList<Salas> listaEdificios;
+    final Handler handler = new Handler();
+    final int delay = 1000; // 1000 milliseconds == 1 second
+    int insertado=0;
+    String nombreCategoria = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,23 +52,33 @@ public class EventoSeleccionado extends AppCompatActivity {
         String nombreEvento = getIntent().getStringExtra("clave_datoNombre");
         lblEventoSeleccionado.setText(nombreEvento.toString());
 
+        nombreCategoria = getIntent().getStringExtra("id_categoria");
 
         // Obtener el ScrollView y LinearLayout del diseño de la actividad
         ScrollView scrollView = findViewById(R.id.cacahuete);
         linearLayout = findViewById(R.id.linearLayout);
 
         // Crear un ArrayList con elementos de ejemplo
+        listaEdificios = metodosObtencion.obtenerEdificios(nombreEvento, nombreCategoria);
         ArrayList<modeloTeatro> elementos = new ArrayList<>();
-        elementos.add(new modeloTeatro(R.drawable.img1, "Las joyas de París"));
-        elementos.add(new modeloTeatro(R.drawable.img2, "Teatro Liceo"));
-        elementos.add(new modeloTeatro(R.drawable.img3, "Teatro Colón"));
-        elementos.add(new modeloTeatro(R.drawable.img4, "Italia y su tradición"));
-        elementos.add(new modeloTeatro(R.drawable.img5, "Ópera de Sídney"));
-        elementos.add(new modeloTeatro(R.drawable.img6, "Royal Opera House"));
-        elementos.add(new modeloTeatro(R.drawable.img7, "Metropolitan Ópera House"));
-        elementos.add(new modeloTeatro(R.drawable.img8, "Ópera House Oslo"));
-        elementos.add(new modeloTeatro(R.drawable.img9, "Ópera estatal de Viena"));
-        elementos.add(new modeloTeatro(R.drawable.img10, "El Bolshoi"));
+
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                System.out.println("Comprobando..."); // Do your work here
+                if(!listaEdificios.isEmpty() && insertado < 1) {
+                    for (Salas edificio : listaEdificios) {
+                        String nombreEdificio = edificio.getNombreEdif().toLowerCase().replaceAll("\\s+", "");
+                        int idImagen = getResources().getIdentifier(nombreEdificio, "drawable", getPackageName());
+
+                        elementos.add(new modeloTeatro(idImagen, edificio.getNombreEdif()));
+                    }
+                    addBlocksForArrayList(elementos);
+                    insertado++;
+                }
+                handler.postDelayed(this, delay);
+            }
+        }, delay);
+
 
         // Agregar bloques con íconos y nombres al LinearLayout
         addBlocksForArrayList(elementos);
@@ -86,6 +106,7 @@ public class EventoSeleccionado extends AppCompatActivity {
 
                     Intent mandar = new Intent(EventoSeleccionado.this, SalasHorasFechas.class);
                     mandar.putExtra("clave_datoNombre", elemento.getName().toString());
+                    mandar.putExtra("id_categoria", nombreCategoria);
                     startActivity(mandar);
                 }
             });

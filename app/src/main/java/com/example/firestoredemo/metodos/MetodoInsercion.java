@@ -28,11 +28,11 @@ public class MetodoInsercion {
     FirebaseFirestore myBBDD;
 
 
-    public void insertarTicket(String fecha, String sala, String edifio, String evento, float precio) {
+    public void insertarTicket(String fecha, String sala, String edifio, String evento, double precio) {
 
         myBBDD = FirebaseFirestore.getInstance();
-
-        ArrayList<String> ticketList = new ArrayList<String>();
+        final int[] numberDocuments = {0};
+        final String[] ticketNuevo = {"Ticket"};
 
         Task coleccion = myBBDD.collection("Tickets").get();
 
@@ -40,43 +40,34 @@ public class MetodoInsercion {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    // Bucle de los edificios que tiene la coleccion que se manda
-                    for (QueryDocumentSnapshot documentLocal : task.getResult()) {
-                        //Sacar el HashMap de Firebase
-                        Map<String, Object> eventosHM = documentLocal.getData();
-                        //Bucle de los Eventos
-                        for (Map.Entry<String, Object> pair : eventosHM.entrySet()) {
-                            String ticket = String.valueOf(new Obras(documentLocal.getId(), Double.valueOf(pair.getValue().toString())));
-                            ticketList.add(ticket);
-                            System.out.println(ticket.length());
-                        }
-                    }
+                    numberDocuments[0] = task.getResult().size();
+                    System.out.println(numberDocuments[0]);
+
+                    ticketNuevo[0] = ticketNuevo[0] + numberDocuments[0];
+
+                    Map<String, Object> ticket = new HashMap<>();
+                    ticket.put("Fecha", fecha);
+                    ticket.put("Sala", sala);
+                    ticket.put("Edifio", edifio);
+                    ticket.put("Evento", evento);
+                    ticket.put("Precio", precio);
+
+                    myBBDD.collection("Tickets").document(ticketNuevo[0])
+                            .set(ticket)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d(TAG, "DocumentSnapshot successfully written!");
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w(TAG, "Error writing document", e);
+                                }
+                            });
                 }
             }
         });
-
-
-        Map<String, Object> ticket = new HashMap<>();
-        ticket.put("Fecha", fecha);
-        ticket.put("Sala", sala);
-        ticket.put("Edifio", edifio);
-        ticket.put("Evento", evento);
-        ticket.put("Precio", precio);
-
-        myBBDD.collection("Tickets").document("Ticket")
-                .set(ticket)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully written!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing document", e);
-                    }
-                });
     }
-
 }

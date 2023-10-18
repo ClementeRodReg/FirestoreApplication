@@ -28,6 +28,7 @@ public class Teatro extends AppCompatActivity {
     final int delay = 1000; // 1000 milliseconds == 1 second
     TextView lblEventoSeleccionado;
     String nombreCategoria = "";
+    double precioEvento = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +58,7 @@ public class Teatro extends AppCompatActivity {
                     for (Obras obra : listaObras) {
                         String nombreObra = obra.getNombre().toLowerCase().replaceAll("\\s+", "");
                         int idImagen = getResources().getIdentifier(nombreObra, "drawable", getPackageName());
+                        precioEvento = obra.getPrecio();
 
                         elementos.add(new modeloTeatro(idImagen, obra.getNombre()));
                     }
@@ -91,9 +93,10 @@ public class Teatro extends AppCompatActivity {
                     // Por ejemplo, mostrar un Toast
 
                     Intent mandar = new Intent(Teatro.this, EventoSeleccionado.class);
-                    mandar.putExtra("clave_datoNombre", elemento.getName().toString());
+                    mandar.putExtra("clave_eventoNombre", elemento.getName().toString());
                     mandar.putExtra("id_categoria", nombreCategoria);
                     mandar.putExtra("clave_datoImagen", elemento.getIconResId());
+                    mandar.putExtra("id_precio", precioEvento);
                     startActivity(mandar);
                 }
             });

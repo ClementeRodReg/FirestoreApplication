@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.firestoredemo.R;
+import com.example.firestoredemo.metodos.MetodoInsercion;
 import com.example.firestoredemo.modelo.modeloTeatro;
 
 import java.util.ArrayList;
@@ -25,6 +26,12 @@ public class SalasHorasFechas extends AppCompatActivity {
     private final String fechas[] = {"20-03-2024", "21-03-2024", "22-03-2024", "23-03-2024"};
     private final String horas[] = {"08:00", "09:30", "11:00", "13:00"};
     private LinearLayout linearLayout;
+    MetodoInsercion metodoInsercion = new MetodoInsercion();
+    String fecha = "";
+    String sala = "";
+    String nombreEdificio = "";
+    String nombreEvento = "";
+    double precioEvento = 0;
 
 
     @Override
@@ -40,9 +47,12 @@ public class SalasHorasFechas extends AppCompatActivity {
         linearLayout = findViewById(R.id.linearLayout);
 
         //Saca nombre evento seleccionado
-        String nombreEvento = getIntent().getStringExtra("clave_datoNombre");
-        lblEventoSeleccionado.setText(nombreEvento.toString());
+        nombreEdificio = getIntent().getStringExtra("clave_edificioNombre");
+        lblEventoSeleccionado.setText(nombreEdificio.toString());
 
+        nombreEvento = getIntent().getStringExtra("clave_eventoNombre");
+
+        precioEvento = getIntent().getDoubleExtra("id_precio", 0);
 
         //Cambiar Color Spinner/ComboBox
         comboBoxFecha.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -111,11 +121,12 @@ public class SalasHorasFechas extends AppCompatActivity {
                 public void onClick(View v) {
                     // Acciones que deseas realizar cuando se hace clic
                     // Por ejemplo, mostrar un Toast
-
                     Intent mandar = new Intent(SalasHorasFechas.this, EventoSeleccionado.class);
                     mandar.putExtra("clave_datoNombre", elemento.getName().toString());
                     mandar.putExtra("clave_datoImagen", elemento.getIconResId());
                     startActivity(mandar);
+
+                    metodoInsercion.insertarTicket(fecha, sala, nombreEdificio, nombreEvento, precioEvento);
                 }
             });
 

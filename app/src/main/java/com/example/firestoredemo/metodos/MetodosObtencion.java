@@ -23,25 +23,25 @@ public class MetodosObtencion {
         myBBDD = FirebaseFirestore.getInstance();
         Task coleccion = myBBDD.collection(nombreCategoria).get();
 
-       coleccion.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-           @Override
-           public void onComplete(@NonNull Task<QuerySnapshot> task) {
-               if (task.isSuccessful()) {
-                   // Bucle de los edificios que tiene la coleccion que se manda
-                   for (QueryDocumentSnapshot documentLocal : task.getResult()) {
-                       //Sacar el HashMap de Firebase
-                       Map<String, Object> eventosHM = documentLocal.getData();
-                       //Bucle de los Eventos
-                       for (Map.Entry<String, Object> pair : eventosHM.entrySet()) {
-                           Obras obra = new Obras(documentLocal.getId(), Double.valueOf(pair.getValue().toString()));
-                           obrasList.add(obra);
-                           System.out.println(obra.getNombre());
-                           System.out.println(obra.getPrecio());
-                       }
-                   }
-               }
-           }
-       });
+        coleccion.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    // Bucle de los edificios que tiene la coleccion que se manda
+                    for (QueryDocumentSnapshot documentLocal : task.getResult()) {
+                        //Sacar el HashMap de Firebase
+                        Map<String, Object> eventosHM = documentLocal.getData();
+                        //Bucle de los Eventos
+                        for (Map.Entry<String, Object> pair : eventosHM.entrySet()) {
+                            Obras obra = new Obras(documentLocal.getId(), Double.valueOf(pair.getValue().toString()));
+                            obrasList.add(obra);
+                            System.out.println(obra.getNombre());
+                            System.out.println(obra.getPrecio());
+                        }
+                    }
+                }
+            }
+        });
         return obrasList;
     }
 
@@ -110,16 +110,32 @@ public class MetodosObtencion {
 
                         //for para mirar si coincide la obra y sala, mirar si ya esta en el arraylist
                         for(Salas edif : edificiosEnLosQueSeCelebra){
+                            //bucle del edificio
+                            Salas salaMeter = new Salas();
+                            salaMeter.setNombreEdif(edif.getNombreEdif());
+                            ArrayList<String> nombresDeLasSalas= new ArrayList<>();
                             for(String salaAL : edif.getNombreSalas()){
+                                //bucle salas del edificio
                                 if(salaAL.equals(sala) && FechaSala.get("NombreObra").equals(obra)){
+                                    //misramos si el arraylist que vamos a mandar esta vacio para meter la pirmera sala que coincida
+                                    if(edificiosEnLosQueSeCelebraReal.isEmpty()){
 
-                                    for(Salas edif2 : edificiosEnLosQueSeCelebraReal){
+
 
                                     }
+                                    else {
 
+                                        for (Salas edif2 : edificiosEnLosQueSeCelebraReal) {
+
+
+
+                                        }
+                                    }
                                 }
-
+                                //termina bucle salas del edificio
                             }
+
+                            //termina bucle del edificio
                         }
 
                     }

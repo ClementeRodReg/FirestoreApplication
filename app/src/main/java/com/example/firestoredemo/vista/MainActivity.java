@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
                                         Log.d("tag", gmail);
                                         Intent IrAVentanaCategorias = new Intent(MainActivity.this, Vista_categorias.class);
-                                        IrAVentanaCategorias.putExtra("email", gmail);
+                                        IrAVentanaCategorias.putExtra("id_gmail", gmail);
                                         startActivity(IrAVentanaCategorias);
 
                                         //

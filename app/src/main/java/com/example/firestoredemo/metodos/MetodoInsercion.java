@@ -41,7 +41,6 @@ public class MetodoInsercion {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     numberDocuments[0] = task.getResult().size();
-                    System.out.println(numberDocuments[0]);
 
                     ticketNuevo[0] = ticketNuevo[0] + numberDocuments[0];
 

@@ -29,4 +29,6 @@
     <string name="lblDeportes">Deporte</string>
     <string name="reg_strate">Regístrarse</string>
     <string name="lbl_concierto">Concierto</string>
+    <string name="lbl_categorias">Categorias</string>
+    <string name="lbl_nombre_usuario">Nombre Usuario</string>
 </resources>

@@ -31,7 +31,7 @@
             android:name=".vista.RegistrarUsuarios"
             android:exported="false" />
         <activity
-            android:name=".vista.Teatro"
+            android:name=".vista.Evento"
             android:exported="false" />
         <activity
             android:name=".vista.MainActivity"

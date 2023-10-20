@@ -15,7 +15,8 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="12dp"
         app:cardElevation="4dp"
-        app:cardUseCompatPadding="true">
+        app:cardUseCompatPadding="true"
+        tools:ignore="RedundantNamespace">
 
     </androidx.cardview.widget.CardView>
 
@@ -33,9 +34,10 @@
         android:layout_height="54dp" />
 
     <ScrollView
-        android:id="@+id/cacahuete"
+        android:id="@+id/categoriaScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:ignore="SpeakableTextPresentCheck">
 
         <LinearLayout
             android:id="@+id/linearLayout"

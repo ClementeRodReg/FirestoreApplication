@@ -68,7 +68,7 @@
         app:layout_constraintTop_toBottomOf="@+id/lblEventoSeleccionado" />
 
     <ScrollView
-        android:id="@+id/cacahuete"
+        android:id="@+id/categoriaScrollView"
         android:layout_width="408dp"
         android:layout_height="483dp"
         android:layout_marginBottom="104dp"

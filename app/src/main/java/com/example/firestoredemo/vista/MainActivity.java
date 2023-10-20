@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
 
-                                        //---Aqui gurada el usuario y contraseña que hace login correctamente en shared preferences---
+                                        //---Aqui guarda el usuario y contraseña que hace login correctamente en shared preferences---
                                         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
                                         SharedPreferences.Editor myEdit = sharedPreferences.edit();
                                         myEdit.putString("mail", gmail);

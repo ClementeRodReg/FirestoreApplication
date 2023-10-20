@@ -19,7 +19,7 @@ public class MetodosObtencion {
 
     public ArrayList<Obras> obtenerObras(String nombreCategoria) {
 
-        ArrayList<Obras> obrasList = new ArrayList<Obras>();
+        ArrayList<Obras> obrasList = new ArrayList<>();
         myBBDD = FirebaseFirestore.getInstance();
         Task coleccion = myBBDD.collection(nombreCategoria).get();
 
@@ -49,7 +49,6 @@ public class MetodosObtencion {
         ArrayList<Salas> edificiosEnLosQueSeCelebra = new ArrayList<>();
         ArrayList<Salas> edificiosEnLosQueSeCelebraReal = new ArrayList<>();
 
-        ArrayList<String> esd = new ArrayList<>();
         String seCelebraC = "";
 
         if (nombreCategoria.equalsIgnoreCase("Teatro")) {
@@ -72,7 +71,7 @@ public class MetodosObtencion {
                     // Bucle de los edificios que tiene la coleccion que se manda
                     for (QueryDocumentSnapshot documentLocal : task3.getResult()) {
                         //Sacar el HashMap de Firebase
-                        ArrayList<String> nombreSalas = new ArrayList<String>();
+                        ArrayList<String> nombreSalas = new ArrayList<>();
                         //bucle para sacar sus datos
                         for (Map.Entry<String, Object> pair : documentLocal.getData().entrySet()) {
                             nombreSalas.add(pair.getValue().toString());
@@ -91,14 +90,10 @@ public class MetodosObtencion {
 
                                 for (QueryDocumentSnapshot FechaSala : task2.getResult()) {
                                     //dividir el id que recibimos de firebase
-                                    String fecha = FechaSala.getId().split("_")[0];
                                     String sala = FechaSala.getId().split("_")[1];
-                                    System.out.println(FechaSala.getData().get("NombreEvento").toString() +" "+obra);
-                                    System.out.println(FechaSala.getData().get("NombreEvento").toString().length() +" "+obra.length());
                                     if (FechaSala.getData().get("NombreEvento").toString().equals(obra) && !salas.contains(sala)) {
                                         salas.add(sala);
                                     }
-
                                 }
 
                                 for (String nSala : salas) {
@@ -135,17 +130,6 @@ public class MetodosObtencion {
                 }
             }
         });
-
-        for(Salas edifPrintln : edificiosEnLosQueSeCelebraReal){
-            System.out.println(edifPrintln.getNombreEdif());
-            for (String salaPrintln : edifPrintln.getNombreSalas()){
-                System.out.println(salaPrintln);
-            }
-        }
-
-        if(edificiosEnLosQueSeCelebraReal.isEmpty())
-            System.out.println("Esta vacio");
-
         return edificiosEnLosQueSeCelebraReal;
     }
 

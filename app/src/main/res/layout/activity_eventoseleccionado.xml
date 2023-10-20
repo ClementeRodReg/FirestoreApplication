@@ -70,7 +70,7 @@
         android:textColor="@color/orange"
         android:textColorHighlight="@color/orange"
         android:textSize="26sp"
-        app:layout_constraintBottom_toBottomOf="@+id/cacahuete"
+        app:layout_constraintBottom_toBottomOf="@+id/categoriaScrollView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,7 +90,7 @@
         tools:ignore="DuplicateIds" />
 
     <ScrollView
-        android:id="@+id/cacahuete"
+        android:id="@+id/categoriaScrollView"
         android:layout_width="375dp"
         android:layout_height="300dp"
         app:layout_constraintBottom_toBottomOf="parent"

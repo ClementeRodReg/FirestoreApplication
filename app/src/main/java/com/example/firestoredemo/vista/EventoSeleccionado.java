@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.example.firestoredemo.R;
 import com.example.firestoredemo.metodos.MetodosEventoSeleccionado;
 import com.example.firestoredemo.metodos.MetodosObtencion;
-import com.example.firestoredemo.modelo.Obras;
 import com.example.firestoredemo.modelo.Salas;
 import com.example.firestoredemo.modelo.modeloTeatro;
 
@@ -59,7 +58,7 @@ public class EventoSeleccionado extends AppCompatActivity {
         precioEvento = getIntent().getDoubleExtra("id_precio", 0);
 
         // Obtener el ScrollView y LinearLayout del diseño de la actividad
-        ScrollView scrollView = findViewById(R.id.cacahuete);
+        ScrollView scrollView = findViewById(R.id.categoriaScrollView);
         linearLayout = findViewById(R.id.linearLayout);
 
         // Crear un ArrayList con elementos de ejemplo
@@ -68,7 +67,6 @@ public class EventoSeleccionado extends AppCompatActivity {
 
         handler.postDelayed(new Runnable() {
             public void run() {
-                System.out.println("Comprobando..."); // Do your work here
                 if(!listaEdificios.isEmpty() && insertado < 1) {
                     for (Salas edificio : listaEdificios) {
                         String nombreEdificio = edificio.getNombreEdif().toLowerCase().replaceAll("\\s+", "");

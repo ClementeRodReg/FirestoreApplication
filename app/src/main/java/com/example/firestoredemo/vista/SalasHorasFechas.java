@@ -43,7 +43,7 @@ public class SalasHorasFechas extends AppCompatActivity {
         lblEventoSeleccionado = findViewById(R.id.lblEventoSeleccionado);
         Spinner comboBoxFecha = findViewById(R.id.comboBoxFecha);
         Spinner comboBoxHora = findViewById(R.id.comboBoxHora);
-        ScrollView scrollView = findViewById(R.id.cacahuete);
+        ScrollView scrollView = findViewById(R.id.categoriaScrollView);
         linearLayout = findViewById(R.id.linearLayout);
 
         //Saca nombre evento seleccionado

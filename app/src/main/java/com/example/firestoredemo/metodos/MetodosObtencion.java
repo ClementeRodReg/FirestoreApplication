@@ -93,7 +93,8 @@ public class MetodosObtencion {
                                     //dividir el id que recibimos de firebase
                                     String fecha = FechaSala.getId().split("_")[0];
                                     String sala = FechaSala.getId().split("_")[1];
-
+                                    System.out.println(FechaSala.getData().get("NombreEvento").toString() +" "+obra);
+                                    System.out.println(FechaSala.getData().get("NombreEvento").toString().length() +" "+obra.length());
                                     if (FechaSala.getData().get("NombreEvento").toString().equals(obra) && !salas.contains(sala)) {
                                         salas.add(sala);
                                     }
@@ -134,6 +135,16 @@ public class MetodosObtencion {
                 }
             }
         });
+
+        for(Salas edifPrintln : edificiosEnLosQueSeCelebraReal){
+            System.out.println(edifPrintln.getNombreEdif());
+            for (String salaPrintln : edifPrintln.getNombreSalas()){
+                System.out.println(salaPrintln);
+            }
+        }
+
+        if(edificiosEnLosQueSeCelebraReal.isEmpty())
+            System.out.println("Esta vacio");
 
         return edificiosEnLosQueSeCelebraReal;
     }

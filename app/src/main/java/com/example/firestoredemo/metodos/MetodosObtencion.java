@@ -63,7 +63,6 @@ public class MetodosObtencion {
         }
         final String seCelebra = seCelebraC;
 
-
         Task coleccion3 = myBBDD.collection("Salas").get();
 
         coleccion3.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -99,11 +98,11 @@ public class MetodosObtencion {
                                         salas.add(sala);
                                     }
 
-
                                 }
 
-
                                 for (String nSala : salas) {
+                                    boolean edificioEncontrado = false;
+
                                     for (Salas edificio : edificiosEnLosQueSeCelebra) {
                                         if (edificio.getNombreSalas().contains(nSala)) {
                                             if (edificiosEnLosQueSeCelebraReal.isEmpty()) {
@@ -111,13 +110,15 @@ public class MetodosObtencion {
                                                 salasAmeter.add(nSala);
                                                 Salas edificionuevo = new Salas(edificio.getNombreEdif(), salasAmeter);
                                                 edificiosEnLosQueSeCelebraReal.add(edificionuevo);
-                                                System.out.println("Entre bien");
                                             } else {
-                                                //este if tengo que hacer el conains con el contenido del array, no con el array
-                                                if (edificiosEnLosQueSeCelebraReal.contains(edificio.getNombreEdif())) {
-                                                    edificiosEnLosQueSeCelebraReal.get(edificiosEnLosQueSeCelebraReal.indexOf(edificio.getNombreEdif())).getNombreSalas().add(nSala);
-                                                } else {
-                                                    System.out.println("No dieveria estar aqui");
+                                                for (Salas edificioExistente : edificiosEnLosQueSeCelebraReal) {
+                                                    if (edificioExistente.getNombreEdif().equals(edificio.getNombreEdif())) {
+                                                        edificioEncontrado = true;
+                                                        edificioExistente.getNombreSalas().addAll(edificio.getNombreSalas());
+                                                    }
+                                                }
+
+                                                if (!edificioEncontrado) {
                                                     ArrayList<String> salasAmeter = new ArrayList<>();
                                                     salasAmeter.add(nSala);
                                                     Salas edificionuevo = new Salas(edificio.getNombreEdif(), salasAmeter);
@@ -127,7 +128,6 @@ public class MetodosObtencion {
                                         }
                                     }
                                 }
-
                             }
                         }
                     });
@@ -135,8 +135,8 @@ public class MetodosObtencion {
             }
         });
 
-
         return edificiosEnLosQueSeCelebraReal;
     }
+
 
 }

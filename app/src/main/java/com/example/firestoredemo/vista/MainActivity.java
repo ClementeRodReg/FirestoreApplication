@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 mAuth.signInAnonymously();
                 Intent IrAVentanaCategorias = new Intent(MainActivity.this, Vista_categorias.class);
-                IrAVentanaCategorias.putExtra("email", "Modo Invitado");
+                IrAVentanaCategorias.putExtra("id_gmail", "Modo Invitado");
                 startActivity(IrAVentanaCategorias);
             }
         });

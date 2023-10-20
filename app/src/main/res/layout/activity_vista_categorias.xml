@@ -24,8 +24,8 @@
 
     <TextView
         android:id="@+id/lblNombreUsuario"
-        android:layout_width="344dp"
-        android:layout_height="61dp"
+        android:layout_width="345dp"
+        android:layout_height="154dp"
         android:layout_marginTop="4dp"
         android:gravity="center"
         android:text="@string/lbl_nombre_usuario"
@@ -39,8 +39,8 @@
 
     <Space
         android:id="@+id/space2"
-        android:layout_width="261dp"
-        android:layout_height="60dp"
+        android:layout_width="250dp"
+        android:layout_height="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblNombreUsuario"

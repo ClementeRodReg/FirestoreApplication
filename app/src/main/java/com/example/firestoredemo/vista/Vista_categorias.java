@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
 import android.widget.Button;
@@ -17,23 +18,27 @@ import com.example.firestoredemo.R;
 import com.example.firestoredemo.metodos.MetodosObtencion;
 import com.example.firestoredemo.modelo.Obras;
 import com.example.firestoredemo.modelo.modeloTeatro;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
 public class Vista_categorias extends AppCompatActivity {
-MetodosObtencion metodosObtencion = new MetodosObtencion();
+    MetodosObtencion metodosObtencion = new MetodosObtencion();
     private LinearLayout linearLayout;
     TextView lblNombreUsuario;
     String gmail;
-    String[] nombreUsuario = new String[1];
-    final Handler handler = new Handler();
-    final int delay = 1000; // 1000 milliseconds == 1 second
-    int insertado=0;
+    String nombreUsuario;
+    private FirebaseFirestore myBBDD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vista_categorias);
+
+        myBBDD = FirebaseFirestore.getInstance();
 
         // Iniciadores de ID
         linearLayout = findViewById(R.id.linearLayout);
@@ -42,19 +47,29 @@ MetodosObtencion metodosObtencion = new MetodosObtencion();
         //Sacar Gmail
         gmail = getIntent().getStringExtra("id_gmail");
 
-        nombreUsuario = metodosObtencion.obtenerNombreUsuario(gmail);
+        if (gmail.equals("Modo Invitado")) {
+            lblNombreUsuario.setText(gmail);
+        } else {
 
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                System.out.println("Comprobando..."); // Do your work here
-                if(!nombreUsuario[0].equals(null) && insertado < 1) {
-                    lblNombreUsuario.setText(nombreUsuario[0]);
-                    insertado++;
+            myBBDD = FirebaseFirestore.getInstance();
+
+            // Obtener nombre del usuario
+            DocumentReference docRef = myBBDD.collection("Usuarios").document(gmail);
+            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (documentSnapshot.exists()) {
+                        // Obtener el valor del campo "Nombre"
+                        String nombre = documentSnapshot.getString("Nombre");
+                        lblNombreUsuario.setText("Bienvenido, " + nombre);
+
+                    } else {
+                        Log.d("MainActivity", "El documento no existe.");
+                    }
                 }
-                handler.postDelayed(this, delay);
-            }
-        }, delay);
+            });
 
+        }
 
 
         // Crear un ArrayList con elementos de ejemplo

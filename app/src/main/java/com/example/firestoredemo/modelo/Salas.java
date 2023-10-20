@@ -5,6 +5,14 @@ import java.util.ArrayList;
 
 public class Salas {
 
+    public void setNombreEdif(String nombreEdif) {
+        this.nombreEdif = nombreEdif;
+    }
+
+    public void setNombreSalas(ArrayList<String> nombreSalas) {
+        this.nombreSalas = nombreSalas;
+    }
+
     String nombreEdif;
     ArrayList<String> nombreSalas;
 

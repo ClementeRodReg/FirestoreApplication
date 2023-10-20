@@ -4,110 +4,114 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.firestoredemo.R;
+import com.example.firestoredemo.metodos.MetodosObtencion;
+import com.example.firestoredemo.modelo.Obras;
+import com.example.firestoredemo.modelo.modeloTeatro;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
 
 public class Vista_categorias extends AppCompatActivity {
-    ScrollView menuLateral;
-    Button botonMenuLateral;
-    TextView id_texttheatro;
-    TextView id_cine;
-    TextView id_deportes;
-    TextView mostrargmail;
-    TextView id_Concierto;
-    LinearLayout idLena;
-    Button cerrarsesion;
+    MetodosObtencion metodosObtencion = new MetodosObtencion();
+    private LinearLayout linearLayout;
+    TextView lblNombreUsuario;
+    String gmail;
+    String nombreUsuario;
+    private FirebaseFirestore myBBDD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vista_categorias);
 
-        idLena = findViewById(R.id.id_lena);
-        botonMenuLateral = findViewById(R.id.idBotonMenuLateral);
-        menuLateral = findViewById(R.id.idMenuLateral);
-        menuLateral.setVisibility(View.INVISIBLE);
+        myBBDD = FirebaseFirestore.getInstance();
 
-        ViewPropertyAnimator animator = botonMenuLateral.animate();
-        id_texttheatro = findViewById(R.id.id_texttheatro);
-        id_cine = findViewById(R.id.id_cine);
-        id_deportes = findViewById(R.id.id_deportes);
-        id_Concierto = findViewById(R.id.id_Concierto);
-        mostrargmail = findViewById(R.id.idmostrargmail);
-        cerrarsesion = findViewById(R.id.idcerarsesion);
+        // Iniciadores de ID
+        linearLayout = findViewById(R.id.linearLayout);
+        lblNombreUsuario = findViewById(R.id.lblNombreUsuario);
 
-        mostrargmail.setText(getIntent().getStringExtra("email"));
+        //Sacar Gmail
+        gmail = getIntent().getStringExtra("id_gmail");
 
-        id_texttheatro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent IrAVentanaTeatro = new Intent(Vista_categorias.this, Teatro.class);
-                IrAVentanaTeatro.putExtra("id_categoria", id_texttheatro.getText().toString());
-                startActivity(IrAVentanaTeatro);
-            }
-        });
+        if (gmail.equals("Modo Invitado")) {
+            lblNombreUsuario.setText(gmail);
+        } else {
 
-        id_cine.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent IrAVentanaTeatro = new Intent(Vista_categorias.this, Teatro.class);
-                IrAVentanaTeatro.putExtra("id_categoria", id_cine.getText().toString());
-                startActivity(IrAVentanaTeatro);
-            }
-        });
+            myBBDD = FirebaseFirestore.getInstance();
 
-        id_deportes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent IrAVentanaTeatro = new Intent(Vista_categorias.this, Teatro.class);
-                IrAVentanaTeatro.putExtra("id_categoria", id_deportes.getText().toString());
-                startActivity(IrAVentanaTeatro);
-            }
-        });
+            // Obtener nombre del usuario
+            DocumentReference docRef = myBBDD.collection("Usuarios").document(gmail);
+            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (documentSnapshot.exists()) {
+                        // Obtener el valor del campo "Nombre"
+                        String nombre = documentSnapshot.getString("Nombre");
+                        lblNombreUsuario.setText("Bienvenido, " + nombre);
 
-        id_Concierto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent IrAVentanaTeatro = new Intent(Vista_categorias.this, Teatro.class);
-                IrAVentanaTeatro.putExtra("id_categoria", id_Concierto.getText().toString());
-                startActivity(IrAVentanaTeatro);
-            }
-        });
-
-
-
-        botonMenuLateral.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (menuLateral.getVisibility() == View.INVISIBLE) {
-                    animator.translationX(680);
-                    animator.setDuration(500);
-                    animator.start();
-                    menuLateral.setVisibility(View.VISIBLE);
-                } else {
-                    menuLateral.setVisibility(View.INVISIBLE);
-                    animator.translationX(10);
-                    animator.setDuration(500);
-                    animator.start();
+                    } else {
+                        Log.d("MainActivity", "El documento no existe.");
+                    }
                 }
-            }
-        });
+            });
+
+        }
 
 
-        cerrarsesion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Vista_categorias.this, MainActivity.class));
-            }
+        // Crear un ArrayList con elementos de ejemplo
+        ArrayList<modeloTeatro> elementos = new ArrayList<>();
+        elementos.add(new modeloTeatro(R.drawable.imgtheatrecategory, "Teatro"));
+        elementos.add(new modeloTeatro(R.drawable.imgcinemacategory, "Cine"));
+        elementos.add(new modeloTeatro(R.drawable.imgmusiccategory, "Concierto"));
+        elementos.add(new modeloTeatro(R.drawable.imgsportcategory, "Deporte"));
 
-        });
+        // Agregar bloques con íconos y nombres al LinearLayout
+        addBlocksForArrayList(elementos);
 
+    }
 
+    private void addBlocksForArrayList(ArrayList<modeloTeatro> elementos) {
+        for (modeloTeatro elemento : elementos) {
+            // Inflar el diseño del elemento de evento
+            View vistaElementoEvento = getLayoutInflater().inflate(R.layout.eventosgeneral, null);
+
+            // Obtener referencias a los elementos de la vista
+            ImageView iconoImageView = vistaElementoEvento.findViewById(R.id.fotoSeleccionada);
+            TextView nombreTextView = vistaElementoEvento.findViewById(R.id.nameTextView);
+            LinearLayout linearLayoutEvento = vistaElementoEvento.findViewById(R.id.linearLayoutEvento);
+
+            // Configurar el ícono y el nombre
+            iconoImageView.setImageResource(elemento.getIconResId());
+            nombreTextView.setText(elemento.getName());
+
+            // Agregar el clic listener al linearLayoutEvento
+            linearLayoutEvento.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Acciones que deseas realizar cuando se hace clic
+                    // Por ejemplo, mostrar un Toast
+                    Intent IrAVentanaTeatro = new Intent(Vista_categorias.this, Teatro.class);
+                    IrAVentanaTeatro.putExtra("id_categoria", elemento.getName().toString());
+                    startActivity(IrAVentanaTeatro);
+                }
+            });
+
+            // Agregar la vista del evento al LinearLayout principal
+            linearLayout.addView(vistaElementoEvento);
+        }
     }
 }

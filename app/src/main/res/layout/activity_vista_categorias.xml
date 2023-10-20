@@ -8,194 +8,82 @@
     android:backgroundTint="@color/black"
     tools:context=".vista.Vista_categorias">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="70dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        tools:ignore="MissingConstraints">
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/lblNombreUsuario"
+        android:layout_width="345dp"
+        android:layout_height="154dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:text="@string/lbl_nombre_usuario"
+        android:textColor="@color/orange"
+        android:textColorHighlight="@color/orange"
+        android:textColorHint="@color/orange"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+    <Space
+        android:id="@+id/space2"
+        android:layout_width="250dp"
+        android:layout_height="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblNombreUsuario"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/lblEventoSeleccionado"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/lbl_categorias"
+        android:textColor="@color/white"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/space2"
+        tools:ignore="MissingConstraints" />
+
+    <Space
+        android:id="@+id/space3"
+        android:layout_width="404dp"
+        android:layout_height="27dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblEventoSeleccionado" />
 
     <ScrollView
-        android:id="@+id/idMenuLateral"
-        android:layout_width="186dp"
-        android:layout_height="731dp"
-        android:background="@color/white"
-        android:backgroundTint="@color/grey"
+        android:id="@+id/categoriaScrollView"
+        android:layout_width="408dp"
+        android:layout_height="483dp"
+        android:layout_marginBottom="104dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toBottomOf="@+id/space3"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
-            android:id="@+id/id_lena"
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/idmostrargmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/orange"
-                android:textColor="@color/white"
-                android:textAlignment="center"/>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="16dp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="16dp" />
-
-            <TextView
-                android:id="@+id/id_texttheatro"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:backgroundTint="@color/orange"
-                android:text="@string/lblteatro"
-                android:textColor="@color/white"
-                android:textAlignment="center"/>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="16dp" />
-
-            <TextView
-                android:id="@+id/id_cine"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/orange"
-                android:text="@string/lblCines"
-                android:textColor="@color/white"
-                android:textAlignment="center"/>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="16dp" />
-
-
-            <TextView
-                android:id="@+id/id_deportes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/orange"
-                android:text="@string/lblDeportes"
-                android:textColor="@color/white"
-                android:textAlignment="center"/>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="16dp" />
-
-            <TextView
-                android:id="@+id/id_Concierto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/orange"
-                android:text="@string/lbl_concierto"
-                android:textAlignment="center"
-                android:textColor="@color/white" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="16dp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="16dp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="16dp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="16dp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="16dp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="16dp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="16dp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="16dp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="16dp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="16dp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="16dp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="16dp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="16dp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="16dp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="16dp" />
-
-            <Button
-                android:id="@+id/idcerarsesion"
-                android:layout_width="98dp"
-                android:layout_height="35dp"
-                android:backgroundTint="@color/orange"
-                android:foreground="@drawable/common_full_open_on_phone"
-                app:layout_constraintBottom_toTopOf="@+id/recyclerView"
-
-                />
-        </LinearLayout>
-
+            android:orientation="vertical" />
     </ScrollView>
-
-    <Button
-        android:id="@+id/idBotonMenuLateral"
-        android:layout_width="144dp"
-        android:layout_height="49dp"
-        android:backgroundTint="@color/orange"
-        android:text="Categorias"
-        android:translationX="30dp"
-        android:translationY="10dp"
-        app:icon="@android:drawable/ic_menu_agenda"
-        app:iconTint="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">VIDE</string>
-    <string name="feliz_jueves_perros" translatable="false">Feliz jueves perros!!!</string>
     <string name="nombre">Nombre:</string>
     <string name="contrase_a">Contraseña:</string>
     <string name="dni">DNI:</string>
@@ -29,4 +28,9 @@
     <string name="lblDeportes">Deporte</string>
     <string name="reg_strate">Regístrarse</string>
     <string name="lbl_concierto">Concierto</string>
+    <string name="lbl_categorias">Categorias</string>
+    <string name="lbl_nombre_usuario">Nombre Usuario</string>
+    <string name="vi">VI</string>
+    <string name="d">D</string>
+    <string name="e">E</string>
 </resources>

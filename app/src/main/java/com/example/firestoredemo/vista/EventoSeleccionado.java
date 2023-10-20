@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.example.firestoredemo.R;
 import com.example.firestoredemo.metodos.MetodosEventoSeleccionado;
 import com.example.firestoredemo.metodos.MetodosObtencion;
-import com.example.firestoredemo.modelo.Obras;
 import com.example.firestoredemo.modelo.Salas;
 import com.example.firestoredemo.modelo.modeloTeatro;
 
@@ -31,6 +30,8 @@ public class EventoSeleccionado extends AppCompatActivity {
     final int delay = 1000; // 1000 milliseconds == 1 second
     int insertado=0;
     String nombreCategoria = "";
+    String nombreEvento = "";
+    double precioEvento = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +50,15 @@ public class EventoSeleccionado extends AppCompatActivity {
         //Saca nombre e imagen lugar seleccionado
         imageView.setImageResource(imagenReferencia);
 
-        String nombreEvento = getIntent().getStringExtra("clave_datoNombre");
+        nombreEvento = getIntent().getStringExtra("clave_eventoNombre");
         lblEventoSeleccionado.setText(nombreEvento.toString());
 
         nombreCategoria = getIntent().getStringExtra("id_categoria");
 
+        precioEvento = getIntent().getDoubleExtra("id_precio", 0);
+
         // Obtener el ScrollView y LinearLayout del diseño de la actividad
-        ScrollView scrollView = findViewById(R.id.cacahuete);
+        ScrollView scrollView = findViewById(R.id.categoriaScrollView);
         linearLayout = findViewById(R.id.linearLayout);
 
         // Crear un ArrayList con elementos de ejemplo
@@ -64,7 +67,6 @@ public class EventoSeleccionado extends AppCompatActivity {
 
         handler.postDelayed(new Runnable() {
             public void run() {
-                System.out.println("Comprobando..."); // Do your work here
                 if(!listaEdificios.isEmpty() && insertado < 1) {
                     for (Salas edificio : listaEdificios) {
                         String nombreEdificio = edificio.getNombreEdif().toLowerCase().replaceAll("\\s+", "");
@@ -105,8 +107,10 @@ public class EventoSeleccionado extends AppCompatActivity {
                     // Por ejemplo, mostrar un Toast
 
                     Intent mandar = new Intent(EventoSeleccionado.this, SalasHorasFechas.class);
-                    mandar.putExtra("clave_datoNombre", elemento.getName().toString());
+                    mandar.putExtra("clave_edificioNombre", elemento.getName().toString());
+                    mandar.putExtra("clave_eventoNombre", nombreEvento.toString());
                     mandar.putExtra("id_categoria", nombreCategoria);
+                    mandar.putExtra("id_precio", precioEvento);
                     startActivity(mandar);
                 }
             });

@@ -12,10 +12,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.example.firestoredemo.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegistrarUsuarios extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -23,6 +29,7 @@ public class RegistrarUsuarios extends AppCompatActivity {
     EditText nombre;
     EditText passw;
     EditText email;
+    FirebaseFirestore myBBDD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +64,25 @@ public class RegistrarUsuarios extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
                                         Toast.makeText(getApplicationContext(), "Registro existoso.", Toast.LENGTH_SHORT).show();
+
+                                        Map<String, Object> datos = new HashMap<>();
+                                        datos.put("Nombre", nombreUser);
+                                        myBBDD = FirebaseFirestore.getInstance();
+                                        myBBDD.collection("Usuarios").document(emailUser).set(datos)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                                                        finish();
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Log.w(TAG, "Error writing document", e);
+                                                    }
+                                                });
+
                                         finish();
                                         //FirebaseUser user = mAuth.getCurrentUser();
 
@@ -69,6 +95,8 @@ public class RegistrarUsuarios extends AppCompatActivity {
                                 }
                             });
                 }
+
+
             }
         });
     }

@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
 
-                                        //---Aqui gurada el usuario y contraseña que hace login correctamente en shared preferences---
+                                        //---Aqui guarda el usuario y contraseña que hace login correctamente en shared preferences---
                                         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
                                         SharedPreferences.Editor myEdit = sharedPreferences.edit();
                                         myEdit.putString("mail", gmail);
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
                                         Log.d("tag", gmail);
                                         Intent IrAVentanaCategorias = new Intent(MainActivity.this, Vista_categorias.class);
-                                        IrAVentanaCategorias.putExtra("email", gmail);
+                                        IrAVentanaCategorias.putExtra("id_gmail", gmail);
                                         startActivity(IrAVentanaCategorias);
 
                                         //
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 mAuth.signInAnonymously();
                 Intent IrAVentanaCategorias = new Intent(MainActivity.this, Vista_categorias.class);
-                IrAVentanaCategorias.putExtra("email", "Modo Invitado");
+                IrAVentanaCategorias.putExtra("id_gmail", "Modo Invitado");
                 startActivity(IrAVentanaCategorias);
             }
         });

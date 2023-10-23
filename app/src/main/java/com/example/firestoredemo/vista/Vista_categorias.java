@@ -25,7 +25,6 @@ public class Vista_categorias extends AppCompatActivity {
     private LinearLayout linearLayout;
     TextView lblNombreUsuario;
     String gmail;
-    String nombreUsuario;
     private FirebaseFirestore myBBDD;
 
     @Override

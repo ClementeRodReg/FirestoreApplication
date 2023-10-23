@@ -4,6 +4,7 @@ import android.widget.ArrayAdapter;
 
 import com.example.firestoredemo.modelo.Obras;
 import com.example.firestoredemo.modelo.Salas;
+import com.example.firestoredemo.modelo.SeCelebraT;
 import com.example.firestoredemo.vista.SalasHorasFechas;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -142,29 +143,38 @@ public class MetodosObtencion {
     public ArrayList<String> obtenerfechaYhora(String obra, String nombreSala, String categoria) {
         ArrayList<String> fechaYhora = new ArrayList<>();
 
-        String seCelebraC = "";
+        myBBDD = FirebaseFirestore.getInstance();
+
+        String seCelebra = "";
 
         if (categoria.equalsIgnoreCase("Teatro")) {
-            seCelebraC = "SeCelebraT";
+            seCelebra = "SeCelebraT";
         } else if (categoria.equals("Cine")) {
-            seCelebraC = "SeCelebraC";
+            seCelebra = "SeCelebraC";
         } else if (categoria.equals("Concierto")) {
-            seCelebraC = "SeCelebraCo";
+            seCelebra = "SeCelebraCo";
         } else {
-            seCelebraC = "SeCelebraD";
+            seCelebra = "SeCelebraD";
         }
-        final String seCelebra = seCelebraC;
+
+
+        System.out.println(seCelebra);
 
         Task coleccion = myBBDD.collection(seCelebra).get();
+        System.out.println(seCelebra);
+
         coleccion.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot documentLocal : task.getResult()) {
+
                         String sala = nombreSala.substring(0, nombreSala.length()-1);
                         if (documentLocal.getId().contains(sala) && documentLocal.get("NombreEvento").equals(obra))
                             fechaYhora.add(documentLocal.getId().split("_")[0]+"_"+documentLocal.get("Hora"));
                     }
+                }else{
+                    System.out.println("No funciona");
                 }
             }
         });

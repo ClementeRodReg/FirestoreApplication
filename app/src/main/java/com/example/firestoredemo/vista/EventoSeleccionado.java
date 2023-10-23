@@ -32,6 +32,7 @@ public class EventoSeleccionado extends AppCompatActivity {
     String nombreCategoria = "";
     String nombreEvento = "";
     double precioEvento = 0;
+    String nombreSala = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,7 @@ public class EventoSeleccionado extends AppCompatActivity {
                     for (Salas edificio : listaEdificios) {
                         String nombreEdificio = edificio.getNombreEdif().toLowerCase().replaceAll("\\s+", "");
                         int idImagen = getResources().getIdentifier(nombreEdificio, "drawable", getPackageName());
+                        nombreSala = edificio.getNombreSalas().toString();
 
                         elementos.add(new modeloTeatro(idImagen, edificio.getNombreEdif()));
                     }
@@ -109,8 +111,9 @@ public class EventoSeleccionado extends AppCompatActivity {
                     Intent mandar = new Intent(EventoSeleccionado.this, SalasHorasFechas.class);
                     mandar.putExtra("clave_edificioNombre", elemento.getName().toString());
                     mandar.putExtra("clave_eventoNombre", nombreEvento.toString());
-                    mandar.putExtra("id_categoria", nombreCategoria);
+                    mandar.putExtra("id_categoria", nombreCategoria.toString());
                     mandar.putExtra("id_precio", precioEvento);
+                    mandar.putExtra("clave_salaNombre", nombreSala);
                     startActivity(mandar);
                 }
             });

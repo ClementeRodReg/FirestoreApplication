@@ -23,6 +23,8 @@ import com.example.firestoredemo.modelo.Salas;
 import com.example.firestoredemo.modelo.modeloTeatro;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SalasHorasFechas extends AppCompatActivity {
 
@@ -40,6 +42,8 @@ public class SalasHorasFechas extends AppCompatActivity {
     final Handler handler = new Handler();
     final int delay = 1000; // 1000 milliseconds == 1 second
     int insertado=0;
+    String numeroSala = "";
+    String tipoSala = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +64,6 @@ public class SalasHorasFechas extends AppCompatActivity {
         nombreCategoria = getIntent().getStringExtra("id_categoria");
         sala = getIntent().getStringExtra("clave_salaNombre");
 
-        System.out.println(nombreCategoria);
-
-
         //Cambiar Color Spinner/ComboBox
         comboBoxFecha.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -78,23 +79,17 @@ public class SalasHorasFechas extends AppCompatActivity {
         });
 
         //Insercion de datos en el Spinner/ComboBox
-        fechas = metodosObtencion.obtenerfechaYhora(nombreEvento, sala, nombreCategoria);
-
-        for (String hola:fechas) {
-            System.out.println(hola.toString());
-        }
+        fechas = metodosObtencion.obtenerfechaYhora(nombreEvento, nombreCategoria);
 
         handler.postDelayed(new Runnable() {
             public void run() {
                 if(!fechas.isEmpty() && insertado < 1) {
 
-                    for (String hola:fechas) {
-                        System.out.println(hola.toString());
-                    }
-
                     ArrayAdapter<String> adapterFecha = new ArrayAdapter<>(SalasHorasFechas.this, android.R.layout.simple_spinner_dropdown_item, fechas);
                     adapterFecha.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     comboBoxFecha.setAdapter(adapterFecha);
+
+                    fecha = comboBoxFecha.getSelectedItem().toString();
 
                     insertado++;
                 }
@@ -102,21 +97,24 @@ public class SalasHorasFechas extends AppCompatActivity {
             }
         }, delay);
 
-        ArrayAdapter<String> adapterFecha = new ArrayAdapter<>(SalasHorasFechas.this, android.R.layout.simple_spinner_dropdown_item, fechas);
-        adapterFecha.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        comboBoxFecha.setAdapter(adapterFecha);
+        Pattern pattern = Pattern.compile("\\d");
+        Matcher matcher = pattern.matcher(sala);
 
-        /*
-        ArrayAdapter<String> adapterHora = new ArrayAdapter<>(SalasHorasFechas.this, android.R.layout.simple_spinner_dropdown_item, horas);
-        adapterHora.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        comboBoxHora.setAdapter(adapterHora);
-        */
+
+        if (matcher.find()) {
+            numeroSala = matcher.group();
+            if(nombreCategoria.equals("Deporte")){
+                tipoSala = "Cancha: " + numeroSala;
+            }else{
+                tipoSala = "Sala: " + numeroSala;
+            }
+        }
 
         //Mostrar salas disponibles
         // Crear un ArrayList con elementos de ejemplo
+
         ArrayList<modeloTeatro> elementos = new ArrayList<>();
-        elementos.add(new modeloTeatro(R.drawable.img0, "Sala 1"));
-        elementos.add(new modeloTeatro(R.drawable.img0, "Sala 2"));
+        elementos.add(new modeloTeatro(R.drawable.img0, tipoSala));
 
 
         // Agregar bloques con íconos y nombres al LinearLayout
@@ -143,9 +141,7 @@ public class SalasHorasFechas extends AppCompatActivity {
                 public void onClick(View v) {
                     // Acciones que deseas realizar cuando se hace clic
                     // Por ejemplo, mostrar un Toast
-                    Intent mandar = new Intent(SalasHorasFechas.this, EventoSeleccionado.class);
-                    mandar.putExtra("clave_datoNombre", elemento.getName().toString());
-                    mandar.putExtra("clave_datoImagen", elemento.getIconResId());
+                    Intent mandar = new Intent(SalasHorasFechas.this, ventana_pago.class);
                     startActivity(mandar);
 
                     metodoInsercion.insertarTicket(fecha, sala, nombreEdificio, nombreEvento, precioEvento);

@@ -140,7 +140,7 @@ public class MetodosObtencion {
     }
 
 
-    public ArrayList<String> obtenerfechaYhora(String obra, String nombreSala, String categoria) {
+    public ArrayList<String> obtenerfechaYhora(String obra, String categoria) {
         ArrayList<String> fechaYhora = new ArrayList<>();
 
         myBBDD = FirebaseFirestore.getInstance();
@@ -157,11 +157,7 @@ public class MetodosObtencion {
             seCelebra = "SeCelebraD";
         }
 
-
-        System.out.println(seCelebra);
-
         Task coleccion = myBBDD.collection(seCelebra).get();
-        System.out.println(seCelebra);
 
         coleccion.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -177,10 +173,6 @@ public class MetodosObtencion {
                 }
             }
         });
-
-        for (String hola:fechaYhora) {
-            System.out.println(hola.toString());
-        }
 
         return fechaYhora;
     }

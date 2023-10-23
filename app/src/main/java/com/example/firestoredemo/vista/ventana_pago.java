@@ -70,6 +70,11 @@ public class ventana_pago extends AppCompatActivity {
         label2.setTextColor(getResources().getColor(R.color.white)); // Texto blanco
         llBotonera.addView(label2);
 
+
+
+
+
+
         TextView textView = new TextView(this);
         textView.setText("");
         textView.setGravity(Gravity.CENTER);

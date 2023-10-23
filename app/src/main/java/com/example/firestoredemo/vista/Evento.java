@@ -29,6 +29,7 @@ public class Evento extends AppCompatActivity {
     TextView lblEventoSeleccionado;
     String nombreCategoria = "";
     double precioEvento = 0;
+    ImageView iCargando;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class Evento extends AppCompatActivity {
         // Establecer el diseño de la actividad
         setContentView(R.layout.activity_evento);
 
+        iCargando = findViewById(R.id.iCargando);
         // Obtener el ScrollView y LinearLayout del diseño de la actividad
         //ScrollView scrollView = findViewById(R.id.categoriaScrollView);
         lblEventoSeleccionado = findViewById(R.id.lblEventoSeleccionado);
@@ -62,10 +64,12 @@ public class Evento extends AppCompatActivity {
 
                         elementos.add(new modeloTeatro(idImagen, obra.getNombre()));
                     }
+                    iCargando.getLayoutParams().height = 0;
                     addBlocksForArrayList(elementos);
                     insertado++;
                 }
-                handler.postDelayed(this, delay);
+                if (insertado < 1)
+                    handler.postDelayed(this, delay);
             }
         }, delay);
 

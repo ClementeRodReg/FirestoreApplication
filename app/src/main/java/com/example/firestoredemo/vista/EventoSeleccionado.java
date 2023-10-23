@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
 import com.example.firestoredemo.R;
 import com.example.firestoredemo.metodos.MetodosEventoSeleccionado;
 import com.example.firestoredemo.metodos.MetodosObtencion;
@@ -28,15 +29,18 @@ public class EventoSeleccionado extends AppCompatActivity {
     ArrayList<Salas> listaEdificios;
     final Handler handler = new Handler();
     final int delay = 1000; // 1000 milliseconds == 1 second
-    int insertado=0;
+    int insertado = 0;
     String nombreCategoria = "";
     String nombreEvento = "";
     double precioEvento = 0;
+    ImageView iCargando;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eventoseleccionado);
+
+        iCargando = findViewById(R.id.iCargando);
 
         MetodosEventoSeleccionado metodosEventoSeleccionado = new MetodosEventoSeleccionado();
 
@@ -67,17 +71,19 @@ public class EventoSeleccionado extends AppCompatActivity {
 
         handler.postDelayed(new Runnable() {
             public void run() {
-                if(!listaEdificios.isEmpty() && insertado < 1) {
+                if (!listaEdificios.isEmpty() && insertado < 1) {
                     for (Salas edificio : listaEdificios) {
                         String nombreEdificio = edificio.getNombreEdif().toLowerCase().replaceAll("\\s+", "");
                         int idImagen = getResources().getIdentifier(nombreEdificio, "drawable", getPackageName());
 
                         elementos.add(new modeloTeatro(idImagen, edificio.getNombreEdif()));
                     }
+                    iCargando.setVisibility(View.INVISIBLE);
                     addBlocksForArrayList(elementos);
                     insertado++;
                 }
-                handler.postDelayed(this, delay);
+                if (insertado < 1)
+                    handler.postDelayed(this, delay);
             }
         }, delay);
 
@@ -85,6 +91,7 @@ public class EventoSeleccionado extends AppCompatActivity {
         // Agregar bloques con íconos y nombres al LinearLayout
         addBlocksForArrayList(elementos);
     }
+
     private void addBlocksForArrayList(ArrayList<modeloTeatro> elementos) {
         for (modeloTeatro elemento : elementos) {
             // Inflar el diseño del elemento de evento

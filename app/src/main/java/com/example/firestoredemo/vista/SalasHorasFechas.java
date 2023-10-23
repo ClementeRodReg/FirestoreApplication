@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,6 +18,8 @@ import android.widget.TextView;
 
 import com.example.firestoredemo.R;
 import com.example.firestoredemo.metodos.MetodoInsercion;
+import com.example.firestoredemo.metodos.MetodosObtencion;
+import com.example.firestoredemo.modelo.Salas;
 import com.example.firestoredemo.modelo.modeloTeatro;
 
 import java.util.ArrayList;
@@ -23,7 +27,7 @@ import java.util.ArrayList;
 public class SalasHorasFechas extends AppCompatActivity {
 
     TextView lblEventoSeleccionado;
-    private final String fechas[] = {"20-03-2024", "21-03-2024", "22-03-2024", "23-03-2024"};
+    private ArrayList<String> fechas;
     private final String horas[] = {"08:00", "09:30", "11:00", "13:00"};
     private LinearLayout linearLayout;
     MetodoInsercion metodoInsercion = new MetodoInsercion();
@@ -32,7 +36,11 @@ public class SalasHorasFechas extends AppCompatActivity {
     String nombreEdificio = "";
     String nombreEvento = "";
     double precioEvento = 0;
-
+    String nombreCategoria = "";
+    MetodosObtencion metodosObtencion = new MetodosObtencion();
+    final Handler handler = new Handler();
+    final int delay = 1000; // 1000 milliseconds == 1 second
+    int insertado=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +57,13 @@ public class SalasHorasFechas extends AppCompatActivity {
         //Saca nombre evento seleccionado
         nombreEdificio = getIntent().getStringExtra("clave_edificioNombre");
         lblEventoSeleccionado.setText(nombreEdificio.toString());
-
         nombreEvento = getIntent().getStringExtra("clave_eventoNombre");
-
         precioEvento = getIntent().getDoubleExtra("id_precio", 0);
+        nombreCategoria = getIntent().getStringExtra("id_categoria");
+        sala = getIntent().getStringExtra("clave_salaNombre");
+
+        System.out.println(nombreCategoria);
+
 
         //Cambiar Color Spinner/ComboBox
         comboBoxFecha.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -82,13 +93,34 @@ public class SalasHorasFechas extends AppCompatActivity {
         });
 
         //Insercion de datos en el Spinner/ComboBox
+
+        System.out.println("Antes");
+        fechas = metodosObtencion.obtenerfechaYhora(nombreEvento, sala, nombreCategoria);
+        System.out.println("Despues");
+
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                if(!fechas.isEmpty() && insertado < 1) {
+
+                    ArrayAdapter<String> adapterFecha = new ArrayAdapter<>(SalasHorasFechas.this, android.R.layout.simple_spinner_dropdown_item, fechas);
+                    adapterFecha.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    comboBoxFecha.setAdapter(adapterFecha);
+
+                    insertado++;
+                }
+                handler.postDelayed(this, delay);
+            }
+        }, delay);
+
         ArrayAdapter<String> adapterFecha = new ArrayAdapter<>(SalasHorasFechas.this, android.R.layout.simple_spinner_dropdown_item, fechas);
         adapterFecha.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         comboBoxFecha.setAdapter(adapterFecha);
 
+        /*
         ArrayAdapter<String> adapterHora = new ArrayAdapter<>(SalasHorasFechas.this, android.R.layout.simple_spinner_dropdown_item, horas);
         adapterHora.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         comboBoxHora.setAdapter(adapterHora);
+        */
 
         //Mostrar salas disponibles
         // Crear un ArrayList con elementos de ejemplo

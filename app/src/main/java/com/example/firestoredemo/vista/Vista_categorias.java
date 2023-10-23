@@ -4,19 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewPropertyAnimator;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.firestoredemo.R;
 import com.example.firestoredemo.metodos.MetodosObtencion;
-import com.example.firestoredemo.modelo.Obras;
 import com.example.firestoredemo.modelo.modeloTeatro;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -104,7 +99,7 @@ public class Vista_categorias extends AppCompatActivity {
                 public void onClick(View v) {
                     // Acciones que deseas realizar cuando se hace clic
                     // Por ejemplo, mostrar un Toast
-                    Intent IrAVentanaTeatro = new Intent(Vista_categorias.this, Teatro.class);
+                    Intent IrAVentanaTeatro = new Intent(Vista_categorias.this, Evento.class);
                     IrAVentanaTeatro.putExtra("id_categoria", elemento.getName().toString());
                     startActivity(IrAVentanaTeatro);
                 }

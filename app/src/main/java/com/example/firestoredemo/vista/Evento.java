@@ -19,7 +19,7 @@ import com.example.firestoredemo.modelo.modeloTeatro;
 
 import java.util.ArrayList;
 
-public class Teatro extends AppCompatActivity {
+public class Evento extends AppCompatActivity {
     int insertado = 0;
     private LinearLayout linearLayout;
     MetodosObtencion metodosObtencion = new MetodosObtencion();
@@ -35,7 +35,7 @@ public class Teatro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Establecer el diseño de la actividad
-        setContentView(R.layout.activity_teatro);
+        setContentView(R.layout.activity_evento);
 
         // Obtener el ScrollView y LinearLayout del diseño de la actividad
         //ScrollView scrollView = findViewById(R.id.categoriaScrollView);
@@ -92,7 +92,7 @@ public class Teatro extends AppCompatActivity {
                     // Acciones que deseas realizar cuando se hace click
                     // Por ejemplo, mostrar un Toast
 
-                    Intent mandar = new Intent(Teatro.this, EventoSeleccionado.class);
+                    Intent mandar = new Intent(Evento.this, EventoSeleccionado.class);
                     mandar.putExtra("clave_eventoNombre", elemento.getName().toString());
                     mandar.putExtra("id_categoria", nombreCategoria);
                     mandar.putExtra("clave_datoImagen", elemento.getIconResId());

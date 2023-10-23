@@ -1,7 +1,10 @@
 package com.example.firestoredemo.metodos;
 
+import android.widget.ArrayAdapter;
+
 import com.example.firestoredemo.modelo.Obras;
 import com.example.firestoredemo.modelo.Salas;
+import com.example.firestoredemo.vista.SalasHorasFechas;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -40,6 +43,8 @@ public class MetodosObtencion {
                 }
             }
         });
+
+
         return obrasList;
     }
 
@@ -58,7 +63,7 @@ public class MetodosObtencion {
         } else if (nombreCategoria.equals("Concierto")) {
             seCelebraC = "SeCelebraCo";
         } else {
-            seCelebraC = "Deporte";
+            seCelebraC = "SeCelebraD";
         }
         final String seCelebra = seCelebraC;
 
@@ -133,5 +138,38 @@ public class MetodosObtencion {
         return edificiosEnLosQueSeCelebraReal;
     }
 
+
+    public ArrayList<String> obtenerfechaYhora(String obra, String nombreSala, String categoria) {
+        ArrayList<String> fechaYhora = new ArrayList<>();
+
+        String seCelebraC = "";
+
+        if (categoria.equalsIgnoreCase("Teatro")) {
+            seCelebraC = "SeCelebraT";
+        } else if (categoria.equals("Cine")) {
+            seCelebraC = "SeCelebraC";
+        } else if (categoria.equals("Concierto")) {
+            seCelebraC = "SeCelebraCo";
+        } else {
+            seCelebraC = "SeCelebraD";
+        }
+        final String seCelebra = seCelebraC;
+
+        Task coleccion = myBBDD.collection(seCelebra).get();
+        coleccion.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot documentLocal : task.getResult()) {
+                        String sala = nombreSala.substring(0, nombreSala.length()-1);
+                        if (documentLocal.getId().contains(sala) && documentLocal.get("NombreEvento").equals(obra))
+                            fechaYhora.add(documentLocal.getId().split("_")[0]+"_"+documentLocal.get("Hora"));
+                    }
+                }
+            }
+        });
+
+        return fechaYhora;
+    }
 
 }

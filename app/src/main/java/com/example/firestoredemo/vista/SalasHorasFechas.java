@@ -28,7 +28,6 @@ public class SalasHorasFechas extends AppCompatActivity {
 
     TextView lblEventoSeleccionado;
     private ArrayList<String> fechas;
-    private final String horas[] = {"08:00", "09:30", "11:00", "13:00"};
     private LinearLayout linearLayout;
     MetodoInsercion metodoInsercion = new MetodoInsercion();
     String fecha = "";
@@ -50,7 +49,6 @@ public class SalasHorasFechas extends AppCompatActivity {
         // Iniciadores de ID
         lblEventoSeleccionado = findViewById(R.id.lblEventoSeleccionado);
         Spinner comboBoxFecha = findViewById(R.id.comboBoxFecha);
-        Spinner comboBoxHora = findViewById(R.id.comboBoxHora);
         ScrollView scrollView = findViewById(R.id.categoriaScrollView);
         linearLayout = findViewById(R.id.linearLayout);
 
@@ -79,28 +77,20 @@ public class SalasHorasFechas extends AppCompatActivity {
             }
         });
 
-        comboBoxHora.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) view).setTextColor(Color.rgb(255, 255, 255));
-                ((TextView) view).setTextSize(20);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // No es necesario hacer nada aquí
-            }
-        });
-
         //Insercion de datos en el Spinner/ComboBox
-
-        System.out.println("Antes");
         fechas = metodosObtencion.obtenerfechaYhora(nombreEvento, sala, nombreCategoria);
-        System.out.println("Despues");
+
+        for (String hola:fechas) {
+            System.out.println(hola.toString());
+        }
 
         handler.postDelayed(new Runnable() {
             public void run() {
                 if(!fechas.isEmpty() && insertado < 1) {
+
+                    for (String hola:fechas) {
+                        System.out.println(hola.toString());
+                    }
 
                     ArrayAdapter<String> adapterFecha = new ArrayAdapter<>(SalasHorasFechas.this, android.R.layout.simple_spinner_dropdown_item, fechas);
                     adapterFecha.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

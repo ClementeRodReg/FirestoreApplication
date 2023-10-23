@@ -169,15 +169,18 @@ public class MetodosObtencion {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot documentLocal : task.getResult()) {
 
-                        String sala = nombreSala.substring(0, nombreSala.length()-1);
-                        if (documentLocal.getId().contains(sala) && documentLocal.get("NombreEvento").equals(obra))
-                            fechaYhora.add(documentLocal.getId().split("_")[0]+"_"+documentLocal.get("Hora"));
+                        if (documentLocal.get("NombreEvento").equals(obra))
+                            fechaYhora.add(documentLocal.getId().split("_")[0]+" "+documentLocal.get("Hora"));
                     }
                 }else{
                     System.out.println("No funciona");
                 }
             }
         });
+
+        for (String hola:fechaYhora) {
+            System.out.println(hola.toString());
+        }
 
         return fechaYhora;
     }

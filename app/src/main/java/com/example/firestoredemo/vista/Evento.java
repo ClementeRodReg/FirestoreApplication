@@ -61,7 +61,6 @@ public class Evento extends AppCompatActivity {
                         String nombreObra = obra.getNombre().toLowerCase().replaceAll("\\s+", "");
                         @SuppressLint("DiscouragedApi") int idImagen = getResources().getIdentifier(nombreObra, "drawable", getPackageName());
                         precioEvento = obra.getPrecio();
-
                         elementos.add(new modeloTeatro(idImagen, obra.getNombre()));
                     }
                     iCargando.getLayoutParams().height = 0;

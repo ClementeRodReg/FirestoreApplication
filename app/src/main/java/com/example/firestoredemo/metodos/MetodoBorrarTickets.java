@@ -65,7 +65,6 @@ public class MetodoBorrarTickets {
                         Log.w(TAG, "Error deleting document", e);
                     }
                 });
-
     }
 
 }

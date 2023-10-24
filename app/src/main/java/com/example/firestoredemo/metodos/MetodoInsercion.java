@@ -47,7 +47,7 @@ public class MetodoInsercion {
                     Map<String, Object> ticket = new HashMap<>();
                     ticket.put("Fecha", fecha);
                     ticket.put("Sala", sala);
-                    ticket.put("Edifio", edifio);
+                    ticket.put("Edificio", edifio);
                     ticket.put("Evento", evento);
                     ticket.put("Precio", precio);
 

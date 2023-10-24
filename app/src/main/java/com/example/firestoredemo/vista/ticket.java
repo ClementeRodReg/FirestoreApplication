@@ -1,14 +1,19 @@
 package com.example.firestoredemo.vista;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.firestoredemo.R;
 import com.example.firestoredemo.metodos.MetodoBorrarTickets;
@@ -25,9 +30,11 @@ public class ticket extends AppCompatActivity {
     final int delay = 1000; // 1000 milisegundos == 1 segundo
     int insertado = 0;
     TextView lblPrecioTotal;
+    Button btn_pagar;
     private LinearLayout linearLayout;
     float precioTotal = 0;
     ArrayList<String> nombresElementos = new ArrayList<>();
+    ArrayList<Float> precios = new ArrayList<>();
     int i = 0;
 
     @Override
@@ -36,7 +43,8 @@ public class ticket extends AppCompatActivity {
         setContentView(R.layout.activity_ticket);
 
         linearLayout = findViewById(R.id.linearLayout);
-        lblPrecioTotal=findViewById(R.id.lblPrecioTotal);
+        lblPrecioTotal = findViewById(R.id.lblPrecioTotal);
+        btn_pagar = findViewById(R.id.btn_pagar);
 
         ArrayList<String> listaTickets = metodosObtencion.obtenerTickets();
         ArrayList<modeloTeatro> elementos = new ArrayList<>();
@@ -47,6 +55,7 @@ public class ticket extends AppCompatActivity {
                     for (String ticket : listaTickets) {
                         String textoTicket = ticket.split(";")[0];
                         elementos.add(new modeloTeatro(R.drawable.imgtheatrecategory, textoTicket));
+                        precios.add(Float.parseFloat(ticket.split(";")[1]));
                         precioTotal = precioTotal + Float.parseFloat(ticket.split(";")[1]);
                         nombresElementos.add("Ticket" + i); // Agregar el nombre a la lista
                         i++;
@@ -58,6 +67,18 @@ public class ticket extends AppCompatActivity {
                 handler.postDelayed(this, delay);
             }
         }, delay);
+
+        if (precioTotal > 0) {
+            btn_pagar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    mostrarPopup();
+
+                }
+            });
+        }
+
     }
 
     private void addBlocksForArrayList(ArrayList<modeloTeatro> elementos) {
@@ -92,6 +113,13 @@ public class ticket extends AppCompatActivity {
                         // Llamar al método de borrado con el nombre del ticket
                         metodoBorrarTickets.borrarTicket("Ticket" + posicion);
 
+                        precioTotal = precioTotal - precios.get(posicion);
+
+                        if (precioTotal < 0) {
+                            lblPrecioTotal.setText("Precio total: 0€");
+                        } else {
+                            lblPrecioTotal.setText("Precio total: " + (float) precioTotal + "€");
+                        }
                     }
                 }
             });
@@ -100,4 +128,25 @@ public class ticket extends AppCompatActivity {
             linearLayout.addView(vistaElementoEvento);
         }
     }
+
+    public void mostrarPopup() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Gracias por la compra de nuestros tickets");
+        builder.setMessage("El precio total es de: " + (float) precioTotal + "€");
+
+        builder.setPositiveButton("Comprar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                metodoBorrarTickets.borrarTickets();
+                Intent mover = new Intent(ticket.this, MainActivity.class);
+                startActivity(mover);
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+
 }

@@ -33,4 +33,8 @@
     <string name="vi">VI</string>
     <string name="d">D</string>
     <string name="e">E</string>
+    <string name="lbl_precio_total">Precio Total:</string>
+    <string name="lbl_Titulo_Tickets">Tickets</string>
+    <string name="lbl_clique_sobre_los_tickets_que_quiera_quitar">Clique sobre los tickets que quiera quitar</string>
+    <string name="btn_pagar">Pagar</string>
 </resources>

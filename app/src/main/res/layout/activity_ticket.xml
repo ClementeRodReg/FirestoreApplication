@@ -14,7 +14,7 @@
         android:layout_height="68dp"
         android:layout_marginTop="24dp"
         android:gravity="center"
-        android:text="Tickets"
+        android:text="@string/lbl_Titulo_Tickets"
         android:textColor="@color/orange"
         android:textColorHighlight="@color/orange"
         android:textColorHint="@color/orange"
@@ -33,6 +33,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
+    <TextView
+        android:id="@+id/lbl_Intrucciones"
+        android:layout_width="343dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="@string/lbl_clique_sobre_los_tickets_que_quiera_quitar"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/categoriaScrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/space4"
+        app:layout_constraintVertical_bias="0.0" />
+
     <ScrollView
         android:id="@+id/categoriaScrollView"
         android:layout_width="351dp"
@@ -40,10 +54,9 @@
         android:layout_marginBottom="76dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/space4"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.469">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -56,9 +69,9 @@
         android:id="@+id/lblPrecioTotal"
         android:layout_width="259dp"
         android:layout_height="49dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="12dp"
         android:gravity="center"
-        android:text="Precio Total: "
+        android:text="@string/lbl_precio_total"
         android:textColor="@color/white"
         android:textColorHighlight="@color/white"
         android:textColorHint="@color/white"
@@ -73,7 +86,10 @@
         android:layout_width="194dp"
         android:layout_height="45dp"
         android:layout_marginTop="28dp"
-        android:text="Pagar"
+        android:backgroundTint="@color/orange"
+        android:text="@string/btn_pagar"
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

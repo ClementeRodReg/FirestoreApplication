@@ -27,31 +27,43 @@ public class MetodoInsercion {
 
     FirebaseFirestore myBBDD;
 
-
-    public void insertarTicket(String fecha, String sala, String edifio, String evento, double precio) {
+    public void insertarTicket(String fecha, String sala, String edificio, String evento, double precio) {
 
         myBBDD = FirebaseFirestore.getInstance();
-        final int[] numberDocuments = {0};
-        final String[] ticketNuevo = {"Ticket"};
 
-        Task coleccion = myBBDD.collection("Tickets").get();
+        Task<QuerySnapshot> coleccion = myBBDD.collection("Tickets").get();
 
         coleccion.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    numberDocuments[0] = task.getResult().size();
+                    QuerySnapshot result = task.getResult();
 
-                    ticketNuevo[0] = ticketNuevo[0] + numberDocuments[0];
+                    // Encontrar la primera posición disponible
+                    int primeraPosicionDisponible = 0;
+
+                    for (QueryDocumentSnapshot document : result) {
+                        int posicionActual = Integer.parseInt(document.getId().replace("Ticket", ""));
+                        if (posicionActual == primeraPosicionDisponible) {
+                            primeraPosicionDisponible++;
+                        }
+                    }
+
+                    // Si no se encontró una posición disponible en medio, ir al final
+                    if (primeraPosicionDisponible == result.size()) {
+                        primeraPosicionDisponible = result.size();
+                    }
+
+                    String nuevoDocumento = "Ticket" + primeraPosicionDisponible;
 
                     Map<String, Object> ticket = new HashMap<>();
                     ticket.put("Fecha", fecha);
                     ticket.put("Sala", sala);
-                    ticket.put("Edificio", edifio);
+                    ticket.put("Edificio", edificio);
                     ticket.put("Evento", evento);
                     ticket.put("Precio", precio);
 
-                    myBBDD.collection("Tickets").document(ticketNuevo[0])
+                    myBBDD.collection("Tickets").document(nuevoDocumento)
                             .set(ticket)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -65,8 +77,11 @@ public class MetodoInsercion {
                                     Log.w(TAG, "Error writing document", e);
                                 }
                             });
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
                 }
             }
         });
     }
 }
+

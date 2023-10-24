@@ -35,6 +35,7 @@ public class EventoSeleccionado extends AppCompatActivity {
     String nombreEvento = "";
     double precioEvento = 0;
     String nombreSala = "";
+    String gmail = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +47,13 @@ public class EventoSeleccionado extends AppCompatActivity {
         int imagenReferencia = getIntent().getIntExtra("clave_datoImagen", 0);
 
         // Iniciadores de ID
-
         lblEventoSeleccionado = findViewById(R.id.lblEventoSeleccionado);
         imageView = findViewById(R.id.fotoSeleccionada);
         iCargando=findViewById(R.id.iCargando);
+
         //Saca nombre e imagen lugar seleccionado
         imageView.setImageResource(imagenReferencia);
+        gmail = getIntent().getStringExtra("id_gmail");
 
         nombreEvento = getIntent().getStringExtra("clave_eventoNombre");
         lblEventoSeleccionado.setText(nombreEvento.toString());
@@ -134,6 +136,7 @@ public class EventoSeleccionado extends AppCompatActivity {
                     mandar.putExtra("id_categoria", nombreCategoria);
                     mandar.putExtra("id_precio", precioEvento);
                     mandar.putExtra("clave_salaNombre", nombreSala);
+                    mandar.putExtra("id_gmail", gmail);
                     startActivity(mandar);
                 }
             });

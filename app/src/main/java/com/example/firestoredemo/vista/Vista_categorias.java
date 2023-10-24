@@ -26,6 +26,8 @@ public class Vista_categorias extends AppCompatActivity {
     TextView lblNombreUsuario;
     String gmail;
     private FirebaseFirestore myBBDD;
+    boolean ticketAñadido = false;
+    boolean invitadoActivo = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +40,10 @@ public class Vista_categorias extends AppCompatActivity {
         linearLayout = findViewById(R.id.linearLayout);
         lblNombreUsuario = findViewById(R.id.lblNombreUsuario);
 
-        //Sacar Gmail
+        //Sacar Datos
         gmail = getIntent().getStringExtra("id_gmail");
+        ticketAñadido = getIntent().getBooleanExtra("id_ticketAnadido", false);
+        invitadoActivo = getIntent().getBooleanExtra("id_invitadoActivo", true);
 
         if (gmail.equals("Modo Invitado")) {
             lblNombreUsuario.setText(gmail);
@@ -73,6 +77,10 @@ public class Vista_categorias extends AppCompatActivity {
         elementos.add(new modeloTeatro(R.drawable.imgmusiccategory, "Concierto"));
         elementos.add(new modeloTeatro(R.drawable.imgsportcategory, "Deporte"));
 
+        if(ticketAñadido == true && invitadoActivo == false){
+            elementos.add(new modeloTeatro(R.drawable.imgshopcategory, "Ticket"));
+        }
+
         // Agregar bloques con íconos y nombres al LinearLayout
         addBlocksForArrayList(elementos);
 
@@ -98,9 +106,17 @@ public class Vista_categorias extends AppCompatActivity {
                 public void onClick(View v) {
                     // Acciones que deseas realizar cuando se hace clic
                     // Por ejemplo, mostrar un Toast
-                    Intent IrAVentanaTeatro = new Intent(Vista_categorias.this, Evento.class);
-                    IrAVentanaTeatro.putExtra("id_categoria", elemento.getName().toString());
-                    startActivity(IrAVentanaTeatro);
+
+                    Intent mandar;
+
+                    if(elemento.getName().equals("Ticket")){
+                        mandar = new Intent(Vista_categorias.this, ticket.class);
+                    }else{
+                        mandar = new Intent(Vista_categorias.this, Evento.class);
+                        mandar.putExtra("id_categoria", elemento.getName().toString());
+                        mandar.putExtra("id_gmail", gmail);
+                    }
+                    startActivity(mandar);
                 }
             });
 

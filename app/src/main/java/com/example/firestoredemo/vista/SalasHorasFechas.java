@@ -44,6 +44,7 @@ public class SalasHorasFechas extends AppCompatActivity {
     int insertado=0;
     String numeroSala = "";
     String tipoSala = "";
+    String gmail = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,9 @@ public class SalasHorasFechas extends AppCompatActivity {
         precioEvento = getIntent().getDoubleExtra("id_precio", 0);
         nombreCategoria = getIntent().getStringExtra("id_categoria");
         sala = getIntent().getStringExtra("clave_salaNombre");
+        gmail = getIntent().getStringExtra("id_gmail");
+
+        System.out.println(gmail);
 
         //Cambiar Color Spinner/ComboBox
         comboBoxFecha.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -139,10 +143,24 @@ public class SalasHorasFechas extends AppCompatActivity {
                 public void onClick(View v) {
                     // Acciones que deseas realizar cuando se hace clic
                     // Por ejemplo, mostrar un Toast
-                    Intent mandar = new Intent(SalasHorasFechas.this, ticket.class);
+
+                    Intent mandar;
+
+                    if(gmail.equals("Modo Invitado")){
+                        mandar = new Intent(SalasHorasFechas.this, Vista_categorias.class);
+                        mandar.putExtra("id_ticketAnadido", true);
+                        mandar.putExtra("id_gmail", gmail);
+                        mandar.putExtra("id_invitadoActivo", true);
+                    }else{
+                        mandar = new Intent(SalasHorasFechas.this, Vista_categorias.class);
+                        mandar.putExtra("id_ticketAnadido", true);
+                        mandar.putExtra("id_gmail", gmail);
+                        mandar.putExtra("id_invitadoActivo", false);
+                        metodoInsercion.insertarTicket(fecha, sala, nombreEdificio, nombreEvento, precioEvento);
+                    }
                     startActivity(mandar);
 
-                    metodoInsercion.insertarTicket(fecha, sala, nombreEdificio, nombreEvento, precioEvento);
+
                 }
             });
 

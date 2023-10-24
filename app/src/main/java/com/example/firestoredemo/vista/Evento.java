@@ -30,6 +30,7 @@ public class Evento extends AppCompatActivity {
     String nombreCategoria = "";
     double precioEvento = 0;
     ImageView iCargando;
+    String gmail = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class Evento extends AppCompatActivity {
 
         //Obtener categoria seleccionada mediante putExta
         nombreCategoria = getIntent().getStringExtra("id_categoria");
+        gmail = getIntent().getStringExtra("id_gmail");
 
         //Colocación del nombre de la categoria seleccionada
         lblEventoSeleccionado.setText(nombreCategoria);
@@ -100,6 +102,7 @@ public class Evento extends AppCompatActivity {
                     mandar.putExtra("id_categoria", nombreCategoria);
                     mandar.putExtra("clave_datoImagen", elemento.getIconResId());
                     mandar.putExtra("id_precio", precioEvento);
+                    mandar.putExtra("id_gmail", gmail);
                     startActivity(mandar);
                 }
             });

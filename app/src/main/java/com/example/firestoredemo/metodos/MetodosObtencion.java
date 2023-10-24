@@ -204,7 +204,7 @@ public class MetodosObtencion {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot documentLocal : task.getResult()) {
-                        String texto = "Edificio: " + documentLocal.get("Edificio") + "\n Evento: " + documentLocal.get("Evento") + "\n Fecha: " + documentLocal.get("Fecha") + "\n Precio: " + documentLocal.get("Precio") + "€" + "\n Sala: " + documentLocal.get("Sala");
+                        String texto = "Edificio: " + documentLocal.get("Edificio") + "\n Evento: " + documentLocal.get("Evento") + "\n Fecha: " + documentLocal.get("Fecha") + "\n Precio: " + documentLocal.get("Precio") + "€" + "\n Sala: " + documentLocal.get("Sala") + ";" + documentLocal.get("Precio");
                         listaTicket.add(texto);
                     }
                 }
@@ -214,27 +214,4 @@ public class MetodosObtencion {
         return listaTicket;
     }
 
-    /*
-    public int obtenerTicketsPrecio() {
-
-        myBBDD = FirebaseFirestore.getInstance();
-        final int[] precioTotal = {0};
-
-        Task coleccion = myBBDD.collection("Tickets").get();
-
-        coleccion.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot documentLocal : task.getResult()) {
-                        precioTotal[0] = precioTotal[0] + (Integer) documentLocal.get("Precio");
-                    }
-                }
-
-            }
-        });
-        return precioTotal[0];
-    }
-*/
 }

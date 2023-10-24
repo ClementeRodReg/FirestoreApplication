@@ -8,6 +8,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -53,16 +54,20 @@ public class MetodoBorrarTickets {
     public void borrarTicket(String nomTicket) {
 
         myBBDD = FirebaseFirestore.getInstance();
-        Task coleccion = myBBDD.collection("Tickets").document(nomTicket).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+        System.out.println(nomTicket);
+        DocumentReference documentRef = myBBDD.collection("Tickets").document(nomTicket);
+        documentRef.delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                        System.out.println("Documento eliminado");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error deleting document", e);
+                        System.out.println("Documento NO eliminado");
+
                     }
                 });
     }

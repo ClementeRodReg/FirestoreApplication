@@ -139,7 +139,7 @@ public class SalasHorasFechas extends AppCompatActivity {
                 public void onClick(View v) {
                     // Acciones que deseas realizar cuando se hace clic
                     // Por ejemplo, mostrar un Toast
-                    Intent mandar = new Intent(SalasHorasFechas.this, ventana_pago.class);
+                    Intent mandar = new Intent(SalasHorasFechas.this, ticket.class);
                     startActivity(mandar);
 
                     metodoInsercion.insertarTicket(fecha, sala, nombreEdificio, nombreEvento, precioEvento);

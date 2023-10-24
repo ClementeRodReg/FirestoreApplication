@@ -84,6 +84,7 @@ public class ticket extends AppCompatActivity {
                     // Encontrar la posición del nombre del ticket en la lista de nombresElementos
                     int posicion = nombresElementos.indexOf(nombreTicket) + 1;
 
+
                     if (posicion >= 0) {
                         // Si se encuentra el nombre del ticket, eliminarlo de la lista
                         nombresElementos.remove(posicion);

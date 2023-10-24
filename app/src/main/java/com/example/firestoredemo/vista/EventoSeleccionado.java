@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
 import com.example.firestoredemo.R;
 import com.example.firestoredemo.metodos.MetodosEventoSeleccionado;
 import com.example.firestoredemo.metodos.MetodosObtencion;
@@ -23,12 +24,13 @@ public class EventoSeleccionado extends AppCompatActivity {
 
     TextView lblEventoSeleccionado;
     ImageView imageView;
+    ImageView iCargando;
     private LinearLayout linearLayout;
     MetodosObtencion metodosObtencion = new MetodosObtencion();
     ArrayList<Salas> listaEdificios;
     final Handler handler = new Handler();
     final int delay = 1000; // 1000 milliseconds == 1 second
-    int insertado=0;
+    int insertado = 0;
     String nombreCategoria = "";
     String nombreEvento = "";
     double precioEvento = 0;
@@ -47,7 +49,7 @@ public class EventoSeleccionado extends AppCompatActivity {
 
         lblEventoSeleccionado = findViewById(R.id.lblEventoSeleccionado);
         imageView = findViewById(R.id.fotoSeleccionada);
-
+        iCargando=findViewById(R.id.iCargando);
         //Saca nombre e imagen lugar seleccionado
         imageView.setImageResource(imagenReferencia);
 
@@ -68,14 +70,13 @@ public class EventoSeleccionado extends AppCompatActivity {
 
         handler.postDelayed(new Runnable() {
             public void run() {
-                if(!listaEdificios.isEmpty() && insertado < 1) {
+                if (!listaEdificios.isEmpty() && insertado < 1) {
                     for (Salas edificio : listaEdificios) {
                         String nombreEdificio = edificio.getNombreEdif().toLowerCase().replaceAll("\\s+", "");
                         int idImagen = getResources().getIdentifier(nombreEdificio, "drawable", getPackageName());
-                        nombreSala = edificio.getNombreSalas().toString();
-
                         elementos.add(new modeloTeatro(idImagen, edificio.getNombreEdif()));
                     }
+                    iCargando.setVisibility(View.INVISIBLE);
                     addBlocksForArrayList(elementos);
                     insertado++;
                 }
@@ -87,6 +88,7 @@ public class EventoSeleccionado extends AppCompatActivity {
         // Agregar bloques con íconos y nombres al LinearLayout
         addBlocksForArrayList(elementos);
     }
+
     private void addBlocksForArrayList(ArrayList<modeloTeatro> elementos) {
         for (modeloTeatro elemento : elementos) {
             // Inflar el diseño del elemento de evento
@@ -96,6 +98,24 @@ public class EventoSeleccionado extends AppCompatActivity {
             ImageView iconoImageView = vistaElementoEvento.findViewById(R.id.fotoSeleccionada);
             TextView nombreTextView = vistaElementoEvento.findViewById(R.id.nameTextView);
             LinearLayout linearLayoutEvento = vistaElementoEvento.findViewById(R.id.linearLayoutEvento);
+
+            nombreSala = "";
+
+            Salas edificioBuscar = null;
+            for (Salas edificio : listaEdificios) {
+                if (edificio.getNombreEdif().equals(elemento.getName().toString())) {
+                    edificioBuscar = edificio;
+                }
+            }
+            ArrayList<String> salas = edificioBuscar.getNombreSalas();
+
+            for (String sala : salas) {
+                if (sala.equals(salas.get(salas.size() - 1))) {
+                    nombreSala = nombreSala + sala;
+                } else {
+                    nombreSala = nombreSala + sala + ";";
+                }
+            }
 
             // Configurar el ícono y el nombre
             iconoImageView.setImageResource(elemento.getIconResId());

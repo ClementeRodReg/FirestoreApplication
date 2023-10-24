@@ -79,7 +79,7 @@ public class SalasHorasFechas extends AppCompatActivity {
         });
 
         //Insercion de datos en el Spinner/ComboBox
-        fechas = metodosObtencion.obtenerfechaYhora(nombreEvento, nombreCategoria);
+        fechas = metodosObtencion.obtenerfechaYhora(nombreEvento, nombreCategoria, sala, nombreEdificio);
 
         handler.postDelayed(new Runnable() {
             public void run() {
@@ -88,9 +88,7 @@ public class SalasHorasFechas extends AppCompatActivity {
                     ArrayAdapter<String> adapterFecha = new ArrayAdapter<>(SalasHorasFechas.this, android.R.layout.simple_spinner_dropdown_item, fechas);
                     adapterFecha.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     comboBoxFecha.setAdapter(adapterFecha);
-
                     fecha = comboBoxFecha.getSelectedItem().toString();
-
                     insertado++;
                 }
                 handler.postDelayed(this, delay);

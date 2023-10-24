@@ -1,11 +1,7 @@
 package com.example.firestoredemo.metodos;
 
-import android.widget.ArrayAdapter;
-
 import com.example.firestoredemo.modelo.Obras;
 import com.example.firestoredemo.modelo.Salas;
-import com.example.firestoredemo.modelo.SeCelebraT;
-import com.example.firestoredemo.vista.SalasHorasFechas;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -140,9 +136,8 @@ public class MetodosObtencion {
     }
 
 
-    public ArrayList<String> obtenerfechaYhora(String obra, String categoria) {
+    public ArrayList<String> obtenerfechaYhora(String obra, String categoria, String sala, String nombreEdificio) {
         ArrayList<String> fechaYhora = new ArrayList<>();
-
         myBBDD = FirebaseFirestore.getInstance();
 
         String seCelebra = "";
@@ -158,22 +153,41 @@ public class MetodosObtencion {
         }
 
         Task coleccion = myBBDD.collection(seCelebra).get();
+        Task coleccion2 = myBBDD.collection("Salas").get();
 
-        coleccion.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        ArrayList<String> nombreSalas = new ArrayList<>();
+        coleccion2.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot documentLocal : task.getResult()) {
+            public void onComplete(@NonNull Task<QuerySnapshot> task2) {
+                for (QueryDocumentSnapshot nombreEdif : task2.getResult()) {
+                    //dividir el id que recibimos de firebase
 
-                        if (documentLocal.get("NombreEvento").equals(obra))
-                            fechaYhora.add(documentLocal.getId().split("_")[0]+" "+documentLocal.get("Hora"));
+                    if (nombreEdificio.equals(nombreEdif.getId())) {
+                        for (Map.Entry<String, Object> pair : nombreEdif.getData().entrySet()) {
+                            nombreSalas.add(pair.getValue().toString());
+                        }
                     }
-                }else{
-                    System.out.println("No funciona");
                 }
-            }
-        });
 
+                coleccion.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot documentLocal : task.getResult()) {
+                                for (String salita:nombreSalas) {
+                                    if (documentLocal.get("NombreEvento").equals(obra) && salita.equals(documentLocal.getId().split("_")[1])) {
+                                        fechaYhora.add(documentLocal.getId().split("_")[0] + " " + documentLocal.get("Hora"));
+                                    }
+                                }
+                            }
+                        } else {
+                            System.out.println("No funciona");
+                        }
+                    }
+                });
+            }
+
+        });
         return fechaYhora;
     }
 

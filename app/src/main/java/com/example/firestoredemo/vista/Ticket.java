@@ -82,6 +82,7 @@ public class Ticket extends AppCompatActivity {
 
     private void addBlocksForArrayList(ArrayList<modeloTeatro> elementos) {
         for (modeloTeatro elemento : elementos) {
+
             // Inflar el diseño del elemento de evento
             @SuppressLint("InflateParams") View vistaElementoEvento = getLayoutInflater().inflate(R.layout.ticket_text, null);
 

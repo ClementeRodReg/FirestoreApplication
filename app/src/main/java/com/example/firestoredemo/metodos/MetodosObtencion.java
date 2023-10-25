@@ -204,7 +204,7 @@ public class MetodosObtencion {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot documentLocal : task.getResult()) {
-                        String texto = "Edificio: " + documentLocal.get("edificio") + "\n Evento: " + documentLocal.get("evento") + "\n Fecha: " + documentLocal.get("fecha") + "\n Precio: " + documentLocal.get("precio") + "€" + "\n Sala: " + documentLocal.get("sala") + ";" + documentLocal.get("precio");
+                        String texto = "Edificio: " + documentLocal.get("edificio") + "\n Evento: " + documentLocal.get("evento") + "\n Fecha: " + documentLocal.get("fecha") + "\n Precio: " + documentLocal.get("precio") + "€" + "\n " + documentLocal.get("sala") + ";" + documentLocal.get("precio");
                         listaTicket.add(texto);
                     }
                 }

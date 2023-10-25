@@ -2,6 +2,7 @@ package com.example.firestoredemo.vista;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -63,9 +64,6 @@ public class SalasHorasFechas extends AppCompatActivity {
         sala = getIntent().getStringExtra("clave_salaNombre");
         gmail = getIntent().getStringExtra("id_gmail");
 
-        System.out.println("--> " + precioEvento);
-
-
         //Cambiar Color Spinner/ComboBox
         comboBoxFecha.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -90,15 +88,17 @@ public class SalasHorasFechas extends AppCompatActivity {
                     adapterFecha.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     comboBoxFecha.setAdapter(adapterFecha);
                     fecha = comboBoxFecha.getSelectedItem().toString();
+                    accionarBoton();
                     insertado++;
                 }
                 handler.postDelayed(this, delay);
             }
         }, delay);
 
+
+        //Sacar el numero de la sala
         Pattern pattern = Pattern.compile("\\d");
         Matcher matcher = pattern.matcher(sala);
-
 
         if (matcher.find()) {
             numeroSala = matcher.group();
@@ -109,6 +109,12 @@ public class SalasHorasFechas extends AppCompatActivity {
             }
         }
 
+
+    }
+
+    private void accionarBoton() {
+
+        //Boton para comprar ticket
         btn_AnadirTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,8 +143,6 @@ public class SalasHorasFechas extends AppCompatActivity {
             }
         });
 
-
     }
-
 
 }

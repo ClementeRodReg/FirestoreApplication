@@ -57,6 +57,18 @@ public class Ticket extends AppCompatActivity {
                         precioTotal = precioTotal + Double.parseDouble(ticket.split(";")[1]);
                         nombresElementos.add("Ticket" + i); // Agregar el nombre a la lista
                         i++;
+
+                        if (precioTotal > 0) {
+                            btn_pagar.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    mostrarPopup();
+
+                                }
+                            });
+                        }
+
                     }
                     addBlocksForArrayList(elementos);
 
@@ -66,17 +78,6 @@ public class Ticket extends AppCompatActivity {
                 handler.postDelayed(this, delay);
             }
         }, delay);
-
-        if (precioTotal > 0) {
-            btn_pagar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    mostrarPopup();
-
-                }
-            });
-        }
 
     }
 

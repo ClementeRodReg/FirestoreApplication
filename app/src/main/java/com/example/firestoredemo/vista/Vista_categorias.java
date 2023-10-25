@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.firestoredemo.R;
 import com.example.firestoredemo.metodos.MetodosObtencion;
@@ -47,6 +48,7 @@ public class Vista_categorias extends AppCompatActivity {
 
         if (gmail.equals("Modo Invitado")) {
             lblNombreUsuario.setText(gmail);
+            Toast.makeText(getApplicationContext(), "En modo invitado no puede comprar tickets.", Toast.LENGTH_SHORT).show();
         } else {
 
             myBBDD = FirebaseFirestore.getInstance();

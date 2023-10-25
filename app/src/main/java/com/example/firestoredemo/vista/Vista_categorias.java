@@ -26,6 +26,7 @@ public class Vista_categorias extends AppCompatActivity {
     private LinearLayout linearLayout;
     TextView lblNombreUsuario;
     String gmail;
+    String nomUser;
     private FirebaseFirestore myBBDD;
     boolean ticketAñadido = false;
     boolean invitadoActivo = true;
@@ -60,9 +61,8 @@ public class Vista_categorias extends AppCompatActivity {
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     if (documentSnapshot.exists()) {
                         // Obtener el valor del campo "Nombre"
-                        String nombre = documentSnapshot.getString("Nombre");
-                        lblNombreUsuario.setText("Bienvenido, " + nombre);
-
+                        nomUser = documentSnapshot.getString("Nombre");
+                        lblNombreUsuario.setText("Bienvenido, " + nomUser);
                     } else {
                         Log.d("MainActivity", "El documento no existe.");
                     }
@@ -79,8 +79,11 @@ public class Vista_categorias extends AppCompatActivity {
         elementos.add(new modeloTeatro(R.drawable.imgmusiccategory, "Concierto"));
         elementos.add(new modeloTeatro(R.drawable.imgsportcategory, "Deporte"));
 
-        if(ticketAñadido == true && invitadoActivo == false){
+        if(ticketAñadido && !invitadoActivo){
             elementos.add(new modeloTeatro(R.drawable.imgshopcategory, "Ticket"));
+        }
+        if(!invitadoActivo){
+            elementos.add(new modeloTeatro(R.drawable.imgusercategory, "Usuario"));
         }
 
         // Agregar bloques con íconos y nombres al LinearLayout
@@ -113,6 +116,10 @@ public class Vista_categorias extends AppCompatActivity {
 
                     if(elemento.getName().equals("Ticket")){
                         mandar = new Intent(Vista_categorias.this, Ticket.class);
+                    }else if(elemento.getName().equals("Usuario")) {
+                        mandar = new Intent(Vista_categorias.this, EditNombreUser.class);
+                        mandar.putExtra("nombreUsuario", nomUser);
+                        mandar.putExtra("id_gmail", gmail);
                     }else{
                         mandar = new Intent(Vista_categorias.this, Evento.class);
                         mandar.putExtra("id_categoria", elemento.getName().toString());

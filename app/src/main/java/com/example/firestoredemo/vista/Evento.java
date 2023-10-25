@@ -28,7 +28,7 @@ public class Evento extends AppCompatActivity {
     final int delay = 1000; // 1000 milliseconds == 1 second
     TextView lblEventoSeleccionado;
     String nombreCategoria = "";
-    float precioEvento = 0;
+    ArrayList<Double> precioEvento = new ArrayList<>();
     ImageView iCargando;
     String gmail = "";
 
@@ -62,7 +62,7 @@ public class Evento extends AppCompatActivity {
                     for (Obras obra : listaObras) {
                         String nombreObra = obra.getNombre().toLowerCase().replaceAll("\\s+", "");
                         @SuppressLint("DiscouragedApi") int idImagen = getResources().getIdentifier(nombreObra, "drawable", getPackageName());
-                        precioEvento = (float) obra.getPrecio();
+                        precioEvento.add(obra.getPrecio());
                         elementos.add(new modeloTeatro(idImagen, obra.getNombre()));
                     }
                     iCargando.getLayoutParams().height = 0;
@@ -94,14 +94,13 @@ public class Evento extends AppCompatActivity {
             linearLayoutEvento.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Acciones que deseas realizar cuando se hace click
-                    // Por ejemplo, mostrar un Toast
 
+                    // Acciones que deseas realizar cuando se hace click
                     Intent mandar = new Intent(Evento.this, EventoSeleccionado.class);
                     mandar.putExtra("clave_eventoNombre", elemento.getName().toString());
                     mandar.putExtra("id_categoria", nombreCategoria);
                     mandar.putExtra("clave_datoImagen", elemento.getIconResId());
-                    mandar.putExtra("id_precio", precioEvento);
+                    mandar.putExtra("id_precio", precioEvento.get(elementos.indexOf(elemento)));
                     mandar.putExtra("id_gmail", gmail);
                     startActivity(mandar);
                 }

@@ -112,7 +112,7 @@ public class Vista_categorias extends AppCompatActivity {
                     Intent mandar;
 
                     if(elemento.getName().equals("Ticket")){
-                        mandar = new Intent(Vista_categorias.this, ticket.class);
+                        mandar = new Intent(Vista_categorias.this, Ticket.class);
                     }else{
                         mandar = new Intent(Vista_categorias.this, Evento.class);
                         mandar.putExtra("id_categoria", elemento.getName().toString());

@@ -10,10 +10,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.firestoredemo.R;
 import com.example.firestoredemo.metodos.MetodoBorrarTickets;
@@ -22,7 +20,7 @@ import com.example.firestoredemo.modelo.modeloTeatro;
 
 import java.util.ArrayList;
 
-public class ticket extends AppCompatActivity {
+public class Ticket extends AppCompatActivity {
 
     MetodosObtencion metodosObtencion = new MetodosObtencion();
     MetodoBorrarTickets metodoBorrarTickets = new MetodoBorrarTickets();
@@ -32,9 +30,9 @@ public class ticket extends AppCompatActivity {
     TextView lblPrecioTotal;
     Button btn_pagar;
     private LinearLayout linearLayout;
-    float precioTotal = 0;
+    double precioTotal = 0;
     ArrayList<String> nombresElementos = new ArrayList<>();
-    ArrayList<Float> precios = new ArrayList<>();
+    ArrayList<Double> precios = new ArrayList<>();
     int i = 0;
 
     @Override
@@ -55,12 +53,13 @@ public class ticket extends AppCompatActivity {
                     for (String ticket : listaTickets) {
                         String textoTicket = ticket.split(";")[0];
                         elementos.add(new modeloTeatro(R.drawable.imgtheatrecategory, textoTicket));
-                        precios.add(Float.parseFloat(ticket.split(";")[1]));
-                        precioTotal = precioTotal + Float.parseFloat(ticket.split(";")[1]);
+                        precios.add(Double.parseDouble(ticket.split(";")[1]));
+                        precioTotal = precioTotal + Double.parseDouble(ticket.split(";")[1]);
                         nombresElementos.add("Ticket" + i); // Agregar el nombre a la lista
                         i++;
                     }
                     addBlocksForArrayList(elementos);
+
                     lblPrecioTotal.setText("Precio total: " + (float) precioTotal + "€");
                     insertado++;
                 }
@@ -113,12 +112,12 @@ public class ticket extends AppCompatActivity {
                         // Llamar al método de borrado con el nombre del ticket
                         metodoBorrarTickets.borrarTicket("Ticket" + posicion);
 
-                        precioTotal = precioTotal - precios.get(posicion);
+                        precioTotal = (precioTotal - precios.get(posicion));
 
                         if (precioTotal < 0) {
                             lblPrecioTotal.setText("Precio total: 0€");
                         } else {
-                            lblPrecioTotal.setText("Precio total: " + (float) precioTotal + "€");
+                            lblPrecioTotal.setText("Precio total: " + precioTotal + "€");
                         }
                     }
                 }
@@ -132,14 +131,14 @@ public class ticket extends AppCompatActivity {
     public void mostrarPopup() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Gracias por la compra de nuestros tickets");
-        builder.setMessage("El precio total es de: " + (float) precioTotal + "€");
+        builder.setMessage("El precio total es de: " + precioTotal + "€");
 
         builder.setPositiveButton("Comprar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 metodoBorrarTickets.borrarTickets();
-                Intent mover = new Intent(ticket.this, MainActivity.class);
+                Intent mover = new Intent(Ticket.this, MainActivity.class);
                 startActivity(mover);
             }
         });

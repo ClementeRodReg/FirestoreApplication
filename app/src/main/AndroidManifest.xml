@@ -16,7 +16,7 @@
             android:name=".ticketText"
             android:exported="false" />
         <activity
-            android:name=".vista.ticket"
+            android:name=".vista.Ticket"
             android:exported="false" />
         <activity
             android:name=".vista.ventana_pago"

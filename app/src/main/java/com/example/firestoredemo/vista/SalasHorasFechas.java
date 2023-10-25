@@ -31,7 +31,7 @@ public class SalasHorasFechas extends AppCompatActivity {
     String sala = "";
     String nombreEdificio = "";
     String nombreEvento = "";
-    float precioEvento = 0;
+    double precioEvento = 0;
     String nombreCategoria = "";
     MetodosObtencion metodosObtencion = new MetodosObtencion();
     final Handler handler = new Handler();
@@ -58,10 +58,13 @@ public class SalasHorasFechas extends AppCompatActivity {
         nombreEdificio = getIntent().getStringExtra("clave_edificioNombre");
         lblEventoSeleccionado.setText(nombreEdificio.toString());
         nombreEvento = getIntent().getStringExtra("clave_eventoNombre");
-        precioEvento = getIntent().getFloatExtra("id_precio", 0);
+        precioEvento = getIntent().getDoubleExtra("id_precio", 0);
         nombreCategoria = getIntent().getStringExtra("id_categoria");
         sala = getIntent().getStringExtra("clave_salaNombre");
         gmail = getIntent().getStringExtra("id_gmail");
+
+        System.out.println("--> " + precioEvento);
+
 
         //Cambiar Color Spinner/ComboBox
         comboBoxFecha.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

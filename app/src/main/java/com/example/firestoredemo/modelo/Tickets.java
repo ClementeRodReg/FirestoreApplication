@@ -5,7 +5,7 @@ public class Tickets {
     String edificio;
     String evento;
     String fecha;
-    float precio = 0;
+    double precio = 0;
     String sala;
 
     public Tickets(String edificio, String evento, String fecha, float precio, String sala){
@@ -56,7 +56,7 @@ public class Tickets {
         return precio;
     }
 
-    public void setPrecio(float precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 

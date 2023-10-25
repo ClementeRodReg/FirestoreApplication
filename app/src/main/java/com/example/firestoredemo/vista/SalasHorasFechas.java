@@ -41,7 +41,7 @@ public class SalasHorasFechas extends AppCompatActivity {
     MetodosObtencion metodosObtencion = new MetodosObtencion();
     final Handler handler = new Handler();
     final int delay = 1000; // 1000 milliseconds == 1 second
-    int insertado=0;
+    int insertado = 0;
     String numeroSala = "";
     String tipoSala = "";
     String gmail = "";
@@ -66,8 +66,6 @@ public class SalasHorasFechas extends AppCompatActivity {
         sala = getIntent().getStringExtra("clave_salaNombre");
         gmail = getIntent().getStringExtra("id_gmail");
 
-        System.out.println(gmail);
-
         //Cambiar Color Spinner/ComboBox
         comboBoxFecha.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -87,8 +85,7 @@ public class SalasHorasFechas extends AppCompatActivity {
 
         handler.postDelayed(new Runnable() {
             public void run() {
-                if(!fechas.isEmpty() && insertado < 1) {
-
+                if (!fechas.isEmpty() && insertado < 1) {
                     ArrayAdapter<String> adapterFecha = new ArrayAdapter<>(SalasHorasFechas.this, android.R.layout.simple_spinner_dropdown_item, fechas);
                     adapterFecha.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     comboBoxFecha.setAdapter(adapterFecha);
@@ -105,9 +102,9 @@ public class SalasHorasFechas extends AppCompatActivity {
 
         if (matcher.find()) {
             numeroSala = matcher.group();
-            if(nombreCategoria.equals("Deporte")){
+            if (nombreCategoria.equals("Deporte")) {
                 tipoSala = "Cancha: " + numeroSala;
-            }else{
+            } else {
                 tipoSala = "Sala: " + numeroSala;
             }
         }
@@ -146,12 +143,12 @@ public class SalasHorasFechas extends AppCompatActivity {
 
                     Intent mandar;
 
-                    if(gmail.equals("Modo Invitado")){
+                    if (gmail.equals("Modo Invitado")) {
                         mandar = new Intent(SalasHorasFechas.this, Vista_categorias.class);
                         mandar.putExtra("id_ticketAnadido", true);
                         mandar.putExtra("id_gmail", gmail);
                         mandar.putExtra("id_invitadoActivo", true);
-                    }else{
+                    } else {
                         mandar = new Intent(SalasHorasFechas.this, Vista_categorias.class);
                         mandar.putExtra("id_ticketAnadido", true);
                         mandar.putExtra("id_gmail", gmail);
@@ -159,7 +156,6 @@ public class SalasHorasFechas extends AppCompatActivity {
                         metodoInsercion.insertarTicket(fecha, sala, nombreEdificio, nombreEvento, precioEvento);
                     }
                     startActivity(mandar);
-
 
                 }
             });

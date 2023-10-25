@@ -28,7 +28,7 @@ public class Evento extends AppCompatActivity {
     final int delay = 1000; // 1000 milliseconds == 1 second
     TextView lblEventoSeleccionado;
     String nombreCategoria = "";
-    double precioEvento = 0;
+    float precioEvento = 0;
     ImageView iCargando;
     String gmail = "";
 
@@ -62,7 +62,7 @@ public class Evento extends AppCompatActivity {
                     for (Obras obra : listaObras) {
                         String nombreObra = obra.getNombre().toLowerCase().replaceAll("\\s+", "");
                         @SuppressLint("DiscouragedApi") int idImagen = getResources().getIdentifier(nombreObra, "drawable", getPackageName());
-                        precioEvento = obra.getPrecio();
+                        precioEvento = (float) obra.getPrecio();
                         elementos.add(new modeloTeatro(idImagen, obra.getNombre()));
                     }
                     iCargando.getLayoutParams().height = 0;

@@ -33,7 +33,7 @@ public class EventoSeleccionado extends AppCompatActivity {
     int insertado = 0;
     String nombreCategoria = "";
     String nombreEvento = "";
-    double precioEvento = 0;
+    float precioEvento = 0;
     String nombreSala = "";
     String gmail = "";
 
@@ -60,7 +60,7 @@ public class EventoSeleccionado extends AppCompatActivity {
 
         nombreCategoria = getIntent().getStringExtra("id_categoria");
 
-        precioEvento = getIntent().getDoubleExtra("id_precio", 0);
+        precioEvento = getIntent().getFloatExtra("id_precio", 0);
 
         // Obtener el ScrollView y LinearLayout del diseño de la actividad
         ScrollView scrollView = findViewById(R.id.categoriaScrollView);

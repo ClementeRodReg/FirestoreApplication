@@ -6,21 +6,17 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.firestoredemo.R;
 import com.example.firestoredemo.metodos.MetodoInsercion;
 import com.example.firestoredemo.metodos.MetodosObtencion;
-import com.example.firestoredemo.modelo.Salas;
-import com.example.firestoredemo.modelo.modeloTeatro;
+import com.example.firestoredemo.modelo.Tickets;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -30,7 +26,6 @@ public class SalasHorasFechas extends AppCompatActivity {
 
     TextView lblEventoSeleccionado;
     private ArrayList<String> fechas;
-    private LinearLayout linearLayout;
     MetodoInsercion metodoInsercion = new MetodoInsercion();
     String fecha = "";
     String sala = "";
@@ -45,6 +40,9 @@ public class SalasHorasFechas extends AppCompatActivity {
     String numeroSala = "";
     String tipoSala = "";
     String gmail = "";
+    Button btn_AnadirTicket;
+
+    Tickets tickets = new Tickets();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +52,8 @@ public class SalasHorasFechas extends AppCompatActivity {
         // Iniciadores de ID
         lblEventoSeleccionado = findViewById(R.id.lblEventoSeleccionado);
         Spinner comboBoxFecha = findViewById(R.id.comboBoxFecha);
-        ScrollView scrollView = findViewById(R.id.categoriaScrollView);
-        linearLayout = findViewById(R.id.linearLayout);
+
+        btn_AnadirTicket = findViewById(R.id.btn_AnadirTicket);
 
         //Saca nombre evento seleccionado
         nombreEdificio = getIntent().getStringExtra("clave_edificioNombre");
@@ -109,60 +107,37 @@ public class SalasHorasFechas extends AppCompatActivity {
             }
         }
 
-        //Mostrar salas disponibles
-        // Crear un ArrayList con elementos de ejemplo
+        btn_AnadirTicket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        ArrayList<modeloTeatro> elementos = new ArrayList<>();
-        elementos.add(new modeloTeatro(R.drawable.img0, tipoSala));
+                tickets.setFecha(fecha);
+                tickets.setSala(tipoSala);
+                tickets.setEdificio(nombreEdificio);
+                tickets.setEvento(nombreEvento);
+                tickets.setPrecio(precioEvento);
 
-
-        // Agregar bloques con íconos y nombres al LinearLayout
-        addBlocksForArrayList(elementos);
-    }
-
-    private void addBlocksForArrayList(ArrayList<modeloTeatro> elementos) {
-        for (modeloTeatro elemento : elementos) {
-            // Inflar el diseño del elemento de evento
-            View vistaElementoEvento = getLayoutInflater().inflate(R.layout.eventosgeneral, null);
-
-            // Obtener referencias a los elementos de la vista
-            ImageView iconoImageView = vistaElementoEvento.findViewById(R.id.fotoSeleccionada);
-            TextView nombreTextView = vistaElementoEvento.findViewById(R.id.nameTextView);
-            LinearLayout linearLayoutEvento = vistaElementoEvento.findViewById(R.id.linearLayoutEvento);
-
-            // Configurar el ícono y el nombre
-            iconoImageView.setImageResource(elemento.getIconResId());
-            nombreTextView.setText(elemento.getName());
-
-            // Agregar el clic listener al linearLayoutEvento
-            linearLayoutEvento.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Acciones que deseas realizar cuando se hace clic
-                    // Por ejemplo, mostrar un Toast
-
-                    Intent mandar;
-
-                    if (gmail.equals("Modo Invitado")) {
-                        mandar = new Intent(SalasHorasFechas.this, Vista_categorias.class);
-                        mandar.putExtra("id_ticketAnadido", true);
-                        mandar.putExtra("id_gmail", gmail);
-                        mandar.putExtra("id_invitadoActivo", true);
-                    } else {
-                        mandar = new Intent(SalasHorasFechas.this, Vista_categorias.class);
-                        mandar.putExtra("id_ticketAnadido", true);
-                        mandar.putExtra("id_gmail", gmail);
-                        mandar.putExtra("id_invitadoActivo", false);
-                        metodoInsercion.insertarTicket(fecha, sala, nombreEdificio, nombreEvento, precioEvento);
-                    }
-                    startActivity(mandar);
-
+                Intent mandar;
+                if (gmail.equals("Modo Invitado")) {
+                    mandar = new Intent(SalasHorasFechas.this, Vista_categorias.class);
+                    mandar.putExtra("id_ticketAnadido", true);
+                    mandar.putExtra("id_gmail", gmail);
+                    mandar.putExtra("id_invitadoActivo", true);
+                } else {
+                    mandar = new Intent(SalasHorasFechas.this, Vista_categorias.class);
+                    mandar.putExtra("id_ticketAnadido", true);
+                    mandar.putExtra("id_gmail", gmail);
+                    mandar.putExtra("id_invitadoActivo", false);
+                    metodoInsercion.insertarTicket(tickets);
                 }
-            });
+                startActivity(mandar);
 
-            // Agregar la vista del evento al LinearLayout principal
-            linearLayout.addView(vistaElementoEvento);
-        }
+            }
+        });
+
+
 
     }
+
+
 }

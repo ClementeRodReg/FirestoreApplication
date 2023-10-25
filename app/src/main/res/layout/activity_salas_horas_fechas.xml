@@ -31,35 +31,36 @@
         android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.147"
+        app:layout_constraintHorizontal_bias="0.173"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblEventoSeleccionado"
-        app:layout_constraintVertical_bias="0.052" />
+        app:layout_constraintVertical_bias="0.186" />
 
     <Spinner
         android:id="@+id/comboBoxFecha"
-        android:layout_width="386dp"
-        android:layout_height="36dp"
+        android:layout_width="322dp"
+        android:layout_height="38dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblSala"
-        app:layout_constraintVertical_bias="0.093" />
+        app:layout_constraintVertical_bias="0.052" />
 
-    <ScrollView
-        android:id="@+id/categoriaScrollView"
-        android:layout_width="410dp"
-        android:layout_height="352dp"
+    <Button
+        android:id="@+id/btn_AnadirTicket"
+        android:layout_width="141dp"
+        android:layout_height="77dp"
+        android:backgroundTint="@color/orange"
+        android:text="@string/btn_anadirTicket"
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/white"
+        android:textColorHint="@color/white"
+        android:textColorLink="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/comboBoxFecha"
+        app:layout_constraintVertical_bias="0.492" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

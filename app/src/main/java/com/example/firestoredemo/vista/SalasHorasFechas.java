@@ -31,7 +31,7 @@ public class SalasHorasFechas extends AppCompatActivity {
     String sala = "";
     String nombreEdificio = "";
     String nombreEvento = "";
-    double precioEvento = 0;
+    float precioEvento = 0;
     String nombreCategoria = "";
     MetodosObtencion metodosObtencion = new MetodosObtencion();
     final Handler handler = new Handler();
@@ -41,7 +41,6 @@ public class SalasHorasFechas extends AppCompatActivity {
     String tipoSala = "";
     String gmail = "";
     Button btn_AnadirTicket;
-
     Tickets tickets = new Tickets();
 
     @Override
@@ -59,7 +58,7 @@ public class SalasHorasFechas extends AppCompatActivity {
         nombreEdificio = getIntent().getStringExtra("clave_edificioNombre");
         lblEventoSeleccionado.setText(nombreEdificio.toString());
         nombreEvento = getIntent().getStringExtra("clave_eventoNombre");
-        precioEvento = getIntent().getDoubleExtra("id_precio", 0);
+        precioEvento = getIntent().getFloatExtra("id_precio", 0);
         nombreCategoria = getIntent().getStringExtra("id_categoria");
         sala = getIntent().getStringExtra("clave_salaNombre");
         gmail = getIntent().getStringExtra("id_gmail");
@@ -134,7 +133,6 @@ public class SalasHorasFechas extends AppCompatActivity {
 
             }
         });
-
 
 
     }

@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.media.MediaPlayer;
 import com.example.firestoredemo.R;
+import com.example.firestoredemo.metodos.MetodoBorrarTickets;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     String gmail;
     String contra;
     private FirebaseAuth mAuth;
-
+    MetodoBorrarTickets metodoBorrarTickets = new MetodoBorrarTickets();
 
     @Override
     protected void onStart() {
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        metodoBorrarTickets.borrarTickets();
 
         mediaPlayer = MediaPlayer.create(this, R.raw.startsound);
         mAuth = FirebaseAuth.getInstance();
@@ -85,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                gmail = gmailLogin.getText().toString();
+                gmail = gmailLogin.getText().toString().toLowerCase();
                 contra = passwLogin.getText().toString();
 
                 if (!(gmail.isEmpty()) && !(contra.isEmpty())) {

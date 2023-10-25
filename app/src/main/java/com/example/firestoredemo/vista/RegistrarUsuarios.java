@@ -68,7 +68,7 @@ public class RegistrarUsuarios extends AppCompatActivity {
                                         Map<String, Object> datos = new HashMap<>();
                                         datos.put("Nombre", nombreUser);
                                         myBBDD = FirebaseFirestore.getInstance();
-                                        myBBDD.collection("Usuarios").document(emailUser).set(datos)
+                                        myBBDD.collection("Usuarios").document(emailUser.toLowerCase()).set(datos)
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void aVoid) {

@@ -76,7 +76,6 @@ public class Vista_categorias extends AppCompatActivity {
                     }
                 }
             });
-
         }
 
 

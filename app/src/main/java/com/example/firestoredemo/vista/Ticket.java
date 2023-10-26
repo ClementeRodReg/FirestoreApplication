@@ -18,6 +18,8 @@ import com.example.firestoredemo.metodos.MetodoBorrarTickets;
 import com.example.firestoredemo.metodos.MetodosObtencion;
 import com.example.firestoredemo.modelo.modeloTeatro;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Ticket extends AppCompatActivity {
@@ -74,8 +76,9 @@ public class Ticket extends AppCompatActivity {
 
                     }
                     addBlocksForArrayList(elementos);
-
-                    lblPrecioTotal.setText("Precio total: " + (float) precioTotal + "€");
+                    DecimalFormat df = new DecimalFormat("#.##");
+                    df.setRoundingMode(RoundingMode.CEILING);
+                    lblPrecioTotal.setText("Precio total: " + df.format((float) precioTotal) + "€");
                     insertado++;
                 }
                 handler.postDelayed(this, delay);
@@ -118,11 +121,12 @@ public class Ticket extends AppCompatActivity {
                         metodoBorrarTickets.borrarTicket("Ticket" + posicion);
 
                         precioTotal = (precioTotal - precios.get(posicion));
-
+                        DecimalFormat df = new DecimalFormat("#.##");
+                        df.setRoundingMode(RoundingMode.CEILING);
                         if (precioTotal < 0) {
                             lblPrecioTotal.setText("Precio total: 0€");
                         } else {
-                            lblPrecioTotal.setText("Precio total: " + precioTotal + "€");
+                            lblPrecioTotal.setText("Precio total: " + df.format(precioTotal) + "€");
                         }
                     }
                 }
@@ -135,19 +139,33 @@ public class Ticket extends AppCompatActivity {
 
     public void mostrarPopup() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Gracias por la compra de nuestros tickets");
-        builder.setMessage("El precio total es de: " + precioTotal + "€");
 
-        builder.setPositiveButton("Comprar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                metodoBorrarTickets.borrarTickets();
-                Intent mover = new Intent(Ticket.this, MainActivity.class);
-                startActivity(mover);
-            }
-        });
+        if (precioTotal <= 0) {
+            builder.setTitle("No hay Tickets en la cesta de la compra.");
+            builder.setMessage("No hay tickets en la lista, saliendo al login...");
+            builder.setPositiveButton("Salir", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    metodoBorrarTickets.borrarTickets();
+                    Intent mover = new Intent(Ticket.this, MainActivity.class);
+                    startActivity(mover);
+                }
+            });
+        } else {
+            builder.setTitle("Gracias por la compra de nuestros tickets.");
+            builder.setMessage("El precio total es de: " + precioTotal + "€");
 
+            builder.setPositiveButton("Comprar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    metodoBorrarTickets.borrarTickets();
+                    Intent mover = new Intent(Ticket.this, MainActivity.class);
+                    startActivity(mover);
+                }
+            });
+        }
         AlertDialog dialog = builder.create();
         dialog.show();
     }

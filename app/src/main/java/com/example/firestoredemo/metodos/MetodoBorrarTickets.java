@@ -27,9 +27,9 @@ public class MetodoBorrarTickets {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
 
-                    for (QueryDocumentSnapshot documentoTiecket : task.getResult()) {
+                    for (QueryDocumentSnapshot documentoTicket : task.getResult()) {
 
-                        myBBDD.collection("Tickets").document(documentoTiecket.getId())
+                        myBBDD.collection("Tickets").document(documentoTicket.getId())
                                 .delete()
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override

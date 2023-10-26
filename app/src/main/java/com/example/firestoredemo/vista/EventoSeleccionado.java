@@ -2,6 +2,7 @@ package com.example.firestoredemo.vista;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -75,7 +76,7 @@ public class EventoSeleccionado extends AppCompatActivity {
                 if (!listaEdificios.isEmpty() && insertado < 1) {
                     for (Salas edificio : listaEdificios) {
                         String nombreEdificio = edificio.getNombreEdif().toLowerCase().replaceAll("\\s+", "");
-                        int idImagen = getResources().getIdentifier(nombreEdificio, "drawable", getPackageName());
+                        @SuppressLint("DiscouragedApi") int idImagen = getResources().getIdentifier(nombreEdificio, "drawable", getPackageName());
                         elementos.add(new modeloTeatro(idImagen, edificio.getNombreEdif()));
                     }
                     iCargando.setVisibility(View.INVISIBLE);
@@ -94,7 +95,7 @@ public class EventoSeleccionado extends AppCompatActivity {
     private void addBlocksForArrayList(ArrayList<modeloTeatro> elementos) {
         for (modeloTeatro elemento : elementos) {
             // Inflar el diseño del elemento de evento
-            View vistaElementoEvento = getLayoutInflater().inflate(R.layout.eventosgeneral, null);
+            @SuppressLint("InflateParams") View vistaElementoEvento = getLayoutInflater().inflate(R.layout.eventosgeneral, null);
 
             // Obtener referencias a los elementos de la vista
             ImageView iconoImageView = vistaElementoEvento.findViewById(R.id.fotoSeleccionada);
@@ -123,11 +124,11 @@ public class EventoSeleccionado extends AppCompatActivity {
             iconoImageView.setImageResource(elemento.getIconResId());
             nombreTextView.setText(elemento.getName());
 
-            // Agregar el clic listener al linearLayoutEvento
+            // Agregar el click listener al linearLayoutEvento
             linearLayoutEvento.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Acciones que deseas realizar cuando se hace clic
+                    // Acciones que deseas realizar cuando se hace click
                     // Por ejemplo, mostrar un Toast
 
                     Intent mandar = new Intent(EventoSeleccionado.this, SalasHorasFechas.class);

@@ -2,6 +2,7 @@ package com.example.firestoredemo.vista;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,7 +29,7 @@ public class Vista_categorias extends AppCompatActivity {
     String gmail;
     String nomUser;
     private FirebaseFirestore myBBDD;
-    boolean ticketAñadido = false;
+    boolean ticketAnyadido = false;
     boolean invitadoActivo = true;
 
     @Override
@@ -44,7 +45,7 @@ public class Vista_categorias extends AppCompatActivity {
 
         //Sacar Datos
         gmail = getIntent().getStringExtra("id_gmail");
-        ticketAñadido = getIntent().getBooleanExtra("id_ticketAnadido", false);
+        ticketAnyadido = getIntent().getBooleanExtra("id_ticketAnadido", false);
         invitadoActivo = getIntent().getBooleanExtra("id_invitadoActivo", true);
         nomUser = getIntent().getStringExtra("id_nombreNuevo");
 
@@ -58,6 +59,7 @@ public class Vista_categorias extends AppCompatActivity {
             // Obtener nombre del usuario
             DocumentReference docRef = myBBDD.collection("Usuarios").document(gmail);
             docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @SuppressLint("SetTextI18n")
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     if (documentSnapshot.exists()) {
@@ -86,7 +88,7 @@ public class Vista_categorias extends AppCompatActivity {
         elementos.add(new modeloTeatro(R.drawable.imgmusiccategory, "Concierto"));
         elementos.add(new modeloTeatro(R.drawable.imgsportcategory, "Deporte"));
 
-        if(ticketAñadido && !invitadoActivo){
+        if(ticketAnyadido && !invitadoActivo){
             elementos.add(new modeloTeatro(R.drawable.imgshopcategory, "Ticket"));
         }
 
@@ -99,7 +101,7 @@ public class Vista_categorias extends AppCompatActivity {
     private void addBlocksForArrayList(ArrayList<modeloTeatro> elementos) {
         for (modeloTeatro elemento : elementos) {
             // Inflar el diseño del elemento de evento
-            View vistaElementoEvento = getLayoutInflater().inflate(R.layout.eventosgeneral, null);
+            @SuppressLint("InflateParams") View vistaElementoEvento = getLayoutInflater().inflate(R.layout.eventosgeneral, null);
 
             // Obtener referencias a los elementos de la vista
             ImageView iconoImageView = vistaElementoEvento.findViewById(R.id.fotoSeleccionada);
@@ -110,11 +112,11 @@ public class Vista_categorias extends AppCompatActivity {
             iconoImageView.setImageResource(elemento.getIconResId());
             nombreTextView.setText(elemento.getName());
 
-            // Agregar el clic listener al linearLayoutEvento
+            // Agregar el click listener al linearLayoutEvento
             linearLayoutEvento.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Acciones que deseas realizar cuando se hace clic
+                    // Acciones que deseas realizar cuando se hace click
                     // Por ejemplo, mostrar un Toast
 
                     Intent mandar;

@@ -100,7 +100,7 @@
                 android:importantForAutofill="no"
                 android:inputType="textEmailAddress"
                 android:textColor="#FFEBEE"
-                tools:ignore="LabelFor,SpeakableTextPresentCheck" />
+                tools:ignore="LabelFor,SpeakableTextPresentCheck,VisualLintTextFieldSize" />
 
             <Space
                 android:layout_width="match_parent"
@@ -115,7 +115,8 @@
                 android:textColor="@color/white"
                 android:textColorHighlight="@color/white"
                 android:textColorHint="@color/white"
-                android:textColorLink="@color/white" />
+                android:textColorLink="@color/white"
+                tools:ignore="TextContrastCheck,VisualLintButtonSize" />
 
         </LinearLayout>
 

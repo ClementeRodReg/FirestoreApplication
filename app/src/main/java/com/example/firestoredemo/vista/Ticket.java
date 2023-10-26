@@ -53,6 +53,7 @@ public class Ticket extends AppCompatActivity {
 
 
         handler.postDelayed(new Runnable() {
+            @SuppressLint("SetTextI18n")
             public void run() {
                 if (!listaTickets.isEmpty() && insertado < 1) {
                     for (String ticket : listaTickets) {
@@ -67,13 +68,10 @@ public class Ticket extends AppCompatActivity {
                             btn_pagar.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-
                                     mostrarPopup();
-
                                 }
                             });
                         }
-
                     }
                     addBlocksForArrayList(elementos);
                     DecimalFormat df = new DecimalFormat("#.##");
@@ -84,7 +82,6 @@ public class Ticket extends AppCompatActivity {
                 handler.postDelayed(this, delay);
             }
         }, delay);
-
     }
 
     private void addBlocksForArrayList(ArrayList<modeloTeatro> elementos) {
@@ -100,8 +97,9 @@ public class Ticket extends AppCompatActivity {
             // Configurar el ícono y el nombre
             nombreTextView.setText(elemento.getName());
 
-            // Agregar el OnClickListener para ocultar el elemento cuando se haga clic
+            // Agregar el OnClickListener para ocultar el elemento cuando se haga click
             linearLayoutEvento.setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("SetTextI18n")
                 @Override
                 public void onClick(View v) {
                     linearLayoutEvento.setVisibility(View.GONE);
@@ -112,7 +110,6 @@ public class Ticket extends AppCompatActivity {
 
                     // Encontrar la posición del nombre del ticket en la lista de nombresElementos
                     int posicion = elementos.indexOf(elemento);
-
 
                     if (posicion >= 0) {
                         // Si se encuentra el nombre del ticket, eliminarlo de la lista
@@ -173,6 +170,5 @@ public class Ticket extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
 
 }

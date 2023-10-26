@@ -1,7 +1,7 @@
 package com.example.firestoredemo.metodos;
 
 import android.text.InputFilter;
-import android.text.Spanned;
+//import android.text.Spanned;
 import android.widget.TextView;
 
 public class MetodosEventoSeleccionado {

@@ -38,4 +38,7 @@
     <string name="lbl_clique_sobre_los_tickets_que_quiera_quitar">Clique sobre los tickets que quiera quitar</string>
     <string name="btn_pagar">Pagar</string>
     <string name="btn_anadirTicket">Añadir Ticket</string>
+    <string name="btn_aceptar">Aceptar</string>
+    <string name="lbl_texoCambieNombre">Cambie su nombre</string>
+    <string name="lbl_perfil">Perfil</string>
 </resources>

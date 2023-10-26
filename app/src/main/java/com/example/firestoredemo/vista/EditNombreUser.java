@@ -5,6 +5,7 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -45,22 +46,29 @@ public class EditNombreUser extends AppCompatActivity {
                 Map<String, Object> datos = new HashMap<>();
                 datos.put("Nombre", texteditarusuario.getText().toString());
                 myBBDD = FirebaseFirestore.getInstance();
-                myBBDD.collection("Usuarios").document(gmail.toLowerCase()).set(datos)
+                myBBDD.collection("Usuarios").document(gmail.toLowerCase()).update(datos)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Log.d(TAG, "DocumentSnapshot successfully written!");
+                                Log.d(TAG, "DocumentSnapshot successfully updated!");
+
+                                Intent mandar;
+                                mandar = new Intent(EditNombreUser.this, Vista_categorias.class);
+                                mandar.putExtra("id_nombreNuevo", nomUsuario);
+                                mandar.putExtra("id_gmail", gmail);
+                                startActivity(mandar);
+
                                 finish();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "Error writing document", e);
+                                Log.w(TAG, "Error updating document", e);
                             }
                         });
-
             }
+
         });
     }
 }

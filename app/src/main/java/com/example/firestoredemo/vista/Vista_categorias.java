@@ -46,12 +46,13 @@ public class Vista_categorias extends AppCompatActivity {
         gmail = getIntent().getStringExtra("id_gmail");
         ticketAñadido = getIntent().getBooleanExtra("id_ticketAnadido", false);
         invitadoActivo = getIntent().getBooleanExtra("id_invitadoActivo", true);
+        nomUser = getIntent().getStringExtra("id_nombreNuevo");
 
         if (gmail.equals("Modo Invitado")) {
             lblNombreUsuario.setText(gmail);
             Toast.makeText(getApplicationContext(), "En modo invitado no puede comprar tickets.", Toast.LENGTH_SHORT).show();
         } else {
-
+            invitadoActivo = false;
             myBBDD = FirebaseFirestore.getInstance();
 
             // Obtener nombre del usuario
@@ -73,7 +74,13 @@ public class Vista_categorias extends AppCompatActivity {
 
 
         // Crear un ArrayList con elementos de ejemplo
+
         ArrayList<modeloTeatro> elementos = new ArrayList<>();
+
+        if(invitadoActivo == false){
+            elementos.add(new modeloTeatro(R.drawable.imgusercategory, "Usuario"));
+        }
+
         elementos.add(new modeloTeatro(R.drawable.imgtheatrecategory, "Teatro"));
         elementos.add(new modeloTeatro(R.drawable.imgcinemacategory, "Cine"));
         elementos.add(new modeloTeatro(R.drawable.imgmusiccategory, "Concierto"));
@@ -82,9 +89,7 @@ public class Vista_categorias extends AppCompatActivity {
         if(ticketAñadido && !invitadoActivo){
             elementos.add(new modeloTeatro(R.drawable.imgshopcategory, "Ticket"));
         }
-        if(!invitadoActivo){
-            elementos.add(new modeloTeatro(R.drawable.imgusercategory, "Usuario"));
-        }
+
 
         // Agregar bloques con íconos y nombres al LinearLayout
         addBlocksForArrayList(elementos);

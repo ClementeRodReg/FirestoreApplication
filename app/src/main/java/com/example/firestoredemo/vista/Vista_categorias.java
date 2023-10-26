@@ -77,7 +77,7 @@ public class Vista_categorias extends AppCompatActivity {
 
         ArrayList<modeloTeatro> elementos = new ArrayList<>();
 
-        if(invitadoActivo == false){
+        if(!invitadoActivo){
             elementos.add(new modeloTeatro(R.drawable.imgusercategory, "Usuario"));
         }
 

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -38,10 +39,14 @@ public class EventoSeleccionado extends AppCompatActivity {
     String nombreSala = "";
     String gmail = "";
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eventoseleccionado);
+
+        // Bloquear la orientación de la pantalla en modo retrato
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         MetodosEventoSeleccionado metodosEventoSeleccionado = new MetodosEventoSeleccionado();
 

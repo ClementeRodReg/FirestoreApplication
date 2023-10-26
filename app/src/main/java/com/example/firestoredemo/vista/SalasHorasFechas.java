@@ -3,7 +3,9 @@ package com.example.firestoredemo.vista;
 import androidx.appcompat.app.AppCompatActivity;
 
 //import android.app.ProgressDialog;
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,6 +21,8 @@ import com.example.firestoredemo.metodos.MetodoInsercion;
 import com.example.firestoredemo.metodos.MetodosObtencion;
 import com.example.firestoredemo.modelo.Tickets;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,6 +30,7 @@ import java.util.regex.Pattern;
 public class SalasHorasFechas extends AppCompatActivity {
 
     TextView lblEventoSeleccionado;
+    TextView lbl_precio;
     private ArrayList<String> fechas;
     MetodoInsercion metodoInsercion = new MetodoInsercion();
     String fecha = "";
@@ -44,15 +49,19 @@ public class SalasHorasFechas extends AppCompatActivity {
     Button btn_AnadirTicket;
     Tickets tickets = new Tickets();
 
+    @SuppressLint({"SourceLockedOrientationActivity", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_salas_horas_fechas);
 
+        // Bloquear la orientación de la pantalla en modo retrato
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         // Iniciadores de ID
         lblEventoSeleccionado = findViewById(R.id.lblEventoSeleccionado);
         Spinner comboBoxFecha = findViewById(R.id.comboBoxFecha);
-
+        lbl_precio = findViewById(R.id.lbl_precio);
         btn_AnadirTicket = findViewById(R.id.btn_AnadirTicket);
 
         //Saca nombre evento seleccionado
@@ -95,6 +104,10 @@ public class SalasHorasFechas extends AppCompatActivity {
             }
         }, delay);
 
+        //Poner precio en label
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.CEILING);
+        lbl_precio.setText("El precio de la ticket es de: " + df.format(precioEvento) + "€");
 
         //Sacar el numero de la sala
         Pattern pattern = Pattern.compile("\\d");

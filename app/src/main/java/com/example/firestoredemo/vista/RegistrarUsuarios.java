@@ -4,6 +4,9 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,10 +34,15 @@ public class RegistrarUsuarios extends AppCompatActivity {
     EditText email;
     FirebaseFirestore myBBDD;
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar_usuarios);
+
+        // Bloquear la orientación de la pantalla en modo retrato
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         FirebaseApp.initializeApp(this);
         this.setTitle("Registrar Usuario");
         mAuth = FirebaseAuth.getInstance();

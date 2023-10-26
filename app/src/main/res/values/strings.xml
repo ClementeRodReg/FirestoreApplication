@@ -41,4 +41,5 @@
     <string name="btn_aceptar">Aceptar</string>
     <string name="lbl_texoCambieNombre">Cambie su nombre</string>
     <string name="lbl_perfil">Perfil</string>
+    <string name="lbl_precioString">El precio de la entrada es de:</string>
 </resources>

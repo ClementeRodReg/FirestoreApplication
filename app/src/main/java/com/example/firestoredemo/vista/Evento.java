@@ -2,6 +2,7 @@ package com.example.firestoredemo.vista;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -32,9 +33,13 @@ public class Evento extends AppCompatActivity {
     ImageView iCargando;
     String gmail = "";
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Bloquear la orientación de la pantalla en modo retrato
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         // Establecer el diseño de la actividad
         setContentView(R.layout.activity_evento);

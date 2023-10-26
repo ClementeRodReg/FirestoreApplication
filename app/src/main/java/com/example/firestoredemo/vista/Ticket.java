@@ -40,12 +40,15 @@ public class Ticket extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket);
 
+        //Obtener informacion seleccionada mediante putExta
         linearLayout = findViewById(R.id.linearLayout);
         lblPrecioTotal = findViewById(R.id.lblPrecioTotal);
         btn_pagar = findViewById(R.id.btn_pagar);
 
+        // Crear un ArrayList con elementos de ejemplo
         ArrayList<String> listaTickets = metodosObtencion.obtenerTickets();
         ArrayList<modeloTeatro> elementos = new ArrayList<>();
+
 
         handler.postDelayed(new Runnable() {
             public void run() {

@@ -51,7 +51,7 @@ public class EventoSeleccionado extends AppCompatActivity {
         imageView = findViewById(R.id.fotoSeleccionada);
         iCargando=findViewById(R.id.iCargando);
 
-        //Saca nombre e imagen lugar seleccionado
+        //Saca nombre, imagen, ... lugar seleccionado
         imageView.setImageResource(imagenReferencia);
         gmail = getIntent().getStringExtra("id_gmail");
 

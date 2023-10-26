@@ -34,12 +34,18 @@ public class EditNombreUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_nombre_user);
 
+        //Obtener informacion seleccionada mediante putExta
         gmail = getIntent().getStringExtra("id_gmail");
         nomUsuario = getIntent().getStringExtra("nombreUsuario");
+
+        //Conectar xml con las variables del java
         texteditarusuario=findViewById(R.id.texteditarusuario);
+        btnAceptar=findViewById(R.id.botonAceptar);
+
+        //Poner nombre recogido en texteditarusuario
         texteditarusuario.setText(nomUsuario);
 
-        btnAceptar=findViewById(R.id.botonAceptar);
+        //Boton de aceptar nombre y su actualización
         btnAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +58,7 @@ public class EditNombreUser extends AppCompatActivity {
                             public void onSuccess(Void aVoid) {
                                 Log.d(TAG, "DocumentSnapshot successfully updated!");
 
+                                //Si la actualizacion ha sido correcta nos devuelve a vista categorias enviando algun dato
                                 Intent mandar;
                                 mandar = new Intent(EditNombreUser.this, Vista_categorias.class);
                                 mandar.putExtra("id_nombreNuevo", nomUsuario);

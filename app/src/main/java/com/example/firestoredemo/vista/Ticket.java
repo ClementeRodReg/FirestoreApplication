@@ -108,9 +108,10 @@ public class Ticket extends AppCompatActivity {
 
                     // Obtener el nombre del ticket que se está eliminando
                     String nombreTicket = elemento.getName();
+                    System.out.println(nombreTicket);
 
                     // Encontrar la posición del nombre del ticket en la lista de nombresElementos
-                    int posicion = nombresElementos.indexOf(nombreTicket) + 1;
+                    int posicion = elementos.indexOf(elemento);
 
 
                     if (posicion >= 0) {
@@ -120,7 +121,8 @@ public class Ticket extends AppCompatActivity {
                         // Llamar al método de borrado con el nombre del ticket
                         metodoBorrarTickets.borrarTicket("Ticket" + posicion);
 
-                        precioTotal = (precioTotal - precios.get(posicion));
+                        precioTotal = (precioTotal - precios.get(elementos.indexOf(elemento)));
+
                         DecimalFormat df = new DecimalFormat("#.##");
                         df.setRoundingMode(RoundingMode.CEILING);
                         if (precioTotal < 0) {
@@ -153,8 +155,10 @@ public class Ticket extends AppCompatActivity {
                 }
             });
         } else {
+            DecimalFormat df = new DecimalFormat("#.##");
+            df.setRoundingMode(RoundingMode.CEILING);
             builder.setTitle("Gracias por la compra de nuestros tickets.");
-            builder.setMessage("El precio total es de: " + precioTotal + "€");
+            builder.setMessage("El precio total es de: " + df.format(precioTotal) + "€");
 
             builder.setPositiveButton("Comprar", new DialogInterface.OnClickListener() {
                 @Override
